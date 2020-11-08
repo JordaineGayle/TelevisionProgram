@@ -20,7 +20,7 @@ public class SceneBuilder {
 
     private Parent parent;
 
-    private Double Length;
+    private Double Width;
 
     private Double Height;
 
@@ -28,29 +28,14 @@ public class SceneBuilder {
 
     private String Title;
 
-    public SceneBuilder(Stage stage, String layoutName, @Nullable Optional<String> title, @Nullable Optional<Double> length, @Nullable Optional<Double> height) {
+    public SceneBuilder(Stage stage, String layoutName, @Nullable Optional<String> title, @Nullable Optional<Double> width, @Nullable Optional<Double> height) {
         this.stage = stage;
         LayoutName = layoutName;
-        Length = length != null ? length.get() : 900.0;
-        Height = height != null ? height.get() : 1200.0;
-        Title = title != null ? title.get() : "LITE TV";
+        Width = width != null ? width.get() : 1000;
+        Height = height != null ? height.get() : 500.0;
+        Title = title != null ? title.get() : "JCTCL Cable TV";
         setIcon();
         Setup();
-    }
-
-    private void setIcon(){
-        String localUrl2 = "";
-        File file1 = new File(Paths.get("").toAbsolutePath().toString()+"/Assets/icon1.png");
-
-        try {
-            localUrl2 = file1.toURI().toURL().toString();
-        } catch (MalformedURLException ex) {
-
-        }
-
-        Image img2 = new Image(localUrl2);
-
-        stage.getIcons().add(img2);
     }
 
     public void Setup(){
@@ -65,11 +50,38 @@ public class SceneBuilder {
 
             stage.setTitle(Title);
 
+            stage.setFullScreen(true);
+
+            stage.setMaximized(true);
+
+            stage.setMinWidth(Width);
+
+            stage.setMinHeight(Height);
+
+            stage.maximizedProperty().addListener((event,o,n)->{
+                stage.setFullScreen(true);
+            });
+
             stage.show();
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void setIcon(){
+        String localUrl2 = "";
+        File file1 = new File(Paths.get("").toAbsolutePath().toString()+"/Assets/icon2.png");
+
+        try {
+            localUrl2 = file1.toURI().toURL().toString();
+        } catch (MalformedURLException ex) {
+
+        }
+
+        Image img2 = new Image(localUrl2);
+
+        stage.getIcons().add(img2);
     }
 
     public Stage getStage() {
@@ -85,7 +97,7 @@ public class SceneBuilder {
     }
 
     public double getLength() {
-        return Length.doubleValue();
+        return Width.doubleValue();
     }
 
     public double getHeight() {

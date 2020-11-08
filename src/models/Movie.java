@@ -18,8 +18,8 @@ public class Movie extends Program
         Actors = actors;
     }
 
-    public Movie(int id, double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, double rating, String dateReleased, String title, List<Actor> actors) {
-        super(id, length, airTime, shortDescription, closedCaption, isNew, isLiveBroadcast, programStatus, programColor);
+    public Movie(int id, double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, double rating, String dateReleased, String title, List<Actor> actors) {
+        super(id, length, airTime, shortDescription, closedCaption, isNew, isLiveBroadcast, programStatus, programColor, programType);
         Rating = rating;
         DateReleased = dateReleased;
         Title = title;
