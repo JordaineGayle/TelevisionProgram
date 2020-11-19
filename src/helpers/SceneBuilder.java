@@ -71,7 +71,7 @@ public class SceneBuilder {
 
     private void setIcon(){
         String localUrl2 = "";
-        File file1 = new File(Paths.get("").toAbsolutePath().toString()+"/Assets/icon2.png");
+        File file1 = new File(Paths.get("").toAbsolutePath().toString()+"/src/assets/icon2.png");
 
         try {
             localUrl2 = file1.toURI().toURL().toString();
