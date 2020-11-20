@@ -26,7 +26,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private Map<String,String> channels = DatabaseHelper.getChannels();
 
-    private Map<Integer,String> channelsRowMapping = new TreeMap<>();
+    private Map<String, Integer> channelsRowMapping = new TreeMap<>();
 
     private int currentHour = LocalDateTime.now().getHour();
 
@@ -119,7 +119,9 @@ public class ChannelListingsLayoutController implements Initializable {
 
             grid.add(BuildChildrenLabel(combinedChannelName),0,currentRowKey);
             grid.getRowConstraints().add(setRowConstaints(0,VPos.CENTER));
-            channelsRowMapping.put(currentRowKey,combinedChannelName.toUpperCase());
+
+            channelsRowMapping.put(combinedChannelName.toUpperCase(),currentRowKey);
+
             rowKey.getAndIncrement();
 
         });

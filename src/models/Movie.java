@@ -5,24 +5,21 @@ public class Movie extends Program
 {
     private double Rating;
     private String DateReleased;
-    private String Title;
     private List<Actor> Actors;
 
     public Movie() {
     }
 
-    public Movie(double rating, String dateReleased, String title, List<Actor> actors) {
+    public Movie(double rating, String dateReleased, List<Actor> actors) {
         Rating = rating;
         DateReleased = dateReleased;
-        Title = title;
         Actors = actors;
     }
 
-    public Movie(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, double rating, String dateReleased, String title, List<Actor> actors) {
-        super(length, airTime, shortDescription, closedCaption, isNew, isLiveBroadcast, programStatus, programColor, programType, channelName);
+    public Movie(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title, double rating, String dateReleased, List<Actor> actors) {
+        super(length, airTime, shortDescription, closedCaption, isNew, isLiveBroadcast, programStatus, programColor, programType, channelName, title);
         Rating = rating;
         DateReleased = dateReleased;
-        Title = title;
         Actors = actors;
     }
 
@@ -40,14 +37,6 @@ public class Movie extends Program
 
     public void setDateReleased(String dateReleased) {
         DateReleased = dateReleased;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
     }
 
     public List<Actor> getActors() {

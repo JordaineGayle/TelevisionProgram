@@ -6,8 +6,8 @@ import java.util.UUID;
 public class Program
 {
     private String id;
-    private double Length;
-    private double AirTime;
+    private double Length; //in hours
+    private double AirTime; // in hours
     private String ShortDescription;
     private boolean ClosedCaption;
     private boolean IsNew;
@@ -16,10 +16,11 @@ public class Program
     private ProgramColor ProgramColor;
     private String ProgramType;
     private String ChannelName;
+    private String Title;
 
     public Program(){ this.id = UUID.randomUUID().toString(); };
 
-    public Program(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName) {
+    public Program(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title) {
         this.id = UUID.randomUUID().toString();
         Length = length;
         AirTime = airTime;
@@ -31,6 +32,7 @@ public class Program
         ProgramColor = programColor;
         ProgramType = programType;
         ChannelName = channelName;
+        Title = title;
     }
 
     public String getId() {
@@ -119,5 +121,13 @@ public class Program
 
     public void setChannelName(String channelName) {
         ChannelName = channelName;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
     }
 }
