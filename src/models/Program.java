@@ -13,10 +13,11 @@ public class Program
     private ProgramStatus ProgramStatus;
     private ProgramColor ProgramColor;
     private String ProgramType;
+    private String ChannelName;
 
     public Program(){};
 
-    public Program(int id, double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType) {
+    public Program(int id, double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName) {
         this.id = id;
         Length = length;
         AirTime = airTime;
@@ -27,6 +28,7 @@ public class Program
         ProgramStatus = programStatus;
         ProgramColor = programColor;
         ProgramType = programType;
+        ChannelName = channelName;
     }
 
     public int getId() {
@@ -107,5 +109,13 @@ public class Program
 
     public void setProgramType(String programType) {
         ProgramType = programType;
+    }
+
+    public String getChannelName() {
+        return ChannelName;
+    }
+
+    public void setChannelName(String channelName) {
+        ChannelName = channelName;
     }
 }

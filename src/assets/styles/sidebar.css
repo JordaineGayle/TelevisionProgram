@@ -15,6 +15,14 @@
     -fx-color: #fff;
 }
 
+.sidebarBtnActive{
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-text-fill: #039BE5;
+    -fx-border-color: #039BE5;
+    -fx-border-width: 0 0 0 2;
+    -fx-color: #039BE5;
+}
+
 
 .miscBtns:hover{
     -fx-background-color: rgba(255,255,255,0.05);

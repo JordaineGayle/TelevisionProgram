@@ -10,9 +10,13 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
 
 public class SceneBuilder {
+
+    private static HashMap<String,Stage> stages = new HashMap<>();
 
     private Stage stage;
 
@@ -30,6 +34,7 @@ public class SceneBuilder {
 
     public SceneBuilder(Stage stage, String layoutName, @Nullable Optional<String> title, @Nullable Optional<Double> width, @Nullable Optional<Double> height) {
         this.stage = stage;
+        stages.put(layoutName,stage);
         LayoutName = layoutName;
         Width = width != null ? width.get() : 1000;
         Height = height != null ? height.get() : 500.0;
@@ -84,8 +89,8 @@ public class SceneBuilder {
         stage.getIcons().add(img2);
     }
 
-    public Stage getStage() {
-        return stage;
+    public static HashMap<String, Stage> getStages() {
+        return stages;
     }
 
     public Scene getScene() {

@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #E0E0E0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="mainPane" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" style="-fx-background-color: #E0E0E0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainLayoutController">
    <left>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="170.0" style="-fx-background-color: #212121; -fx-border-width: 10;" stylesheets="@../assets/styles/sidebar.css" BorderPane.alignment="CENTER">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #212121; -fx-border-width: 10;" stylesheets="@../assets/styles/sidebar.css" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="90.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../assets/name.png" />
                </image>
             </ImageView>
-            <Button alignment="TOP_LEFT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebarBtn" text="DASHBOARD" textAlignment="CENTER" textFill="#909090">
+            <Button fx:id="dashboardBtn" alignment="TOP_LEFT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewDashboard" styleClass="sidebarBtnActive" text="DASHBOARD" textAlignment="CENTER" textFill="#909090">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -34,7 +34,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </Button>
-            <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebarBtn" text="PROGRAMS" textAlignment="CENTER" textFill="#909090">
+            <Button fx:id="programBtn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewPrograms" styleClass="sidebarBtn" text="PROGRAMS" textAlignment="CENTER" textFill="#909090">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
@@ -45,7 +45,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="70.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="sidebarBtn" text="CHANNEL LISTING" textAlignment="CENTER" textFill="#909090">
+            <Button fx:id="channelListBtn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="70.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewListings" styleClass="sidebarBtn" text="CHANNEL LISTING" textAlignment="CENTER" textFill="#909090">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
@@ -59,7 +59,7 @@
             <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
             <HBox maxWidth="1.7976931348623157E308">
                <children>
-                  <Button contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="70.0" styleClass="miscBtns">
+                  <Button fx:id="fullScreenBtn" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleFullscreen" prefWidth="70.0" styleClass="miscBtns">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -72,7 +72,7 @@
                      </cursor>
                   </Button>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button contentDisplay="CENTER" layoutX="50.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="70.0" styleClass="miscBtns">
+                  <Button fx:id="exitBtn" contentDisplay="CENTER" layoutX="50.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitProgram" prefWidth="70.0" styleClass="miscBtns">
                      <graphic>
                         <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
