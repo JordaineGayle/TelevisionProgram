@@ -3,6 +3,8 @@ package helpers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,17 +22,12 @@ public class DatabaseHelper {
 
     public void InitializeDB(){
         loadDBContentsInMemory();
+        System.out.println(saveFileContents(jsonUtility.toJson(channelMap),"channels1.json"));
     }
 
     private void loadDBContentsInMemory(){
 
-        TreeMap<String,Integer> channels = readJson("channels.json", new TypeToken<TreeMap<String,Integer>>(){});
-
-        channels.forEach((key,val) -> {
-            channelMap.put(val,key);
-        });
-
-
+        channelMap = readJson("channels.json");
     }
 
 
@@ -48,24 +45,27 @@ public class DatabaseHelper {
 
 
 
-    private <T> T readJson(String source, TypeToken<T> token){
+    private <T> T readJson(String source){
 
         String data = getFileContents(source);
 
-        Type type = token.getType();
+        Type type = new TypeToken<T>(){}.getType();
 
         return jsonUtility.fromJson(data,type);
     }
 
+    private <T> String toJson(T item){
+        return jsonUtility.toJson(item,new TypeToken<T>(){}.getType());
+    }
 
-    private String getFileContents(String source){
+    private String getFileContents(String filename){
 
         try{
             String basePath = Paths.get(".").normalize().toAbsolutePath().toString()+"/src/database/";
 
             String content = "";
 
-            content = new String(Files.readAllBytes(Paths.get(basePath+source)));
+            content = new String(Files.readAllBytes(Paths.get(basePath+filename)));
 
             return content;
         }catch (Exception e){
@@ -73,6 +73,21 @@ public class DatabaseHelper {
         }
 
         return null;
+    }
+
+    private boolean saveFileContents(String contents, String filename){
+        String basePath = Paths.get(".").normalize().toAbsolutePath().toString()+"/src/database/";
+
+        try{
+            FileWriter writier = new FileWriter(basePath+filename);
+            writier.write(contents);
+            writier.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
 }
