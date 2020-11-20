@@ -7,14 +7,17 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class DatabaseHelper {
 
-    private static Map<Integer, String> channelMap = new TreeMap<>();
+    private static Map<String, String> channelMap = new TreeMap<>();
+
+    private static List<Object> programs = new ArrayList<>();
+
+    private  static List<Object> markedPrograms = new ArrayList<>();
 
     private final Gson jsonUtility = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
@@ -22,21 +25,31 @@ public class DatabaseHelper {
 
     public void InitializeDB(){
         loadDBContentsInMemory();
-        System.out.println(saveFileContents(jsonUtility.toJson(channelMap),"channels1.json"));
     }
 
     private void loadDBContentsInMemory(){
-
         channelMap = readJson("channels.json");
+        programs = readJson("programs.json");
+        markedPrograms = readJson("marked_programs.json");
     }
 
 
 
-    public static Map<Integer, String> GetChannels(){
+
+
+
+
+    public static Map<String, String> getChannels(){
         return channelMap;
     }
 
+    public  static List<Object> getPrograms(){
+        return programs;
+    }
 
+    public static List<Object> getMarkedPrograms(){
+        return markedPrograms;
+    }
 
 
 
@@ -63,9 +76,15 @@ public class DatabaseHelper {
         try{
             String basePath = Paths.get(".").normalize().toAbsolutePath().toString()+"/src/database/";
 
+            Path path = Paths.get(basePath+filename);
+
             String content = "";
 
-            content = new String(Files.readAllBytes(Paths.get(basePath+filename)));
+            if(Files.exists(path)){
+                content = new String(Files.readAllBytes(path));
+            }else{
+                Files.createFile(path);
+            }
 
             return content;
         }catch (Exception e){

@@ -1,9 +1,11 @@
 package models;
 
 
+import java.util.UUID;
+
 public class Program
 {
-    private int id;
+    private String id;
     private double Length;
     private double AirTime;
     private String ShortDescription;
@@ -15,10 +17,10 @@ public class Program
     private String ProgramType;
     private String ChannelName;
 
-    public Program(){};
+    public Program(){ this.id = UUID.randomUUID().toString(); };
 
-    public Program(int id, double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName) {
-        this.id = id;
+    public Program(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName) {
+        this.id = UUID.randomUUID().toString();
         Length = length;
         AirTime = airTime;
         ShortDescription = shortDescription;
@@ -31,12 +33,12 @@ public class Program
         ChannelName = channelName;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setid(){
+        this.id = UUID.randomUUID().toString();
     }
 
     public double getLength() {

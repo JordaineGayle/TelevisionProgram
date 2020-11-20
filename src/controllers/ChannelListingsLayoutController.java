@@ -1,31 +1,32 @@
 package controllers;
 
+import helpers.DatabaseHelper;
 import helpers.TimeHelper;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.Effect;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChannelListingsLayoutController implements Initializable {
 
     private HashMap<Integer,String> clockHours =  new TimeHelper().get24HrClock();
+
+    private Map<String,String> channels = DatabaseHelper.getChannels();
+
+    private Map<Integer,String> channelsRowMapping = new TreeMap<>();
 
     private int currentHour = LocalDateTime.now().getHour();
 
@@ -34,15 +35,26 @@ public class ChannelListingsLayoutController implements Initializable {
     @FXML
     private BorderPane channelBorderPane = new BorderPane();
 
+    @FXML
+    private Label currentDateLabel = new Label();
+
+    @FXML
+    private ScrollPane scrollPane = new ScrollPane();
+
+
     private GridPane grid = new GridPane();
 
     private GridPane listingGrid = new GridPane();
 
-    private ScrollPane scrollPane = new ScrollPane();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //Setting the current date time for the channel listing
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy HH:mm a");
+        String now = LocalDateTime.now().format(formatter);
+        currentDateLabel.setText(now);
+
+        //Adding time quartz between the clock hours
         clockHours.forEach((hour, val) -> {
             if(hour >= currentHour){
 
@@ -63,12 +75,11 @@ public class ChannelListingsLayoutController implements Initializable {
             }
         });
 
-        System.out.println(columnNames);
-
+        //setting the grid up
         setupGrid();
 
-        scrollPane.setPannable(true);
-        scrollPane.setContent(grid);
+        //setting scroll pane up
+        setupScrollPane();
 
     }
 
@@ -82,18 +93,37 @@ public class ChannelListingsLayoutController implements Initializable {
         setGridHeadings();
     }
 
+    private void setupScrollPane(){
+        scrollPane.setPannable(true);
+        scrollPane.setContent(grid);
+    }
+
     private void setGridHeadings(){
+
+        AtomicInteger rowKey = new AtomicInteger();
+
         grid.addColumn(0,BuildHeadingLabel("Channels"));
 
         grid.getColumnConstraints().add(setColumnConstaints(150,HPos.LEFT));
 
         for(int x = 0; x < columnNames.size(); x++){
-
             grid.addColumn(x+1,BuildHeadingLabel(columnNames.get(x)));
-            grid.addRow(columnNames.size()+x,BuildHeadingLabel("Station: "+x));
-
             grid.getColumnConstraints().add(setColumnConstaints(250,HPos.CENTER));
         }
+
+        channels.forEach((cnum,cname) -> {
+
+            String combinedChannelName = cnum+" - "+cname;
+
+            int currentRowKey = rowKey.get()+1;
+
+            grid.add(BuildChildrenLabel(combinedChannelName),0,currentRowKey);
+            grid.getRowConstraints().add(setRowConstaints(0,VPos.CENTER));
+            channelsRowMapping.put(currentRowKey,combinedChannelName.toUpperCase());
+            rowKey.getAndIncrement();
+
+        });
+
     }
 
 
@@ -109,6 +139,18 @@ public class ChannelListingsLayoutController implements Initializable {
         return label;
     }
 
+    private Label BuildChildrenLabel(String name){
+        Label label = new Label(name);
+
+        label.setPadding(new Insets(10,10,10,10));
+
+        label.setTextAlignment(TextAlignment.CENTER);
+
+        label.setFont(new Font("Rockwell",12));
+
+        return label;
+    }
+
     private ColumnConstraints setColumnConstaints(double width, HPos pos){
 
         ColumnConstraints colconst = new ColumnConstraints();
@@ -117,6 +159,24 @@ public class ChannelListingsLayoutController implements Initializable {
         colconst.setHgrow(Priority.ALWAYS);
         colconst.setHalignment(pos);
         return colconst;
+    }
+
+    private RowConstraints setRowConstaints(double height, VPos pos){
+
+        RowConstraints rowconst = new RowConstraints();
+
+        if (height > 0){
+            rowconst.setMinHeight(height);
+        }
+
+        rowconst.setVgrow(Priority.ALWAYS);
+
+
+        if (pos!=null){
+            rowconst.setValignment(pos);
+        }
+
+        return rowconst;
     }
 
 }
