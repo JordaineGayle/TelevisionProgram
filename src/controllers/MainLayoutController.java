@@ -11,7 +11,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class MainLayoutController implements Initializable {
@@ -41,6 +43,7 @@ public class MainLayoutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainPane.setCenter(paneBuilder("DashboardLayout.fxml"));
+        System.out.println();
     }
 
     @FXML

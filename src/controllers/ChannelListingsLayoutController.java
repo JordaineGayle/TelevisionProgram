@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.Effect;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -31,9 +32,13 @@ public class ChannelListingsLayoutController implements Initializable {
     private ArrayList<String> columnNames = new ArrayList<>();
 
     @FXML
-    private ScrollPane scrollPane = new ScrollPane();
+    private BorderPane channelBorderPane = new BorderPane();
 
     private GridPane grid = new GridPane();
+
+    private GridPane listingGrid = new GridPane();
+
+    private ScrollPane scrollPane = new ScrollPane();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
