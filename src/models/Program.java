@@ -11,8 +11,10 @@ public class Program
     private String ProgramType;
     private String ChannelName;
     private String Title;
+    private String Image;
     private String ShortDescription;
     private double Length; //in hours
+    private double Duration; //in days
     private boolean ClosedCaption;
     private ProgramPhase ProgramPhase;
     private ProgramStatus ProgramStatus;
@@ -21,18 +23,20 @@ public class Program
 
     public Program(){ this.id = UUID.randomUUID().toString(); };
 
-    public Program(double length, LocalDateTime localDateTime, String shortDescription, boolean closedCaption, ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title) {
+    public Program(String programType, String channelName, String title, String image, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime) {
         this.id = UUID.randomUUID().toString();
-        Length = length;
-        ProgramAirDateTime = localDateTime;
-        ProgramPhase = programPhase;
-        ShortDescription = shortDescription;
-        ClosedCaption = closedCaption;
-        ProgramStatus = programStatus;
-        ProgramColor = programColor;
         ProgramType = programType;
         ChannelName = channelName;
         Title = title;
+        Image = image;
+        ShortDescription = shortDescription;
+        Length = length;
+        Duration = duration;
+        ClosedCaption = closedCaption;
+        ProgramPhase = programPhase;
+        ProgramStatus = programStatus;
+        ProgramColor = programColor;
+        ProgramAirDateTime = programAirDateTime;
     }
 
     public String getId() {
@@ -43,20 +47,36 @@ public class Program
         this.id = UUID.randomUUID().toString();
     }
 
-    public double getLength() {
-        return Length;
+    public String getProgramType() {
+        return ProgramType;
     }
 
-    public void setLength(double length) {
-        Length = length;
+    public void setProgramType(String programType) {
+        ProgramType = programType;
     }
 
-    public LocalDateTime getProgramAirDateTime() {
-        return ProgramAirDateTime;
+    public String getChannelName() {
+        return ChannelName;
     }
 
-    public void setProgramAirDateTime(LocalDateTime programAirDateTime) {
-        ProgramAirDateTime = programAirDateTime;
+    public void setChannelName(String channelName) {
+        ChannelName = channelName;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 
     public String getShortDescription() {
@@ -65,6 +85,22 @@ public class Program
 
     public void setShortDescription(String shortDescription) {
         ShortDescription = shortDescription;
+    }
+
+    public double getLength() {
+        return Length;
+    }
+
+    public void setLength(double length) {
+        Length = length;
+    }
+
+    public double getDuration() {
+        return Duration;
+    }
+
+    public void setDuration(double duration) {
+        Duration = duration;
     }
 
     public boolean isClosedCaption() {
@@ -99,27 +135,11 @@ public class Program
         ProgramColor = programColor;
     }
 
-    public String getProgramType() {
-        return ProgramType;
+    public LocalDateTime getProgramAirDateTime() {
+        return ProgramAirDateTime;
     }
 
-    public void setProgramType(String programType) {
-        ProgramType = programType;
-    }
-
-    public String getChannelName() {
-        return ChannelName;
-    }
-
-    public void setChannelName(String channelName) {
-        ChannelName = channelName;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
+    public void setProgramAirDateTime(LocalDateTime programAirDateTime) {
+        ProgramAirDateTime = programAirDateTime;
     }
 }

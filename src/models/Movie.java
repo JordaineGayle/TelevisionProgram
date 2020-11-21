@@ -17,8 +17,8 @@ public class Movie extends Program
         Actors = actors;
     }
 
-    public Movie(double length, LocalDateTime localDateTime, String shortDescription, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title, double rating, String dateReleased, List<Actor> actors) {
-        super(length, localDateTime, shortDescription, closedCaption, programPhase, programStatus, programColor, programType, channelName, title);
+    public Movie(String programType, String channelName, String title, String image, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, double rating, String dateReleased, List<Actor> actors) {
+        super(programType, channelName, title, image, shortDescription, length, duration, closedCaption, programPhase, programStatus, programColor, programAirDateTime);
         Rating = rating;
         DateReleased = dateReleased;
         Actors = actors;

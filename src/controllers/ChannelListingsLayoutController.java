@@ -9,8 +9,13 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -187,7 +192,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
                             Label node = buildChildrenLabel(program.getTitle());
 
-                            addStyleToNode(program,node);
+                            setupCellNode(program,node);
 
                             grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
 
@@ -200,9 +205,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
                         Label node = buildChildrenLabel(program.getTitle());
 
-                        addStyleToNode(program,node);
-
-                        //System.out.println(colKey);
+                        setupCellNode(program,node);
 
                         grid.add(node,channelsColumnMapping.get(colKey),channelsRowMapping.get(rowKey));
                     }
@@ -241,41 +244,57 @@ public class ChannelListingsLayoutController implements Initializable {
         return label;
     }
 
-    private void addStyleToNode(Program program, Label node){
-        if(program.getProgramColor().equals(ProgramColor.RED))
-        {
-            node.getStyleClass().add("red");
-        }
-        else if(program.getProgramColor().equals(ProgramColor.WHITE))
-        {
-            node.getStyleClass().add("white");
-        }
-        else if(program.getProgramColor().equals(ProgramColor.BLUE))
-        {
-            node.getStyleClass().add("blue");
-        }
-        else if(program.getProgramColor().equals(ProgramColor.GREEN))
-        {
-            node.getStyleClass().add("green");
-        }
-        else if(program.getProgramColor().equals(ProgramColor.YELLOW))
-        {
-            node.getStyleClass().add("yellow");
-        }
-        else if(program.getProgramColor().equals(ProgramColor.PURPLE))
-        {
-            node.getStyleClass().add("purple");
-        }
+    private void setupCellNode(Program program, Label node){
+
+        ContextMenu contextMenu = setepCellContextMenu(program);
+
+        node.getStyleClass().add(program.getProgramColor().name().toLowerCase());
 
         node.getStylesheets().clear();
+
         node.getStylesheets().add(getClass().getResource("/assets/styles/labelstyle.css").toExternalForm());
 
         node.setId(program.getId());
 
-        node.setOnMouseClicked(ev -> {
-            System.out.println(program.getId());
+        node.setOnMouseClicked(event -> {
+            if(event.getButton() == MouseButton.SECONDARY){
+                contextMenu.show(node, event.getScreenX(), event.getScreenY());
+            }
+
+            if(event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2){
+                System.out.println("You are now viewing: "+program.getTitle());
+            }
         });
 
+    }
+
+    private ContextMenu setepCellContextMenu(Program program){
+
+        ContextMenu contextMenu = new ContextMenu();
+
+        MenuItem watchNow = new MenuItem("Watch Now");
+
+        MenuItem viewLater = new MenuItem("View Later");
+
+        MenuItem viewMore = new MenuItem("See Full Description");
+
+        contextMenu.getItems().addAll(watchNow,viewLater,viewMore);
+
+        contextMenu.getItems().forEach( i -> {
+            i.setStyle("-fx-text-fill:#fff;-fx-font-size: 12px;-fx-padding:5 80 5 5;-fx-width:250px");
+        });
+
+        contextMenu.setOpacity(0.9);
+
+        contextMenu.centerOnScreen();
+
+        contextMenu.setStyle("-fx-background-color:#212121;-fx-text-fill:#fff");
+
+        contextMenu.setAutoFix(true);
+
+        contextMenu.setAutoHide(true);
+
+        return contextMenu;
     }
 
     private ColumnConstraints setColumnConstraints(double width, HPos pos){
