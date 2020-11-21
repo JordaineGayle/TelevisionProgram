@@ -1,6 +1,7 @@
 package models;
 
 import javax.swing.border.TitledBorder;
+import java.time.LocalDateTime;
 
 //Kids class
 public class Kids extends Program
@@ -14,8 +15,8 @@ public class Kids extends Program
         AgeRange = ageRange;
     }
 
-    public Kids(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title, Range ageRange) {
-        super(length, airTime, shortDescription, closedCaption, isNew, isLiveBroadcast, programStatus, programColor, programType, channelName, title);
+    public Kids(double length, LocalDateTime localDateTime, String shortDescription, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title, Range ageRange) {
+        super(length, localDateTime, shortDescription, closedCaption, programPhase, programStatus, programColor, programType, channelName, title);
         AgeRange = ageRange;
     }
 

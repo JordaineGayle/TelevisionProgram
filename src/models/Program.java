@@ -1,33 +1,33 @@
 package models;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Program
 {
     private String id;
-    private double Length; //in hours
-    private double AirTime; // in hours
-    private String ShortDescription;
-    private boolean ClosedCaption;
-    private boolean IsNew;
-    private boolean IsLiveBroadcast;
-    private ProgramStatus ProgramStatus;
-    private ProgramColor ProgramColor;
     private String ProgramType;
     private String ChannelName;
     private String Title;
+    private String ShortDescription;
+    private double Length;
+    private boolean ClosedCaption;
+    private ProgramPhase ProgramPhase;
+    private ProgramStatus ProgramStatus;
+    private ProgramColor ProgramColor;
+    private LocalDateTime ProgramAirDateTime;
 
     public Program(){ this.id = UUID.randomUUID().toString(); };
 
-    public Program(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title) {
+    public Program(double length, LocalDateTime localDateTime, String shortDescription, boolean closedCaption, ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title) {
         this.id = UUID.randomUUID().toString();
         Length = length;
-        AirTime = airTime;
+        ProgramAirDateTime = localDateTime;
+        ProgramPhase = programPhase;
         ShortDescription = shortDescription;
         ClosedCaption = closedCaption;
-        IsNew = isNew;
-        IsLiveBroadcast = isLiveBroadcast;
         ProgramStatus = programStatus;
         ProgramColor = programColor;
         ProgramType = programType;
@@ -51,12 +51,12 @@ public class Program
         Length = length;
     }
 
-    public double getAirTime() {
-        return AirTime;
+    public LocalDateTime getProgramAirDateTime() {
+        return ProgramAirDateTime;
     }
 
-    public void setAirTime(double airTime) {
-        AirTime = airTime;
+    public void setProgramAirDateTime(LocalDateTime programAirDateTime) {
+        ProgramAirDateTime = programAirDateTime;
     }
 
     public String getShortDescription() {
@@ -75,20 +75,12 @@ public class Program
         ClosedCaption = closedCaption;
     }
 
-    public boolean isNew() {
-        return IsNew;
+    public models.ProgramPhase getProgramPhase() {
+        return ProgramPhase;
     }
 
-    public void setNew(boolean aNew) {
-        IsNew = aNew;
-    }
-
-    public boolean isLiveBroadcast() {
-        return IsLiveBroadcast;
-    }
-
-    public void setLiveBroadcast(boolean liveBroadcast) {
-        IsLiveBroadcast = liveBroadcast;
+    public void setProgramPhase(models.ProgramPhase programPhase) {
+        ProgramPhase = programPhase;
     }
 
     public models.ProgramStatus getProgramStatus() {

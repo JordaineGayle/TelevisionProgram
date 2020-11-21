@@ -1,4 +1,5 @@
 package models;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Movie extends Program
@@ -16,8 +17,8 @@ public class Movie extends Program
         Actors = actors;
     }
 
-    public Movie(double length, double airTime, String shortDescription, boolean closedCaption, boolean isNew, boolean isLiveBroadcast, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title, double rating, String dateReleased, List<Actor> actors) {
-        super(length, airTime, shortDescription, closedCaption, isNew, isLiveBroadcast, programStatus, programColor, programType, channelName, title);
+    public Movie(double length, LocalDateTime localDateTime, String shortDescription, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, String programType, String channelName, String title, double rating, String dateReleased, List<Actor> actors) {
+        super(length, localDateTime, shortDescription, closedCaption, programPhase, programStatus, programColor, programType, channelName, title);
         Rating = rating;
         DateReleased = dateReleased;
         Actors = actors;

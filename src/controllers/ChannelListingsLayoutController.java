@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import models.Program;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -27,6 +28,8 @@ public class ChannelListingsLayoutController implements Initializable {
     private Map<String,String> channels = DatabaseHelper.getChannels();
 
     private Map<String, Integer> channelsRowMapping = new TreeMap<>();
+
+    private List<Object> programs = DatabaseHelper.getPrograms();
 
     private int currentHour = LocalDateTime.now().getHour();
 
@@ -125,6 +128,16 @@ public class ChannelListingsLayoutController implements Initializable {
             rowKey.getAndIncrement();
 
         });
+
+        if(programs!=null){
+            programs.forEach((o) -> {
+                Program program = (Program)o;
+
+                double programTotalAirTime = program.getAirTime() + program.getLength();
+
+
+            });
+        }
 
     }
 
