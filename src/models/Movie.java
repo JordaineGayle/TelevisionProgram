@@ -5,20 +5,20 @@ import java.util.List;
 public class Movie extends Program
 {
     private double Rating;
-    private String DateReleased;
+    private LocalDateTime DateReleased;
     private List<Actor> Actors;
 
     public Movie() {
     }
 
-    public Movie(double rating, String dateReleased, List<Actor> actors) {
+    public Movie(double rating, LocalDateTime dateReleased, List<Actor> actors) {
         Rating = rating;
         DateReleased = dateReleased;
         Actors = actors;
     }
 
-    public Movie(String programType, String channelName, String title, String image, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, double rating, String dateReleased, List<Actor> actors) {
-        super(programType, channelName, title, image, shortDescription, length, duration, closedCaption, programPhase, programStatus, programColor, programAirDateTime);
+    public Movie(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, double rating, LocalDateTime dateReleased, List<Actor> actors) {
+        super(programType, channelName, title, image, source, shortDescription, length, duration, closedCaption, programPhase, programStatus, programColor, programAirDateTime);
         Rating = rating;
         DateReleased = dateReleased;
         Actors = actors;
@@ -32,11 +32,11 @@ public class Movie extends Program
         Rating = rating;
     }
 
-    public String getDateReleased() {
+    public LocalDateTime getDateReleased() {
         return DateReleased;
     }
 
-    public void setDateReleased(String dateReleased) {
+    public void setDateReleased(LocalDateTime dateReleased) {
         DateReleased = dateReleased;
     }
 

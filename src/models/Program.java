@@ -12,6 +12,7 @@ public class Program
     private String ChannelName;
     private String Title;
     private String Image;
+    private String Source;
     private String ShortDescription;
     private double Length; //in hours
     private double Duration; //in days
@@ -23,12 +24,13 @@ public class Program
 
     public Program(){ this.id = UUID.randomUUID().toString(); };
 
-    public Program(String programType, String channelName, String title, String image, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime) {
+    public Program(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime) {
         this.id = UUID.randomUUID().toString();
         ProgramType = programType;
         ChannelName = channelName;
         Title = title;
         Image = image;
+        Source = source;
         ShortDescription = shortDescription;
         Length = length;
         Duration = duration;
@@ -77,6 +79,14 @@ public class Program
 
     public void setImage(String image) {
         Image = image;
+    }
+
+    public String getSource() {
+        return Source;
+    }
+
+    public void setSource(String source) {
+        Source = source;
     }
 
     public String getShortDescription() {
