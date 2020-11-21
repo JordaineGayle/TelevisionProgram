@@ -1,0 +1,67 @@
+[
+  {
+    "id":"801faf59-ef2b-409c-b895-7514909d2165",
+    "Length": 8.00,
+    "ProgramType":"Movie",
+    "ChannelName": "1 - BBC-ONE",
+    "Title": "Bonny & Clyde",
+    "ShortDescription":"This is a hot movie, thriller",
+    "ClosedCaption":true,
+    "ProgramPhase":"New",
+    "ProgramStatus":"",
+    "ProgramColor":"RED",
+    "ProgramAirDateTime": "2020-11-21T08:15:32.413361300"
+  },
+  {
+    "id":"4e42a847-6967-4930-868b-bcab242ce730",
+    "Length": 10.00,
+    "ProgramType":"Movie",
+    "ChannelName": "89 - HOME",
+    "Title": "Top Notch",
+    "ShortDescription":"This is a hot movie, thriller",
+    "ClosedCaption":true,
+    "ProgramPhase":"New",
+    "ProgramStatus":"",
+    "ProgramColor":"GREEN",
+    "ProgramAirDateTime": "2020-11-21T07:15:32.413361300"
+  },
+  {
+    "id":"4e42a847-6967-4930-868b-bcab242ce730",
+    "Length": 6,
+    "ProgramType":"Movie",
+    "ChannelName": "74 - DAVE",
+    "Title": "Top Notch",
+    "ShortDescription":"This is a hot movie, thriller",
+    "ClosedCaption":true,
+    "ProgramPhase":"New",
+    "ProgramStatus":"",
+    "ProgramColor":"YELLOW",
+    "ProgramAirDateTime": "2020-11-21T09:15:32.413361300"
+  },
+  {
+    "id":"4e42a847-6967-4930-868b-bcab242ce730",
+    "Length": 12,
+    "ProgramType":"Movie",
+    "ChannelName": "74 - DAVE",
+    "Title": "Top Notch",
+    "ShortDescription":"This is a hot movie, thriller",
+    "ClosedCaption":true,
+    "ProgramPhase":"New",
+    "ProgramStatus":"",
+    "ProgramColor":"PURPLE",
+    "ProgramAirDateTime": "2020-11-21T15:15:32.413361300"
+  },
+  {
+    "id":"27d7541b-6641-4735-aa93-3c5b142e074f",
+    "Length": 0,
+    "ProgramType":"Movie",
+    "ChannelName": "64 - MTV",
+    "Title": "Hot Topic",
+    "ShortDescription":"This is a hot movie, thriller",
+    "ClosedCaption":true,
+    "ProgramPhase":"New",
+    "ProgramStatus":"",
+    "ProgramColor":"BLUE",
+    "ProgramAirDateTime": "2020-11-21T16:30:32.413361300"
+  }
+]

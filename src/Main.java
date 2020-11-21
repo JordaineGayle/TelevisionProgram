@@ -12,9 +12,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
-        new DatabaseHelper().InitializeDB();
-
+        DatabaseHelper.db.InitializeDB();
         launch(args);
     }
 }

@@ -1,7 +1,6 @@
 package helpers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.FileWriter;
@@ -9,9 +8,13 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DatabaseHelper {
+
+    public static DatabaseHelper db = new DatabaseHelper();
 
     private static Map<String, String> channelMap = new TreeMap<>();
 
@@ -19,7 +22,21 @@ public class DatabaseHelper {
 
     private  static List<Object> markedPrograms = new ArrayList<>();
 
-    private final Gson jsonUtility = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+    private final Gson jsonUtility = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
+        @Override
+        public LocalDateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+            return LocalDateTime.parse(json.getAsString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME); }
+
+    }).registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
+        private final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        @Override
+        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(formatter.format(localDateTime));
+        }
+
+    }).serializeNulls().setPrettyPrinting().create();
 
     public DatabaseHelper(){};
 
@@ -28,9 +45,9 @@ public class DatabaseHelper {
     }
 
     private void loadDBContentsInMemory(){
-        channelMap = readJson("channels.json");
-        programs = readJson("programs.json");
-        markedPrograms = readJson("marked_programs.json");
+        channelMap = readJson("channels.json",new TypeToken<>(){});
+        programs = readJson("programs.json",new TypeToken<>(){});
+        markedPrograms = readJson("marked_programs.json",new TypeToken<>(){});
     }
 
 
@@ -51,6 +68,12 @@ public class DatabaseHelper {
         return markedPrograms;
     }
 
+    public static <T> T toType(Object item, TypeToken<T> type){
+
+        String covertedItem = db.toJson(item);
+
+        return db.fromJson(covertedItem,type);
+    }
 
 
 
@@ -58,18 +81,26 @@ public class DatabaseHelper {
 
 
 
-    private <T> T readJson(String source){
+    public <T> T readJson(String source, TypeToken<T> token){
 
         String data = getFileContents(source);
 
-        Type type = new TypeToken<T>(){}.getType();
-
-        return jsonUtility.fromJson(data,type);
+        return jsonUtility.fromJson(data,token.getType());
     }
 
-    private <T> String toJson(T item){
-        return jsonUtility.toJson(item,new TypeToken<T>(){}.getType());
+
+    public <T> T fromJson(String data, TypeToken<T> type){
+
+        T converted = jsonUtility.fromJson(data,type.getType());
+
+        return converted;
     }
+
+
+    public <T> String toJson(T item){
+        return jsonUtility.toJson(item);
+    }
+
 
     private String getFileContents(String filename){
 

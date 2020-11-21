@@ -12,7 +12,7 @@ public class Program
     private String ChannelName;
     private String Title;
     private String ShortDescription;
-    private double Length;
+    private double Length; //in hours
     private boolean ClosedCaption;
     private ProgramPhase ProgramPhase;
     private ProgramStatus ProgramStatus;

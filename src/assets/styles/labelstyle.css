@@ -1,0 +1,34 @@
+.red{
+    -fx-background-color: #e53935;
+    -fx-text-fill: #fff;
+}
+
+.white{
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
+
+.green{
+    -fx-background-color: #43A047;
+    -fx-text-fill: #fff;
+}
+
+.yellow{
+    -fx-background-color: #FDD835;
+    -fx-text-fill: #000;
+}
+
+.blue{
+    -fx-background-color: #1E88E5;
+    -fx-text-fill: #fff;
+}
+
+.purple{
+    -fx-background-color: #5E35B1;
+    -fx-text-fill: #fff;
+}
+
+.red:hover,.white:hover,.green:hover,.yellow:hover,.blue:hover,.purple:hover{
+    -fx-background-color: rgba(21,21,21,0.05);
+    -fx-text-fill: black;
+}
