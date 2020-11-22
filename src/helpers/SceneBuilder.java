@@ -67,8 +67,6 @@ public class SceneBuilder {
                 stage.setFullScreen(true);
             });
 
-            stage.show();
-
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package controllers;
 
 import com.google.gson.reflect.TypeToken;
 import helpers.DatabaseHelper;
+import helpers.ScenesHelper;
 import helpers.TimeHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import models.Program;
 import models.ProgramColor;
 
@@ -43,8 +45,6 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private GridPane grid = new GridPane();
 
-
-
     private HashMap<Integer,String> clockHours =  new TimeHelper().get24HrClock();
 
     private Map<String,String> channels = DatabaseHelper.getChannels();
@@ -64,6 +64,8 @@ public class ChannelListingsLayoutController implements Initializable {
     private ArrayList<String> columnNames = new ArrayList<>();
 
     private ArrayList<Program> todaysPrograms = new ArrayList<>();
+
+    private static Program viewNowProgram;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -90,6 +92,10 @@ public class ChannelListingsLayoutController implements Initializable {
         //setting scroll pane up
         setupScrollPane();
 
+    }
+
+    public static Program getCurrentViewingNowProgram(){
+        return viewNowProgram;
     }
 
 
@@ -262,7 +268,8 @@ public class ChannelListingsLayoutController implements Initializable {
             }
 
             if(event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2){
-                System.out.println("You are now viewing: "+program.getTitle());
+                viewNowProgram = program;
+                ScenesHelper.InvokeMediaPlayer(new Stage());
             }
         });
 
@@ -282,6 +289,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
         contextMenu.getItems().forEach( i -> {
             i.setStyle("-fx-text-fill:#fff;-fx-font-size: 12px;-fx-padding:5 80 5 5;-fx-width:250px");
+        });
+
+        watchNow.setOnAction(e -> {
+            viewNowProgram = program;
+            ScenesHelper.InvokeMediaPlayer(new Stage());
         });
 
         contextMenu.setOpacity(0.9);
