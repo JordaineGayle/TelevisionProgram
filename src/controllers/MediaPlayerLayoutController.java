@@ -7,14 +7,17 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Slider;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -23,6 +26,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import models.Program;
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -34,8 +38,7 @@ public class MediaPlayerLayoutController implements Initializable {
 
     private Program currentProgram = ChannelListingsLayoutController.getCurrentViewingNowProgram();
 
-    //private Media media = new Media(getClass().getResource("/assets/vid1.mp4").toExternalForm()); //Media(currentProgram.getSource());
-    private Media media = new Media("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"); //Media(currentProgram.getSource());
+    private Media media = new Media(currentProgram.getSource());
 
     private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
@@ -85,6 +88,9 @@ public class MediaPlayerLayoutController implements Initializable {
     @FXML
     private Label mediaTitle = new Label();
 
+    @FXML
+    private Tooltip progressToolTip = new Tooltip();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -92,6 +98,12 @@ public class MediaPlayerLayoutController implements Initializable {
         volumeSlider.valueProperty().bindBidirectional(mediaPlayer.volumeProperty());
 
         progressBar.setProgress(0);
+
+        progressToolTip.setShowDelay(new Duration(0));
+
+        progressToolTip.setAutoFix(true);
+
+        progressToolTip.setAutoHide(true);
 
         progress = new SimpleDoubleProperty() {};
 
@@ -164,6 +176,20 @@ public class MediaPlayerLayoutController implements Initializable {
                     }
                 });
 
+                progressBar.setOnMouseMoved(mv ->{
+                    double progressBarHoverPosition = mv.getX();
+
+                    double pWidth = progressBar.getWidth();
+
+                    double progression = progressBarHoverPosition / pWidth;
+
+                    long percentMilliSec = (long)(progression * mediaPlayer.getTotalDuration().toMillis());
+
+                    String progressTpTime = DurationFormatUtils.formatDuration(percentMilliSec,"H:mm:ss", true);
+
+                    progressToolTip.setText(progressTpTime);
+                });
+
                 mediaPlayer.play();
             }
 
@@ -174,7 +200,11 @@ public class MediaPlayerLayoutController implements Initializable {
                 isPlaying = false;
             }
 
-            mediaStat.setText(n.name());
+            if(n.equals(MediaPlayer.Status.STALLED) || n.equals(MediaPlayer.Status.UNKNOWN)){
+                mediaStat.setText("BUFFERING...");
+            }else{
+                mediaStat.setText(n.name());
+            }
         });
 
         mediaPlayer.currentTimeProperty().addListener((e,o,n)->{
@@ -210,8 +240,12 @@ public class MediaPlayerLayoutController implements Initializable {
     private void setupMediaView(){
 
         mediaView.setPreserveRatio(true);
-        mediaView.setMediaPlayer(mediaPlayer);
         mediaView.setSmooth(true);
+        mediaView.setCache(true);
+        mediaView.setFitWidth(1280);
+        mediaView.setFitHeight(900);
+        mediaView.setMediaPlayer(mediaPlayer);
+
 
         mediaView.setOnMouseClicked(e -> {
             if(e.getButton().equals(MouseButton.PRIMARY)){
@@ -220,6 +254,22 @@ public class MediaPlayerLayoutController implements Initializable {
                 }else{
                     mediaPlayer.play();
                 }
+            }
+        });
+
+
+        playerPane.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+            System.out.println("Space key Pressed");
+            if (event.getCode() == KeyCode.SPACE) {
+                if(isPlaying){
+                    mediaPlayer.pause();
+                }else{
+                    mediaPlayer.play();
+                }
+            }
+
+            if (event.getCode() == KeyCode.ALT) {
+                mediaPlayer.stop();
             }
         });
 

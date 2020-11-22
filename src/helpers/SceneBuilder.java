@@ -18,11 +18,9 @@ public class SceneBuilder {
 
     private static HashMap<String,Stage> stages = new HashMap<>();
 
+    private static HashMap<String,Parent> scenes = new HashMap<>();
+
     private Stage stage;
-
-    private Scene scene;
-
-    private Parent parent;
 
     private Double Width;
 
@@ -47,11 +45,11 @@ public class SceneBuilder {
 
         try{
 
-            parent = FXMLLoader.load(SceneBuilder.class.getResource("/layouts/"+LayoutName));
+            Parent parent = FXMLLoader.load(SceneBuilder.class.getResource("/layouts/"+LayoutName));
 
-            scene = new Scene(parent);
+            scenes.put(getLayoutName(),parent);
 
-            stage.setScene(scene);
+            stage.setScene(new Scene(parent));
 
             stage.setTitle(Title);
 
@@ -91,12 +89,8 @@ public class SceneBuilder {
         return stages;
     }
 
-    public Scene getScene() {
-        return scene;
-    }
-
-    public Parent getParent() {
-        return parent;
+    public static HashMap<String, Parent> getScenes() {
+        return scenes;
     }
 
     public double getLength() {
