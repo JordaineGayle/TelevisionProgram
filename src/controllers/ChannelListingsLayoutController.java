@@ -1,6 +1,4 @@
 package controllers;
-
-import com.google.gson.reflect.TypeToken;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;
 import helpers.TimeHelper;
@@ -91,8 +89,6 @@ public class ChannelListingsLayoutController implements Initializable {
     public static IProgram getCurrentViewingNowProgram(){
         return viewNowProgram;
     }
-
-
 
     private void setupGrid(){
         grid.setGridLinesVisible(true);
@@ -190,8 +186,8 @@ public class ChannelListingsLayoutController implements Initializable {
         });
     }
 
-
     private void handleDurationDays(IProgram program){
+
         LocalDateTime accurateDate = program.getProgramAirDateTime();
 
         double totalHours = (program.getProgramAirDateTime().getHour() + program.getLength());
@@ -202,10 +198,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
         String rowKey = program.getChannelName();
 
-
         if(program.getLength() > 0){
-
-            System.out.println("Program has duration attached: "+program.getTitle());
 
             String newColKey = "";
 
@@ -223,7 +216,6 @@ public class ChannelListingsLayoutController implements Initializable {
 
                 }
             }
-
         }
         else{
             if(program.getProgramAirDateTime().getHour() >= currentHour){
@@ -253,11 +245,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
             totalHours = duration.toHours();
 
-
-            System.out.println("Total Hours: "+totalHours);
-
             accurateDate = LocalDateTime.now();
-            System.out.println("Accurate Date: "+accurateDate.toString());
 
         }
         else{

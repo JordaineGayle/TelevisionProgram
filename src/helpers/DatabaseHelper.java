@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DatabaseHelper {
@@ -91,13 +92,25 @@ public class DatabaseHelper {
 
         Stream<IProgram> result = markedPrograms.stream().filter(e -> e.getId().equals(program.getId()));
 
-        if(result.count() > 0) return false;
+        if(result!=null && result.collect(Collectors.toList()).size() > 0){
+            IProgram item = result.findFirst().get();
+            markedPrograms.remove(item);
+        }
 
         markedPrograms.add(program);
 
-        System.out.println(markedPrograms);
+        boolean success = db.saveFileContents(db.toJson(markedPrograms),"marked_programs.json");
 
-        return db.saveFileContents(db.toJson(markedPrograms),"marked_programs.json");
+        new Thread(){
+            @Override
+            public void run() {
+                db.loadMarkedPrograms();
+            }
+        }.start();
+
+        System.out.println(db.toJson(markedPrograms));
+
+        return success;
     }
 
     public static boolean addOrUpdateProgram(IProgram program){
@@ -193,26 +206,11 @@ public class DatabaseHelper {
 
     private void loadDBContentsInMemory(){
 
-        new Thread(){
-            @Override
-            public void run() {
-                channelMap = readJson("channels.json",new TypeToken<>(){});
-            }
-        }.start();
+        channelMap = readJson("channels.json",new TypeToken<>(){});
 
-        new Thread(){
-            @Override
-            public void run() {
-                loadPrograms();
-            }
-        }.start();
+        loadPrograms();
 
-        new Thread(){
-            @Override
-            public void run() {
-                loadMarkedPrograms();
-            }
-        }.start();
+        loadMarkedPrograms();
 
     }
 

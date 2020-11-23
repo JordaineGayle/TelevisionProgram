@@ -1,3 +1,4 @@
+import controllers.MainLayoutController;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;
 import javafx.application.Application;

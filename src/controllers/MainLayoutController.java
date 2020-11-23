@@ -1,12 +1,16 @@
 package controllers;
 
+import helpers.DatabaseHelper;
 import helpers.SceneBuilder;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -34,6 +38,11 @@ public class MainLayoutController implements Initializable {
     private Button exitBtn = new Button();
 
     @FXML
+    private Label markedItems = new Label();
+
+    private static IntegerProperty markedItemsCount = new SimpleIntegerProperty();
+
+    @FXML
     private BorderPane mainPane = new BorderPane();
 
     private boolean fullScreen = true;
@@ -43,6 +52,13 @@ public class MainLayoutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainPane.setCenter(paneBuilder("DashboardLayout.fxml"));
+
+        markedItems.textProperty().bind(markedItemsCount.asString());
+
+        if(DatabaseHelper.getMarkedPrograms().size() > 0){
+            markedItemsCount.setValue(DatabaseHelper.getMarkedPrograms().size());
+        }
+
         System.out.println();
     }
 
@@ -101,6 +117,10 @@ public class MainLayoutController implements Initializable {
         }
 
         return null;
+    }
+
+    public static void incrementMarkedItems(int val){
+        markedItemsCount.set(val);
     }
 
 

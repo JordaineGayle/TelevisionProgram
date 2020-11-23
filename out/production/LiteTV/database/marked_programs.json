@@ -14,49 +14,5 @@
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "RED",
     "ProgramAirDateTime": "2020-11-24T21:15:32.4133613"
-  },
-  {
-    "Rating": 0.0,
-    "DateReleased": null,
-    "Actors": [
-      {
-        "Id": 0,
-        "FirstName": "Jordaine",
-        "LastName": "Gayle",
-        "Age": 0,
-        "LastGrammyDate": null
-      }
-    ],
-    "id": "27d7541b-6641-4735-aa93-3c5b142e074f",
-    "ProgramType": "Movie",
-    "ChannelName": "64 - MTV",
-    "Title": "Hot Topic",
-    "Image": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-    "Source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "ShortDescription": "This is a hot movie, thriller",
-    "Length": 19.0,
-    "Duration": 0.0,
-    "ClosedCaption": true,
-    "ProgramPhase": "New",
-    "ProgramStatus": "ViewingLater",
-    "ProgramColor": "BLUE",
-    "ProgramAirDateTime": "2020-11-22T20:30:32.4133613"
-  },
-  {
-    "Denomination": null,
-    "id": "4e42a847-6967-4930-868b-bcab242ce730",
-    "ProgramType": "Gospel",
-    "ChannelName": "74 - DAVE",
-    "Title": "Top Notch",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "This is a hot movie, thriller",
-    "Length": 12.0,
-    "Duration": 0.0,
-    "ClosedCaption": false,
-    "ProgramPhase": "New",
-    "ProgramStatus": "ViewingLater",
-    "ProgramColor": "PURPLE",
-    "ProgramAirDateTime": "2020-11-22T19:15:32.4133613"
   }
 ]

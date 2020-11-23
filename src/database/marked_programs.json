@@ -34,29 +34,12 @@
     "Image": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
     "Source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     "ShortDescription": "This is a hot movie, thriller",
-    "Length": 19.0,
-    "Duration": 0.0,
+    "Length": 12.0,
+    "Duration": 2.0,
     "ClosedCaption": true,
     "ProgramPhase": "New",
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "BLUE",
-    "ProgramAirDateTime": "2020-11-22T20:30:32.4133613"
-  },
-  {
-    "Denomination": null,
-    "id": "4e42a847-6967-4930-868b-bcab242ce730",
-    "ProgramType": "Gospel",
-    "ChannelName": "74 - DAVE",
-    "Title": "Top Notch",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "This is a hot movie, thriller",
-    "Length": 12.0,
-    "Duration": 0.0,
-    "ClosedCaption": false,
-    "ProgramPhase": "New",
-    "ProgramStatus": "ViewingLater",
-    "ProgramColor": "PURPLE",
-    "ProgramAirDateTime": "2020-11-22T19:15:32.4133613"
+    "ProgramAirDateTime": "2020-11-21T20:30:32.4133613"
   }
 ]

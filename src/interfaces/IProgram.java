@@ -1,12 +1,9 @@
 package interfaces;
 
 import models.Actor;
-import models.Program;
 import models.Range;
-
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 public interface IProgram {
 
@@ -35,7 +32,6 @@ public interface IProgram {
     int getSeverityRating();
 
     void setSeverityRating(int severityRating);
-
 
     void setid();
 
