@@ -12,6 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -143,6 +146,8 @@ public class DatabaseHelper {
 
         if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
 
+        if(program.getChannelName() == null || program.getChannelName().isEmpty()) throw new Exception("A channel is mandatory please add one.");
+
         if(program.getProgramAirDateTime() == null || program.getProgramAirDateTime().isBefore(LocalDateTime.now()))
             throw new Exception("Please use a valid air date for program.");
 
@@ -163,6 +168,27 @@ public class DatabaseHelper {
 
         if(program.getProgramType().equals(ProgramType.Gospel.name()) && program.getDenomination() == null)
             throw new Exception("Please set a valid denomination. Gospel programs require it.");
+
+        /* Temporal Logic*/
+
+        List<IProgram> subsetOfProgramsByChannel = programs.stream().filter(p -> p.getChannelName().equals(program.getChannelName().toUpperCase())).collect(Collectors.toList());
+
+        if(subsetOfProgramsByChannel != null && subsetOfProgramsByChannel.size() > 0){
+
+            LocalDateTime currenProgramMinDate = program.getProgramAirDateTime();
+
+            LocalDateTime currentProgramMaxDate = TimeHelper.correctProgramDate(program);
+
+            ZoneId zoneId = ZoneId.systemDefault();
+
+            List<IProgram> getClashedPrograms = new ArrayList<>();
+
+            subsetOfProgramsByChannel.forEach(e ->{
+
+                
+
+            });
+        }
 
 
         Stream<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId()));
