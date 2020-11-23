@@ -1,24 +1,17 @@
 package controllers;
 
 import helpers.SceneBuilder;
-import javafx.beans.InvalidationListener;
+import interfaces.IProgram;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -26,9 +19,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
-import models.Program;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import java.net.URL;
@@ -36,7 +27,7 @@ import java.util.ResourceBundle;
 
 public class MediaPlayerLayoutController implements Initializable {
 
-    private Program currentProgram = ChannelListingsLayoutController.getCurrentViewingNowProgram();
+    private IProgram currentProgram = ChannelListingsLayoutController.getCurrentViewingNowProgram();
 
     private Media media = new Media(currentProgram.getSource());
 
@@ -91,7 +82,6 @@ public class MediaPlayerLayoutController implements Initializable {
     @FXML
     private Tooltip progressToolTip = new Tooltip();
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -118,6 +108,7 @@ public class MediaPlayerLayoutController implements Initializable {
         stage.setOnCloseRequest(e -> {
             mediaPlayer.stop();
             mediaPlayer.dispose();
+            stage.close();
         });
     }
 
@@ -259,7 +250,7 @@ public class MediaPlayerLayoutController implements Initializable {
 
 
         playerPane.addEventFilter(KeyEvent.KEY_PRESSED, event->{
-            System.out.println("Space key Pressed");
+
             if (event.getCode() == KeyCode.SPACE) {
                 if(isPlaying){
                     mediaPlayer.pause();

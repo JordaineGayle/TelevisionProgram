@@ -1,7 +1,5 @@
 package models;
 
-import java.security.PublicKey;
-
 //actor class
 public class Actor
 {

@@ -2,6 +2,8 @@ package helpers;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import interfaces.IProgram;
+import models.*;
 
 import java.io.FileWriter;
 import java.lang.reflect.Type;
@@ -11,6 +13,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class DatabaseHelper {
 
@@ -18,9 +21,9 @@ public class DatabaseHelper {
 
     private static Map<String, String> channelMap = new TreeMap<>();
 
-    private static List<Object> programs = new ArrayList<>();
+    private static List programs = new ArrayList();
 
-    private  static List<Object> markedPrograms = new ArrayList<>();
+    private  static List markedPrograms = new ArrayList();
 
     private final Gson jsonUtility = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -45,9 +48,43 @@ public class DatabaseHelper {
     }
 
     private void loadDBContentsInMemory(){
-        channelMap = readJson("channels.json",new TypeToken<>(){});
-        programs = readJson("programs.json",new TypeToken<>(){});
-        markedPrograms = readJson("marked_programs.json",new TypeToken<>(){});
+
+        new Thread(){
+            @Override
+            public void run() {
+                try{
+                    channelMap = readJson("channels.json",new TypeToken<>(){});
+                }catch (Exception e){}
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                try{
+                    programs = readJson("programs.json",new TypeToken<>(){});
+
+                    if(programs == null){
+                        programs = new ArrayList();
+                    }
+                }catch (Exception e){}
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                try{
+                    markedPrograms = readJson("marked_programs.json",new TypeToken<>(){});
+
+                    if(markedPrograms == null){
+                        markedPrograms = new ArrayList();
+                    }
+                }catch (Exception e){}
+            }
+        }.start();
+
+
     }
 
 
@@ -60,26 +97,71 @@ public class DatabaseHelper {
         return channelMap;
     }
 
-    public  static List<Object> getPrograms(){
+    public  static List getPrograms(){
         return programs;
     }
 
-    public static List<Object> getMarkedPrograms(){
+    public static List getMarkedPrograms(){
         return markedPrograms;
     }
 
     public static <T> T toType(Object item, TypeToken<T> type){
 
-        String covertedItem = db.toJson(item);
+        String convertedItem = db.toJson(item);
 
-        return db.fromJson(covertedItem,type);
+        return db.fromJson(convertedItem,type);
     }
 
+    public static <T extends IProgram> T convertToSpecifiedType(IProgram program, TypeToken<T> type){
 
+        for(Object o : programs){
 
+            String covertedItem = db.toJson(o);
 
+            T t = db.fromJson(covertedItem,type);
 
+            if (t.getId().equals(program.getId())){
+                return t;
+            }
+        }
 
+        return null;
+    }
+
+    public static <T extends IProgram> boolean addMarkedProgram(T program){
+
+        ArrayList<Program> markedItems = toType(markedPrograms,new TypeToken<>(){});
+
+        Stream<Program> result = markedItems.stream().filter(e -> e.getId().equals(program.getId()));
+
+        if(result.count() > 0) return false;
+
+        markedPrograms.add(program);
+
+        System.out.println(markedPrograms);
+
+        return db.saveFileContents(db.toJson(markedPrograms),"marked_programs.json");
+    }
+
+    public static IProgram convertToSpecifiedType(IProgram program){
+        if(program.getProgramType().equals("Comedy")){
+            return convertToSpecifiedType(program,new TypeToken<Comedy>(){});
+        }else if(program.getProgramType().equals("General")){
+            return convertToSpecifiedType(program,new TypeToken<General>(){});
+        }else if(program.getProgramType().equals("Gospel")){
+            return convertToSpecifiedType(program,new TypeToken<Gospel>(){});
+        }else if(program.getProgramType().equals("Kids")){
+            return convertToSpecifiedType(program,new TypeToken<Kids>(){});
+        }else if(program.getProgramType().equals("Movie")){
+            return convertToSpecifiedType(program,new TypeToken<Movie>(){});
+        }else if(program.getProgramType().equals("News")){
+            return convertToSpecifiedType(program,new TypeToken<News>(){});
+        }else if(program.getProgramType().equals("Weather")){
+            return convertToSpecifiedType(program,new TypeToken<General>(){});
+        }
+
+        return convertToSpecifiedType(program,new TypeToken<Program>(){});
+    }
 
     public <T> T readJson(String source, TypeToken<T> token){
 

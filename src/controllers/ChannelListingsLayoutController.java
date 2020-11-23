@@ -4,25 +4,23 @@ import com.google.gson.reflect.TypeToken;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;
 import helpers.TimeHelper;
+import interfaces.IProgram;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import models.Program;
-import models.ProgramColor;
+import models.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -53,7 +51,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private Map<String, Integer> channelsColumnMapping = new HashMap<>();
 
-    private List<Object> programs = DatabaseHelper.getPrograms();
+    private List programs = DatabaseHelper.getPrograms();
 
     private ArrayList<Program> basePrograms = DatabaseHelper.toType(programs,new TypeToken<>(){});
 
@@ -65,14 +63,14 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private ArrayList<Program> todaysPrograms = new ArrayList<>();
 
-    private static Program viewNowProgram;
+    private static IProgram viewNowProgram;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //Setting the current date time for the channel listing
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy hh:mm a");
-        String now = LocalDateTime.now().format(formatter);
+
+        String now = TimeHelper.convertToHumanReadableFormat(LocalDateTime.now());
         currentDateLabel.setText(now);
 
         //Adding time quartz between the clock hours
@@ -94,7 +92,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     }
 
-    public static Program getCurrentViewingNowProgram(){
+    public static IProgram getCurrentViewingNowProgram(){
         return viewNowProgram;
     }
 
@@ -172,9 +170,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
         if(programs==null) return;
 
-        programs.forEach((o) -> {
-
-            Program program = DatabaseHelper.toType(o,new TypeToken<>(){});
+        basePrograms.forEach((program) -> {
 
             if(TimeHelper.isDateEqualToNow(program.getProgramAirDateTime())){
 
@@ -250,7 +246,7 @@ public class ChannelListingsLayoutController implements Initializable {
         return label;
     }
 
-    private void setupCellNode(Program program, Label node){
+    private void setupCellNode(IProgram program, Label node){
 
         ContextMenu contextMenu = setepCellContextMenu(program);
 
@@ -275,7 +271,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     }
 
-    private ContextMenu setepCellContextMenu(Program program){
+    private ContextMenu setepCellContextMenu(IProgram program){
 
         ContextMenu contextMenu = new ContextMenu();
 
@@ -283,18 +279,40 @@ public class ChannelListingsLayoutController implements Initializable {
 
         MenuItem viewLater = new MenuItem("View Later");
 
+        MenuItem recordProgram = new MenuItem("Record Program");
+
         MenuItem viewMore = new MenuItem("See Full Description");
 
-        contextMenu.getItems().addAll(watchNow,viewLater,viewMore);
+        contextMenu.getItems().addAll(watchNow,viewLater,recordProgram,viewMore);
 
         contextMenu.getItems().forEach( i -> {
             i.setStyle("-fx-text-fill:#fff;-fx-font-size: 12px;-fx-padding:5 80 5 5;-fx-width:250px");
         });
 
+
+
         watchNow.setOnAction(e -> {
             viewNowProgram = program;
             ScenesHelper.InvokeMediaPlayer(new Stage());
         });
+
+        viewMore.setOnAction(e -> {
+            viewNowProgram = program;
+            ScenesHelper.InvokeProgramDescription(new Stage());
+        });
+
+        viewLater.setOnAction(e -> {
+            IProgram marked = DatabaseHelper.convertToSpecifiedType(program);
+            marked.setProgramStatus(ProgramStatus.ViewingLater);
+            System.out.println(DatabaseHelper.addMarkedProgram(marked));
+        });
+
+        recordProgram.setOnAction(e -> {
+            IProgram marked = DatabaseHelper.convertToSpecifiedType(program);
+            marked.setProgramStatus(ProgramStatus.Recorded);
+            System.out.println(DatabaseHelper.addMarkedProgram(marked));
+        });
+
 
         contextMenu.setOpacity(0.9);
 

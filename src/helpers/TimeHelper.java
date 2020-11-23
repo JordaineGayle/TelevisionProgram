@@ -1,6 +1,7 @@
 package helpers;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class TimeHelper {
@@ -42,6 +43,12 @@ public class TimeHelper {
                 return hour+":"+mins+" PM";
             }
         }
+    }
+
+    public static String convertToHumanReadableFormat(LocalDateTime localDateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE MMMM dd, yyyy hh:mm a");
+        String converted = localDateTime.format(formatter);
+        return converted;
     }
 
     public static boolean isDateEqualToNow(LocalDateTime localDateTime){

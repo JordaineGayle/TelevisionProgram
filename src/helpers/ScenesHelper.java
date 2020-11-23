@@ -3,6 +3,8 @@ package helpers;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.Optional;
+
 public class ScenesHelper {
 
     public static void InvokeMainLayout(Stage stage){
@@ -27,7 +29,24 @@ public class ScenesHelper {
             stage.initModality(Modality.APPLICATION_MODAL);
         }
 
-        new SceneBuilder(stage,"MediaPlayerLayout.fxml",null,null,null);
+        new SceneBuilder(stage,"MediaPlayerLayout.fxml", Optional.of("Media Player"),null,null);
         stage.show();
+    }
+
+    public static void InvokeProgramDescription(Stage stage){
+
+        Stage hasStage = SceneBuilder.getStages().get("ProgramInfoLayout.fxml");
+
+        if(hasStage != null){
+            stage = hasStage;
+        }else{
+            stage.initModality(Modality.APPLICATION_MODAL);
+        }
+
+        new SceneBuilder(stage,"ProgramInfoLayout.fxml",Optional.of("Program Description"),Optional.of(300.00),Optional.of(800.00));
+        stage.setResizable(false);
+        stage.setMaximized(false);
+        stage.setFullScreen(false);
+        stage.showAndWait();
     }
 }

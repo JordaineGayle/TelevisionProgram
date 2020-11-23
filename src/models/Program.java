@@ -1,11 +1,13 @@
 package models;
 
 
-import java.time.LocalDate;
+import interfaces.IProgram;
+
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
-public class Program
+public class Program implements IProgram
 {
     private String id;
     private String ProgramType;
@@ -151,5 +153,65 @@ public class Program
 
     public void setProgramAirDateTime(LocalDateTime programAirDateTime) {
         ProgramAirDateTime = programAirDateTime;
+    }
+
+    @Override
+    public List<Actor> getActors() {
+        return null;
+    }
+
+    @Override
+    public void setActors(List<Actor> actors) {
+
+    }
+
+    @Override
+    public Denomination getDenomination() {
+        return null;
+    }
+
+    @Override
+    public void setDenomination(Denomination denomination) {
+
+    }
+
+    @Override
+    public Range getAgeRange() {
+        return null;
+    }
+
+    @Override
+    public void setAgeRange(Range ageRange) {
+
+    }
+
+    @Override
+    public double getRating() {
+        return 0;
+    }
+
+    @Override
+    public void setRating(double rating) {
+
+    }
+
+    @Override
+    public LocalDateTime getDateReleased() {
+        return null;
+    }
+
+    @Override
+    public void setDateReleased(LocalDateTime dateReleased) {
+
+    }
+
+    @Override
+    public int getSeverityRating() {
+        return 0;
+    }
+
+    @Override
+    public void setSeverityRating(int severityRating) {
+
     }
 }

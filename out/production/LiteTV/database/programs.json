@@ -2,7 +2,7 @@
   {
     "id":"801faf59-ef2b-409c-b895-7514909d2165",
     "Length": 8.00,
-    "ProgramType":"Movie",
+    "ProgramType":"News",
     "ChannelName": "1 - BBC-ONE",
     "Title": "Bonny & Clyde",
     "ShortDescription":"This is a hot movie, thriller",
@@ -10,12 +10,12 @@
     "ProgramPhase":"New",
     "ProgramStatus":"",
     "ProgramColor":"RED",
-    "ProgramAirDateTime": "2020-11-21T08:15:32.413361300"
+    "ProgramAirDateTime": "2020-11-22T21:15:32.413361300"
   },
   {
-    "id":"4e42a847-6967-4930-868b-bcab242ce730",
+    "id":"49f4d1ee-1d63-495a-94b4-dafbfbb7f2ca",
     "Length": 10.00,
-    "ProgramType":"Movie",
+    "ProgramType":"General",
     "ChannelName": "89 - HOME",
     "Title": "Top Notch",
     "ShortDescription":"This is a hot movie, thriller",
@@ -23,12 +23,12 @@
     "ProgramPhase":"New",
     "ProgramStatus":"",
     "ProgramColor":"GREEN",
-    "ProgramAirDateTime": "2020-11-21T07:15:32.413361300"
+    "ProgramAirDateTime": "2020-11-22T20:15:32.413361300"
   },
   {
-    "id":"4e42a847-6967-4930-868b-bcab242ce730",
+    "id":"866f925e-1cc4-47b2-be25-ccf5a549b14c",
     "Length": 6,
-    "ProgramType":"Movie",
+    "ProgramType":"Kids",
     "ChannelName": "74 - DAVE",
     "Title": "Top Notch",
     "ShortDescription":"This is a hot movie, thriller",
@@ -36,24 +36,24 @@
     "ProgramPhase":"New",
     "ProgramStatus":"",
     "ProgramColor":"YELLOW",
-    "ProgramAirDateTime": "2020-11-21T09:15:32.413361300"
+    "ProgramAirDateTime": "2020-11-22T20:15:32.413361300"
   },
   {
     "id":"4e42a847-6967-4930-868b-bcab242ce730",
     "Length": 12,
-    "ProgramType":"Movie",
+    "ProgramType":"Gospel",
     "ChannelName": "74 - DAVE",
     "Title": "Top Notch",
     "ShortDescription":"This is a hot movie, thriller",
-    "ClosedCaption":true,
+    "ClosedCaption":false,
     "ProgramPhase":"New",
     "ProgramStatus":"",
     "ProgramColor":"PURPLE",
-    "ProgramAirDateTime": "2020-11-21T15:15:32.413361300"
+    "ProgramAirDateTime": "2020-11-22T19:15:32.413361300"
   },
   {
     "id":"27d7541b-6641-4735-aa93-3c5b142e074f",
-    "Length": 12,
+    "Length": 19,
     "ProgramType":"Movie",
     "ChannelName": "64 - MTV",
     "Title": "Hot Topic",
@@ -63,6 +63,8 @@
     "ProgramStatus":"",
     "ProgramColor":"BLUE",
     "Source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "ProgramAirDateTime": "2020-11-22T02:30:32.413361300"
+    "Image": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
+    "Actors": [{"FirstName":"Jordaine","LastName": "Gayle"}],
+    "ProgramAirDateTime": "2020-11-22T20:30:32.413361300"
   }
 ]
