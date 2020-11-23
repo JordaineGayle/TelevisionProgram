@@ -21,9 +21,9 @@ public class DatabaseHelper {
 
     private static Map<String, String> channelMap = new TreeMap<>();
 
-    private static List programs = new ArrayList();
+    private static List<IProgram> programs = new ArrayList<>();
 
-    private  static List markedPrograms = new ArrayList();
+    private  static List<IProgram> markedPrograms = new ArrayList<>();
 
     private final Gson jsonUtility = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
         @Override
@@ -41,98 +41,55 @@ public class DatabaseHelper {
 
     }).serializeNulls().setPrettyPrinting().create();
 
+    /** Initialization */
+
     public DatabaseHelper(){};
 
     public void InitializeDB(){
         loadDBContentsInMemory();
     }
 
-    private void loadDBContentsInMemory(){
+    public void loadPrograms(){
+        List objects = readJson("programs.json",new TypeToken<>(){});
 
-        new Thread(){
-            @Override
-            public void run() {
-                try{
-                    channelMap = readJson("channels.json",new TypeToken<>(){});
-                }catch (Exception e){}
-            }
-        }.start();
+        if(objects == null){
+            programs = new ArrayList<>();
+        }
 
-        new Thread(){
-            @Override
-            public void run() {
-                try{
-                    programs = readJson("programs.json",new TypeToken<>(){});
-
-                    if(programs == null){
-                        programs = new ArrayList();
-                    }
-                }catch (Exception e){}
-            }
-        }.start();
-
-        new Thread(){
-            @Override
-            public void run() {
-                try{
-                    markedPrograms = readJson("marked_programs.json",new TypeToken<>(){});
-
-                    if(markedPrograms == null){
-                        markedPrograms = new ArrayList();
-                    }
-                }catch (Exception e){}
-            }
-        }.start();
-
-
+        programs = convertToIPrograms(objects);
     }
 
+    public void loadMarkedPrograms(){
+        List objects = readJson("marked_programs.json",new TypeToken<>(){});
 
+        if(objects == null){
+            markedPrograms = new ArrayList<>();
+        }
 
+        markedPrograms = convertToIPrograms(objects);
 
+        saveFileContents(toJson(markedPrograms),"marked_programs.json");
+    }
 
-
+    /** Static getters for in memory data store */
 
     public static Map<String, String> getChannels(){
         return channelMap;
     }
 
-    public  static List getPrograms(){
+    public  static List<IProgram> getPrograms(){
         return programs;
     }
 
-    public static List getMarkedPrograms(){
+    public static List<IProgram> getMarkedPrograms(){
         return markedPrograms;
     }
 
-    public static <T> T toType(Object item, TypeToken<T> type){
+    /**  Type converters */
 
-        String convertedItem = db.toJson(item);
+    public static boolean addMarkedProgram(IProgram program){
 
-        return db.fromJson(convertedItem,type);
-    }
-
-    public static <T extends IProgram> T convertToSpecifiedType(IProgram program, TypeToken<T> type){
-
-        for(Object o : programs){
-
-            String covertedItem = db.toJson(o);
-
-            T t = db.fromJson(covertedItem,type);
-
-            if (t.getId().equals(program.getId())){
-                return t;
-            }
-        }
-
-        return null;
-    }
-
-    public static <T extends IProgram> boolean addMarkedProgram(T program){
-
-        ArrayList<Program> markedItems = toType(markedPrograms,new TypeToken<>(){});
-
-        Stream<Program> result = markedItems.stream().filter(e -> e.getId().equals(program.getId()));
+        Stream<IProgram> result = markedPrograms.stream().filter(e -> e.getId().equals(program.getId()));
 
         if(result.count() > 0) return false;
 
@@ -143,24 +100,85 @@ public class DatabaseHelper {
         return db.saveFileContents(db.toJson(markedPrograms),"marked_programs.json");
     }
 
-    public static IProgram convertToSpecifiedType(IProgram program){
-        if(program.getProgramType().equals("Comedy")){
-            return convertToSpecifiedType(program,new TypeToken<Comedy>(){});
-        }else if(program.getProgramType().equals("General")){
-            return convertToSpecifiedType(program,new TypeToken<General>(){});
-        }else if(program.getProgramType().equals("Gospel")){
-            return convertToSpecifiedType(program,new TypeToken<Gospel>(){});
-        }else if(program.getProgramType().equals("Kids")){
-            return convertToSpecifiedType(program,new TypeToken<Kids>(){});
-        }else if(program.getProgramType().equals("Movie")){
-            return convertToSpecifiedType(program,new TypeToken<Movie>(){});
-        }else if(program.getProgramType().equals("News")){
-            return convertToSpecifiedType(program,new TypeToken<News>(){});
-        }else if(program.getProgramType().equals("Weather")){
-            return convertToSpecifiedType(program,new TypeToken<General>(){});
+    public static boolean addOrUpdateProgram(IProgram program){
+
+        Stream<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId()));
+
+        if(result.count() > 0) return false;
+
+        programs.add(program);
+
+        return db.saveFileContents(db.toJson(programs),"programs.json");
+    }
+
+    public static List<IProgram> convertToIPrograms(List<Object> objects){
+
+        List<IProgram> convertedPrograms = new ArrayList<>();
+
+        for (Object  o: objects) {
+
+            String covertedItem = db.toJson(o);
+
+            Program prog = db.fromJson(covertedItem,new TypeToken<>(){});
+
+            if(prog.getProgramStatus() != null && prog.getProgramStatus().equals(ProgramStatus.ViewingLater))
+            {
+                try{
+
+                    LocalDateTime dt = TimeHelper.correctProgramDate(prog);
+
+                    if(dt.isEqual(LocalDateTime.now()) || dt.isAfter(LocalDateTime.now())){
+                        convertedPrograms.add(convertToSpecifiedType(prog,o));
+                    }
+
+                }catch (Exception e){}
+            }
+            else
+            {
+                convertedPrograms.add(convertToSpecifiedType(prog,o));
+            }
         }
 
-        return convertToSpecifiedType(program,new TypeToken<Program>(){});
+        return convertedPrograms;
+    }
+
+    public static <T> T toType(Object item, TypeToken<T> type){
+
+        String convertedItem = db.toJson(item);
+
+        return db.fromJson(convertedItem,type);
+    }
+
+    public static IProgram convertToSpecifiedType(IProgram program, Object original){
+        if(program.getProgramType().equals("Comedy")){
+            return toType(original,new TypeToken<Comedy>(){});
+        }else if(program.getProgramType().equals("General")){
+            return toType(original,new TypeToken<General>(){});
+        }else if(program.getProgramType().equals("Gospel")){
+            return toType(original,new TypeToken<Gospel>(){});
+        }else if(program.getProgramType().equals("Kids")){
+            return toType(original,new TypeToken<Kids>(){});
+        }else if(program.getProgramType().equals("Movie")){
+            return toType(original,new TypeToken<Movie>(){});
+        }else if(program.getProgramType().equals("News")){
+            return toType(original,new TypeToken<News>(){});
+        }else if(program.getProgramType().equals("Weather")){
+            return toType(original,new TypeToken<General>(){});
+        }
+
+        return toType(original,new TypeToken<Program>(){});
+
+    }
+
+    public <T> T fromJson(String data, TypeToken<T> type){
+
+        T converted = jsonUtility.fromJson(data,type.getType());
+
+        return converted;
+    }
+
+    public <T> String toJson(T item){
+        return jsonUtility.toJson(item);
     }
 
     public <T> T readJson(String source, TypeToken<T> token){
@@ -171,18 +189,32 @@ public class DatabaseHelper {
     }
 
 
-    public <T> T fromJson(String data, TypeToken<T> type){
+    /** File,Memory processing & handling */
 
-        T converted = jsonUtility.fromJson(data,type.getType());
+    private void loadDBContentsInMemory(){
 
-        return converted;
+        new Thread(){
+            @Override
+            public void run() {
+                channelMap = readJson("channels.json",new TypeToken<>(){});
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                loadPrograms();
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                loadMarkedPrograms();
+            }
+        }.start();
+
     }
-
-
-    public <T> String toJson(T item){
-        return jsonUtility.toJson(item);
-    }
-
 
     private String getFileContents(String filename){
 

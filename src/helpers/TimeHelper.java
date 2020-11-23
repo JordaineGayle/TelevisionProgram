@@ -1,5 +1,7 @@
 package helpers;
 
+import interfaces.IProgram;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -53,5 +55,9 @@ public class TimeHelper {
 
     public static boolean isDateEqualToNow(LocalDateTime localDateTime){
         return LocalDateTime.now().toLocalDate().isEqual(localDateTime.toLocalDate());
+    }
+
+    public static LocalDateTime correctProgramDate(IProgram prog){
+        return prog.getProgramAirDateTime().minusDays((long)(-1*prog.getDuration())).minusHours((long)(-1*prog.getLength()));
     }
 }

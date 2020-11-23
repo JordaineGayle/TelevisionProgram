@@ -51,17 +51,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private Map<String, Integer> channelsColumnMapping = new HashMap<>();
 
-    private List programs = DatabaseHelper.getPrograms();
-
-    private ArrayList<Program> basePrograms = DatabaseHelper.toType(programs,new TypeToken<>(){});
+    private List<IProgram> programs = DatabaseHelper.getPrograms();
 
     private int currentHour = LocalDateTime.now().getHour();
 
-    private int currentMins = LocalDateTime.now().getMinute();
-
     private ArrayList<String> columnNames = new ArrayList<>();
-
-    private ArrayList<Program> todaysPrograms = new ArrayList<>();
 
     private static IProgram viewNowProgram;
 
@@ -170,9 +164,9 @@ public class ChannelListingsLayoutController implements Initializable {
 
         if(programs==null) return;
 
-        basePrograms.forEach((program) -> {
+        programs.forEach((program) -> {
 
-            if(TimeHelper.isDateEqualToNow(program.getProgramAirDateTime())){
+            if(TimeHelper.isDateEqualToNow(TimeHelper.correctProgramDate(program))){
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:00 a");
 
@@ -289,8 +283,6 @@ public class ChannelListingsLayoutController implements Initializable {
             i.setStyle("-fx-text-fill:#fff;-fx-font-size: 12px;-fx-padding:5 80 5 5;-fx-width:250px");
         });
 
-
-
         watchNow.setOnAction(e -> {
             viewNowProgram = program;
             ScenesHelper.InvokeMediaPlayer(new Stage());
@@ -302,15 +294,13 @@ public class ChannelListingsLayoutController implements Initializable {
         });
 
         viewLater.setOnAction(e -> {
-            IProgram marked = DatabaseHelper.convertToSpecifiedType(program);
-            marked.setProgramStatus(ProgramStatus.ViewingLater);
-            System.out.println(DatabaseHelper.addMarkedProgram(marked));
+            program.setProgramStatus(ProgramStatus.ViewingLater);
+            System.out.println(DatabaseHelper.addMarkedProgram(program));
         });
 
         recordProgram.setOnAction(e -> {
-            IProgram marked = DatabaseHelper.convertToSpecifiedType(program);
-            marked.setProgramStatus(ProgramStatus.Recorded);
-            System.out.println(DatabaseHelper.addMarkedProgram(marked));
+            program.setProgramStatus(ProgramStatus.Recorded);
+            System.out.println(DatabaseHelper.addMarkedProgram(program));
         });
 
 
