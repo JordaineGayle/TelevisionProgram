@@ -58,6 +58,15 @@ public class TimeHelper {
     }
 
     public static LocalDateTime correctProgramDate(IProgram prog){
-        return prog.getProgramAirDateTime().minusDays((long)(-1*prog.getDuration())).minusHours((long)(-1*prog.getLength()));
+        LocalDateTime dt = prog.getProgramAirDateTime().plusDays((long)(prog.getDuration())).plusHours((long)(prog.getLength()));
+        //System.out.println(dt.toString());
+        return dt;
+    }
+
+
+    public static LocalDateTime correctProgramDateLength(IProgram prog){
+        LocalDateTime dt = prog.getProgramAirDateTime().plusHours((long)(prog.getLength()));
+        //System.out.println(dt.toString());
+        return dt;
     }
 }

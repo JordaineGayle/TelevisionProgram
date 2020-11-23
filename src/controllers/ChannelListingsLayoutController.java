@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 import models.*;
 
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -119,9 +121,6 @@ public class ChannelListingsLayoutController implements Initializable {
         loadProgramsInCell();
     }
 
-
-
-
     private void loadColumnNames(){
         AtomicInteger colKey = new AtomicInteger();
 
@@ -166,52 +165,200 @@ public class ChannelListingsLayoutController implements Initializable {
 
         programs.forEach((program) -> {
 
-            if(TimeHelper.isDateEqualToNow(TimeHelper.correctProgramDate(program))){
+            LocalDateTime correctDate = TimeHelper.correctProgramDateLength(program);
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:00 a");
+            LocalDateTime fullCorrectDate = TimeHelper.correctProgramDate(program);
 
-                String colKey = program.getProgramAirDateTime().format(formatter);
+            if(TimeHelper.isDateEqualToNow(correctDate)){
 
-                String rowKey = program.getChannelName();
+                handleDurationHours(program);
+            }
+            else if(LocalDateTime.now().isAfter(correctDate) && program.getDuration() > 0){
 
-                double totalHours = (program.getProgramAirDateTime().getHour() + program.getLength());
+                if(fullCorrectDate.isAfter(LocalDateTime.now()) || TimeHelper.isDateEqualToNow(fullCorrectDate)){
 
-                if(program.getLength() > 0){
+                    int totalHours = (int)(program.getProgramAirDateTime().getHour() + program.getLength());
 
-                    String newColKey = "";
-
-                    for(int t = program.getProgramAirDateTime().getHour(); t < totalHours; t++){
-
-                        if(t >= currentHour && t < 24){
-
-                            newColKey = formatTo12Hour(t,"00");
-
-                            Label node = buildChildrenLabel(program.getTitle());
-
-                            setupCellNode(program,node);
-
-                            grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
-
-                        }
+                    if(totalHours > 23){
+                        handleDurationHoursOffset(program);
                     }
 
-                }
-                else{
-                    if(program.getProgramAirDateTime().getHour() >= currentHour){
+                    handleDurationDays(program);
 
-                        Label node = buildChildrenLabel(program.getTitle());
-
-                        setupCellNode(program,node);
-
-                        grid.add(node,channelsColumnMapping.get(colKey),channelsRowMapping.get(rowKey));
-                    }
                 }
             }
         });
     }
 
 
+    private void handleDurationDays(IProgram program){
+        LocalDateTime accurateDate = program.getProgramAirDateTime();
 
+        double totalHours = (program.getProgramAirDateTime().getHour() + program.getLength());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:00 a");
+
+        String colKey = accurateDate.format(formatter);
+
+        String rowKey = program.getChannelName();
+
+
+        if(program.getLength() > 0){
+
+            System.out.println("Program has duration attached: "+program.getTitle());
+
+            String newColKey = "";
+
+            for(int t = accurateDate.getHour(); t < totalHours; t++){
+
+                if(t >= currentHour && t < 24){
+
+                    newColKey = formatTo12Hour(t,"00");
+
+                    Label node = buildChildrenLabel(program.getTitle());
+
+                    setupCellNode(program,node);
+
+                    grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
+
+                }
+            }
+
+        }
+        else{
+            if(program.getProgramAirDateTime().getHour() >= currentHour){
+
+                Label node = buildChildrenLabel(program.getTitle());
+
+                setupCellNode(program,node);
+
+                grid.add(node,channelsColumnMapping.get(colKey),channelsRowMapping.get(rowKey));
+            }
+        }
+    }
+
+    private void handleDurationHours(IProgram program){
+
+        LocalDateTime correctDate = TimeHelper.correctProgramDateLength(program);
+
+        LocalDateTime accurateDate = program.getProgramAirDateTime();
+
+        double totalHours = 0.0;
+
+        if(!TimeHelper.isDateEqualToNow(accurateDate)){
+
+            accurateDate = LocalDate.now().atStartOfDay();
+
+            Duration duration = Duration.between(accurateDate,correctDate);
+
+            totalHours = duration.toHours();
+
+
+            System.out.println("Total Hours: "+totalHours);
+
+            accurateDate = LocalDateTime.now();
+            System.out.println("Accurate Date: "+accurateDate.toString());
+
+        }
+        else{
+            totalHours = (program.getProgramAirDateTime().getHour() + program.getLength());
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:00 a");
+
+        String colKey = accurateDate.format(formatter);
+
+        String rowKey = program.getChannelName();
+
+
+        if(program.getLength() > 0){
+
+            String newColKey = "";
+
+            for(int t = accurateDate.getHour(); t < totalHours; t++){
+
+                if(t >= currentHour && t < 24){
+
+                    newColKey = formatTo12Hour(t,"00");
+
+                    Label node = buildChildrenLabel(program.getTitle());
+
+                    setupCellNode(program,node);
+
+                    grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
+
+                }
+            }
+
+        }
+        else{
+            if(program.getProgramAirDateTime().getHour() >= currentHour){
+
+                Label node = buildChildrenLabel(program.getTitle());
+
+                setupCellNode(program,node);
+
+                grid.add(node,channelsColumnMapping.get(colKey),channelsRowMapping.get(rowKey));
+            }
+        }
+    }
+
+    private void handleDurationHoursOffset(IProgram program){
+
+        LocalDateTime currentProgramDate = LocalDateTime.now();
+
+        LocalDateTime previousProgramDate = LocalDateTime.now();
+
+        LocalDateTime correctDate = LocalDateTime.now();
+
+        LocalDateTime accurateDate = program.getProgramAirDateTime();
+
+        Duration period = Duration.between(accurateDate,TimeHelper.correctProgramDate(program));
+
+        long daysBetween = period.toDays();
+
+        for (int t = 1; t <=daysBetween; t++){
+            LocalDateTime newDt = accurateDate.plusDays(t);
+            if(TimeHelper.isDateEqualToNow(newDt)){
+                currentProgramDate = newDt;
+                break;
+            }
+        }
+
+        previousProgramDate = currentProgramDate.minusDays(1);
+
+        correctDate = previousProgramDate.plusHours((long)program.getLength());
+
+        accurateDate = LocalDate.now().atStartOfDay();
+
+        Duration duration = Duration.between(accurateDate,correctDate);
+
+        long totalHours = duration.toHours();
+
+        accurateDate = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:00 a");
+
+        String rowKey = program.getChannelName();
+
+        String newColKey = "";
+
+        for(int t = accurateDate.getHour(); t < totalHours; t++){
+
+            if(t >= currentHour && t < 24){
+
+                newColKey = formatTo12Hour(t,"00");
+
+                Label node = buildChildrenLabel(program.getTitle());
+
+                setupCellNode(program,node);
+
+                grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
+
+            }
+        }
+
+    }
 
     private Label buildHeadingLabel(String name){
         Label label = new Label(name);

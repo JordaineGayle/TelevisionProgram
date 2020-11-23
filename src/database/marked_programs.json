@@ -58,21 +58,5 @@
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "PURPLE",
     "ProgramAirDateTime": "2020-11-22T19:15:32.4133613"
-  },
-  {
-    "id": "49f4d1ee-1d63-495a-94b4-dafbfbb7f2ca",
-    "ProgramType": "General",
-    "ChannelName": "89 - HOME",
-    "Title": "Top Notch",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "This is a hot movie, thriller",
-    "Length": 10.0,
-    "Duration": 0.0,
-    "ClosedCaption": true,
-    "ProgramPhase": "New",
-    "ProgramStatus": "ViewingLater",
-    "ProgramColor": "GREEN",
-    "ProgramAirDateTime": "2020-11-22T20:15:32.4133613"
   }
 ]
