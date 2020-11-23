@@ -2,6 +2,7 @@ package helpers;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import controllers.MainLayoutController;
 import interfaces.IProgram;
 import models.*;
 
@@ -90,10 +91,10 @@ public class DatabaseHelper {
 
     public static boolean addMarkedProgram(IProgram program){
 
-        Stream<IProgram> result = markedPrograms.stream().filter(e -> e.getId().equals(program.getId()));
+        List<IProgram> result = markedPrograms.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
 
-        if(result!=null && result.collect(Collectors.toList()).size() > 0){
-            IProgram item = result.findFirst().get();
+        if(result!=null && result.size() > 0){
+            IProgram item = result.stream().findFirst().get();
             markedPrograms.remove(item);
         }
 
@@ -108,7 +109,7 @@ public class DatabaseHelper {
             }
         }.start();
 
-        System.out.println(db.toJson(markedPrograms));
+        MainLayoutController.incrementMarkedItems(markedPrograms.size());
 
         return success;
     }

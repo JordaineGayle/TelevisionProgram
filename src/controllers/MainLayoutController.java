@@ -5,6 +5,7 @@ import helpers.SceneBuilder;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,8 @@ public class MainLayoutController implements Initializable {
 
     private static IntegerProperty markedItemsCount = new SimpleIntegerProperty();
 
+    private static SimpleStringProperty str = new SimpleStringProperty();
+
     @FXML
     private BorderPane mainPane = new BorderPane();
 
@@ -58,8 +61,6 @@ public class MainLayoutController implements Initializable {
         if(DatabaseHelper.getMarkedPrograms().size() > 0){
             markedItemsCount.setValue(DatabaseHelper.getMarkedPrograms().size());
         }
-
-        System.out.println();
     }
 
     @FXML
@@ -120,7 +121,8 @@ public class MainLayoutController implements Initializable {
     }
 
     public static void incrementMarkedItems(int val){
-        markedItemsCount.set(val);
+        System.out.println("Yaa am incremented");
+        markedItemsCount.setValue(val);
     }
 
 
