@@ -121,7 +121,6 @@ public class MainLayoutController implements Initializable {
     }
 
     public static void incrementMarkedItems(int val){
-        System.out.println("Yaa am incremented");
         markedItemsCount.setValue(val);
     }
 

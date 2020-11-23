@@ -114,13 +114,83 @@ public class DatabaseHelper {
         return success;
     }
 
-    public static boolean addOrUpdateProgram(IProgram program){
+    public static boolean removeMarkedProgram(IProgram program){
+
+        List<IProgram> result = markedPrograms.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
+
+        if(result!=null && result.size() > 0){
+
+            IProgram item = result.stream().findFirst().get();
+
+            markedPrograms.remove(item);
+        }
+
+        boolean success = db.saveFileContents(db.toJson(markedPrograms),"marked_programs.json");
+
+        new Thread(){
+            @Override
+            public void run() {
+                db.loadMarkedPrograms();
+            }
+        }.start();
+
+        MainLayoutController.incrementMarkedItems(markedPrograms.size());
+
+        return success;
+    }
+
+    public static boolean addOrUpdateProgram(IProgram program) throws Exception{
+
+        if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
+
+        if(program.getProgramAirDateTime() == null || program.getProgramAirDateTime().isBefore(LocalDateTime.now()))
+            throw new Exception("Please use a valid air date for program.");
+
+        if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
+
+        if(program.getProgramPhase() != null && program.getProgramPhase().equals(ProgramPhase.Repeat) && program.getDuration() <= 0){
+            throw new Exception("You cannot set the program to repeat with a 'Duration'. Please set 'Duration'.");
+        }
+
+        if(program.getLength() < 0 || program.getDuration() < 0
+                || program.getRating() < 0 || program.getSeverityRating() < 0
+                || (program.getAgeRange() != null && program.getAgeRange().getMin() < 0)
+                || (program.getAgeRange() != null && program.getAgeRange().getMax() < 0)) throw new Exception("Invalid Number. All number entered must be a whole number.");
+
+
+        if(program.getProgramType().equals(ProgramType.Kids.name()) && (program.getAgeRange() == null || program.getAgeRange().getMax() < program.getAgeRange().getMin()))
+            throw new Exception("Please set a valid age range. Kids program require an age range.");
+
+        if(program.getProgramType().equals(ProgramType.Gospel.name()) && program.getDenomination() == null)
+            throw new Exception("Please set a valid denomination. Gospel programs require it.");
+
 
         Stream<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId()));
 
-        if(result.count() > 0) return false;
+
+
+        if(result != null && result.count() > 0){
+
+//            IProgram item = result.stream().findFirst().get();
+//
+//            programs.remove(item);
+        }
 
         programs.add(program);
+
+        return db.saveFileContents(db.toJson(programs),"programs.json");
+    }
+
+    public static boolean removeProgram(IProgram program){
+
+        List<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
+
+        if(result != null && result.size() > 0){
+
+            IProgram item = result.stream().findFirst().get();
+
+            programs.remove(item);
+        }
 
         return db.saveFileContents(db.toJson(programs),"programs.json");
     }

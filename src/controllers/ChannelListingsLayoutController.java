@@ -430,12 +430,10 @@ public class ChannelListingsLayoutController implements Initializable {
 
         viewLater.setOnAction(e -> {
             program.setProgramStatus(ProgramStatus.ViewingLater);
-            System.out.println(DatabaseHelper.addMarkedProgram(program));
         });
 
         recordProgram.setOnAction(e -> {
             program.setProgramStatus(ProgramStatus.Recorded);
-            System.out.println(DatabaseHelper.addMarkedProgram(program));
         });
 
 

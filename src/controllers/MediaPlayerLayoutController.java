@@ -29,7 +29,7 @@ public class MediaPlayerLayoutController implements Initializable {
 
     private IProgram currentProgram = ChannelListingsLayoutController.getCurrentViewingNowProgram();
 
-    private Media media = new Media(currentProgram.getSource());
+    private Media media = new Media(currentProgram.getSource() == null ? "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" : currentProgram.getSource());
 
     private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
@@ -233,8 +233,8 @@ public class MediaPlayerLayoutController implements Initializable {
         mediaView.setPreserveRatio(true);
         mediaView.setSmooth(true);
         mediaView.setCache(true);
-        mediaView.setFitWidth(1280);
-        mediaView.setFitHeight(900);
+        mediaView.setFitWidth(1440);
+        mediaView.setFitHeight(720);
         mediaView.setMediaPlayer(mediaPlayer);
 
 
