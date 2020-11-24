@@ -179,27 +179,48 @@ public class DatabaseHelper {
 
             LocalDateTime currentProgramMaxDate = TimeHelper.correctProgramDate(program);
 
-            ZoneId zoneId = ZoneId.systemDefault();
-
-            List<IProgram> getClashedPrograms = new ArrayList<>();
+            TreeMap<Integer,Integer> clashedTimes = new TreeMap<>();
 
             subsetOfProgramsByChannel.forEach(e ->{
 
-                
+                LocalDateTime mindatetime = e.getProgramAirDateTime();
+                LocalDateTime progmindatetime = program.getProgramAirDateTime();
 
+                LocalDateTime maxdatetime = TimeHelper.correctProgramDate(e);
+                LocalDateTime progmaxdatetime = TimeHelper.correctProgramDate(program);
+
+                int minhours = e.getProgramAirDateTime().getHour();
+                int progminhours = program.getProgramAirDateTime().getHour();
+
+                int maxhours = (int)(e.getProgramAirDateTime().getHour()+e.getLength());
+                int progmaxhours = (int)(program.getProgramAirDateTime().getHour()+program.getLength());
+
+                if(progmindatetime.isAfter(mindatetime) && progmaxdatetime.isBefore(maxdatetime))
+                {
+                        if((progminhours >= minhours && progmaxhours <= minhours) || (progminhours >= maxhours && progmaxhours <= maxhours)){
+                            clashedTimes.put(minhours,minhours);
+                            clashedTimes.put(maxhours,maxhours);
+                        }
+                }
             });
+
+            if(clashedTimes.size() > 0){
+                int min = clashedTimes.firstEntry().getValue();
+                int max = clashedTimes.lastEntry().getValue();
+
+
+
+                throw new Exception("A clashed was detected with your temporal window. Please select a time range: [0-"+min+"] or ["+max+"-23] hrs.");
+            }
         }
 
+        List<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
 
-        Stream<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId()));
+        if(result != null && result.size() > 0){
 
+            IProgram item = result.stream().findFirst().get();
 
-
-        if(result != null && result.count() > 0){
-
-//            IProgram item = result.stream().findFirst().get();
-//
-//            programs.remove(item);
+            programs.remove(item);
         }
 
         programs.add(program);
