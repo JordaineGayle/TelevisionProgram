@@ -1,4 +1,5 @@
 package controllers;
+import com.google.gson.reflect.TypeToken;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;
 import helpers.TimeHelper;
@@ -156,7 +157,8 @@ public class ChannelListingsLayoutController implements Initializable {
     }
 
     private void loadProgramsInCell(){
-
+        /**this was built with the ability to display programs from another day but due to time
+        we had to limit down the program within a day,  the logic for adding was becoming to complex.*/
         if(programs==null) return;
 
         programs.forEach((program) -> {
@@ -170,7 +172,7 @@ public class ChannelListingsLayoutController implements Initializable {
                 handleDurationHours(program);
             }
             else if(LocalDateTime.now().isAfter(correctDate) && program.getDuration() > 0){
-
+                System.out.println("Correct fu date "+fullCorrectDate.toString());
                 if(fullCorrectDate.isAfter(LocalDateTime.now()) || TimeHelper.isDateEqualToNow(fullCorrectDate)){
 
                     int totalHours = (int)(program.getProgramAirDateTime().getHour() + program.getLength());
@@ -305,8 +307,9 @@ public class ChannelListingsLayoutController implements Initializable {
 
         long daysBetween = period.toDays();
 
-        for (int t = 1; t <=daysBetween; t++){
+        for (int t = 1; t <=daysBetween+1; t++){
             LocalDateTime newDt = accurateDate.plusDays(t);
+            System.out.println("New DATE "+newDt.toString());
             if(TimeHelper.isDateEqualToNow(newDt)){
                 currentProgramDate = newDt;
                 break;
@@ -425,17 +428,36 @@ public class ChannelListingsLayoutController implements Initializable {
 
         viewMore.setOnAction(e -> {
             viewNowProgram = program;
+
             ScenesHelper.InvokeProgramDescription(new Stage());
         });
 
         viewLater.setOnAction(e -> {
             program.setProgramStatus(ProgramStatus.ViewingLater);
+
+            IProgram newp = DatabaseHelper.db.fromJson(DatabaseHelper.db.toJson(program),new TypeToken<Movie>(){});
+            newp.setid();
+            newp.setProgramAirDateTime(newp.getProgramAirDateTime().plusDays(4).plusHours(13));
+
+
+
+            newp.setDuration(5);
+            newp.setLength(6);
+            newp.setProgramColor(ProgramColor.PURPLE);
+
+            System.out.println("New program air date: "+newp.getProgramAirDateTime().toString());
+            System.out.println("New program date end: "+TimeHelper.correctProgramDate(newp).toString());
+
+            try{
+
+                DatabaseHelper.addOrUpdateProgram(newp);
+                //System.out.println(DatabaseHelper.db.toJson(newp));
+            }catch (Exception ex){ex.printStackTrace();}
         });
 
         recordProgram.setOnAction(e -> {
             program.setProgramStatus(ProgramStatus.Recorded);
         });
-
 
         contextMenu.setOpacity(0.9);
 

@@ -12,13 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class DatabaseHelper {
 
@@ -148,9 +144,6 @@ public class DatabaseHelper {
 
         if(program.getChannelName() == null || program.getChannelName().isEmpty()) throw new Exception("A channel is mandatory please add one.");
 
-        if(program.getProgramAirDateTime() == null || program.getProgramAirDateTime().isBefore(LocalDateTime.now()))
-            throw new Exception("Please use a valid air date for program.");
-
         if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
 
         if(program.getProgramPhase() != null && program.getProgramPhase().equals(ProgramPhase.Repeat) && program.getDuration() <= 0){
@@ -169,58 +162,66 @@ public class DatabaseHelper {
         if(program.getProgramType().equals(ProgramType.Gospel.name()) && program.getDenomination() == null)
             throw new Exception("Please set a valid denomination. Gospel programs require it.");
 
+        List<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
+
+        if(result != null && result.size() > 0){
+
+            return db.saveFileContents(db.toJson(programs),"programs.json");
+        }
+
         /* Temporal Logic*/
 
-        List<IProgram> subsetOfProgramsByChannel = programs.stream().filter(p -> p.getChannelName().equals(program.getChannelName().toUpperCase())).collect(Collectors.toList());
+        if(program.getProgramAirDateTime() == null || program.getProgramAirDateTime().isBefore(LocalDateTime.now()))
+            throw new Exception("Please use a valid air date for program.");
+
+        if(!TimeHelper.correctProgramDateLength(program).toLocalDate().equals(program.getProgramAirDateTime().toLocalDate()))
+            throw new Exception("Your temporal window is exceeding the 24 hours of a day, please use a different day or adjust the times.");
+
+        List<IProgram> subsetOfProgramsByChannel = programs.stream().filter(p -> p.getChannelName().equals(program.getChannelName())).collect(Collectors.toList());
 
         if(subsetOfProgramsByChannel != null && subsetOfProgramsByChannel.size() > 0){
-
-            LocalDateTime currenProgramMinDate = program.getProgramAirDateTime();
-
-            LocalDateTime currentProgramMaxDate = TimeHelper.correctProgramDate(program);
 
             TreeMap<Integer,Integer> clashedTimes = new TreeMap<>();
 
             subsetOfProgramsByChannel.forEach(e ->{
 
                 LocalDateTime mindatetime = e.getProgramAirDateTime();
+
                 LocalDateTime progmindatetime = program.getProgramAirDateTime();
 
                 LocalDateTime maxdatetime = TimeHelper.correctProgramDate(e);
+
                 LocalDateTime progmaxdatetime = TimeHelper.correctProgramDate(program);
 
                 int minhours = e.getProgramAirDateTime().getHour();
+
                 int progminhours = program.getProgramAirDateTime().getHour();
 
                 int maxhours = (int)(e.getProgramAirDateTime().getHour()+e.getLength());
+
                 int progmaxhours = (int)(program.getProgramAirDateTime().getHour()+program.getLength());
 
-                if(progmindatetime.isAfter(mindatetime) && progmaxdatetime.isBefore(maxdatetime))
+                if((progmindatetime.isBefore(progmaxdatetime) && progmaxdatetime.isAfter(mindatetime))
+                    || progmindatetime.toLocalDate().equals(mindatetime.toLocalDate())
+                    || progmaxdatetime.toLocalDate().equals(maxdatetime.toLocalDate()))
                 {
-                        if((progminhours >= minhours && progmaxhours <= minhours) || (progminhours >= maxhours && progmaxhours <= maxhours)){
-                            clashedTimes.put(minhours,minhours);
-                            clashedTimes.put(maxhours,maxhours);
-                        }
+                    if(progminhours <= maxhours  && progmaxhours >= minhours)
+                    {
+                        clashedTimes.put(minhours,minhours);
+                        clashedTimes.put(maxhours,maxhours);
+                    }
                 }
+
             });
 
             if(clashedTimes.size() > 0){
+
                 int min = clashedTimes.firstEntry().getValue();
+
                 int max = clashedTimes.lastEntry().getValue();
-
-
 
                 throw new Exception("A clashed was detected with your temporal window. Please select a time range: [0-"+min+"] or ["+max+"-23] hrs.");
             }
-        }
-
-        List<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
-
-        if(result != null && result.size() > 0){
-
-            IProgram item = result.stream().findFirst().get();
-
-            programs.remove(item);
         }
 
         programs.add(program);
