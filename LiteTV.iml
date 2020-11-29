@@ -19,5 +19,7 @@
     </orderEntry>
     <orderEntry type="library" name="gson-2.2.2" level="project" />
     <orderEntry type="library" name="commons-lang3-3.11" level="project" />
+    <orderEntry type="library" name="controlsfx-11.0.3" level="project" />
+    <orderEntry type="library" name="tornadofx-controls-1.0.6" level="project" />
   </component>
 </module>

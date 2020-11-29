@@ -49,4 +49,21 @@ public class ScenesHelper {
         stage.setFullScreen(false);
         stage.showAndWait();
     }
+
+    public static void InvokeProgramModification(Stage stage){
+
+        Stage hasStage = SceneBuilder.getStages().get("ProgramModificationLayout.fxml");
+
+        if(hasStage != null){
+            stage = hasStage;
+        }else{
+            stage.initModality(Modality.APPLICATION_MODAL);
+        }
+
+        new SceneBuilder(stage,"ProgramModificationLayout.fxml",Optional.of("Program Modification"),Optional.of(400.00),null);
+        stage.setResizable(false);
+        stage.setMaximized(false);
+        stage.setFullScreen(false);
+        stage.showAndWait();
+    }
 }
