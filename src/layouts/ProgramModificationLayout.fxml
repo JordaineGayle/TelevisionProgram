@@ -14,10 +14,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.Rating?>
 <?import tornadofx.control.DateTimePicker?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProgramModificationLayoutController">
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" style="-fx-background-color: #212121;" text="Modify Program" textFill="WHITE" BorderPane.alignment="CENTER">
          <font>
@@ -259,40 +260,52 @@
       </HBox>
    </center>
    <bottom>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="saveProgram" layoutX="10.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #039BE5;" text="Save" textFill="WHITE">
-               <font>
-                  <Font name="Rockwell Bold" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow color="#00000044" />
-               </effect>
-               <HBox.margin>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button fx:id="saveProgram" layoutX="10.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #039BE5;" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <DropShadow color="#00000044" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deleteProgram" layoutX="110.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: rgba(229,57,53 ,1);" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <DropShadow color="#00000044" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="deleteProgram" layoutX="110.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: rgba(229,57,53 ,1);" text="Delete" textFill="WHITE">
+               </padding>
+            </HBox>
+            <Text fx:id="errorText" fill="#ee0d0d" stroke="#030303" strokeWidth="0.3" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="758.3652114868164" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="Rockwell Bold" size="14.0" />
+                  <Font name="Rockwell Bold" size="12.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <DropShadow color="#00000044" />
-               </effect>
-               <HBox.margin>
+               <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
+               </VBox.margin>
+            </Text>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </HBox>
+      </VBox>
    </bottom>
 </BorderPane>

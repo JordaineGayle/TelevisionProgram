@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public class News extends Program
 {
     public News() {
+        ProgramColor = models.ProgramColor.WHITE;
     }
 
     public News(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime) {

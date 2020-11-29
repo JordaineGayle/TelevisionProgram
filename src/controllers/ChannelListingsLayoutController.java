@@ -46,7 +46,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private HashMap<Integer,String> clockHours =  new TimeHelper().get24HrClock();
 
-    private Map<String,String> channels = DatabaseHelper.getChannels();
+    private List<String> channels = DatabaseHelper.getChannels();
 
     private Map<String, Integer> channelsRowMapping = new TreeMap<>();
 
@@ -140,9 +140,9 @@ public class ChannelListingsLayoutController implements Initializable {
 
         AtomicInteger rowKey = new AtomicInteger();
 
-        channels.forEach((cnum,cname) -> {
+        channels.forEach((cname) -> {
 
-            String combinedChannelName = cnum+" - "+cname;
+            String combinedChannelName = cname;
 
             int currentRowKey = rowKey.get()+1;
 

@@ -20,7 +20,7 @@ public class DatabaseHelper {
 
     public static DatabaseHelper db = new DatabaseHelper();
 
-    private static Map<String, String> channelMap = new TreeMap<>();
+    private static List<String> channelMap = new ArrayList<>();
 
     private static List<IProgram> programs = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class DatabaseHelper {
 
     /** Static getters for in memory data store */
 
-    public static Map<String, String> getChannels(){
+    public static List<String> getChannels(){
         return channelMap;
     }
 
@@ -325,7 +325,13 @@ public class DatabaseHelper {
 
     private void loadDBContentsInMemory(){
 
-        channelMap = readJson("channels.json",new TypeToken<>(){});
+        TreeMap<Integer,String> items = readJson("channels.json",new TypeToken<>(){});
+
+        items.forEach((key,val)-> {
+            channelMap.add((key+" - "+val).toUpperCase());
+        });
+
+        System.out.println(items);
 
         loadPrograms();
 

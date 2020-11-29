@@ -8,10 +8,12 @@ public class Comedy extends Program
     private List<Actor> Actors;
 
     public Comedy() {
+        ProgramColor = ProgramColor.YELLOW;
     }
 
     public Comedy(List<Actor> actors) {
         Actors = actors;
+        ProgramColor = ProgramColor.YELLOW;
     }
 
     public Comedy(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, List<Actor> actors) {
@@ -27,4 +29,5 @@ public class Comedy extends Program
     public void setActors(List<Actor> actors) {
         Actors = actors;
     }
+
 }

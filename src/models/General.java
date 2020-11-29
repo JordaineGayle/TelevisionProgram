@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class General extends Program
 {
     public General() {
+        ProgramColor = ProgramColor.WHITE;
     }
 
     public General(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime) {

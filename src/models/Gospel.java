@@ -7,10 +7,12 @@ public class Gospel extends Program {
     private Denomination Denomination;
 
     public Gospel() {
+        ProgramColor = ProgramColor.BLUE;
     }
 
     public Gospel(models.Denomination denomination) {
         Denomination = denomination;
+        ProgramColor = ProgramColor.BLUE;
     }
 
     public Gospel(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, models.Denomination denomination) {

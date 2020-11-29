@@ -7,10 +7,12 @@ public class Weather extends Program
     private int SeverityRating;
 
     public Weather() {
+        ProgramColor = models.ProgramColor.GREEN;
     }
 
     public Weather(int severityRating) {
         SeverityRating = severityRating;
+        ProgramColor = models.ProgramColor.GREEN;
     }
 
     public Weather(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, int severityRating) {

@@ -21,7 +21,7 @@ public class Program implements IProgram
     private boolean ClosedCaption;
     private ProgramPhase ProgramPhase;
     private ProgramStatus ProgramStatus;
-    private ProgramColor ProgramColor;
+    protected ProgramColor ProgramColor;
     private LocalDateTime ProgramAirDateTime;
 
     public Program(){ this.id = UUID.randomUUID().toString(); };

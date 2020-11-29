@@ -10,12 +10,14 @@ public class Movie extends Program
     private List<Actor> Actors;
 
     public Movie() {
+        ProgramColor = ProgramColor.RED;
     }
 
     public Movie(double rating, LocalDateTime dateReleased, List<Actor> actors) {
         Rating = rating;
         DateReleased = dateReleased;
         Actors = actors;
+        ProgramColor = ProgramColor.RED;
     }
 
     public Movie(String programType, String channelName, String title, String image, String source, String shortDescription, double length, double duration, boolean closedCaption, models.ProgramPhase programPhase, models.ProgramStatus programStatus, models.ProgramColor programColor, LocalDateTime programAirDateTime, double rating, LocalDateTime dateReleased, List<Actor> actors) {
