@@ -164,6 +164,9 @@ public class DatabaseHelper {
         if(program.getProgramType().equals(ProgramType.Gospel.name()) && program.getDenomination() == null)
             throw new Exception("Please set a valid denomination. Gospel programs require it.");
 
+        if(program.getProgramType().equals(ProgramType.Movie.name()) && program.getDateReleased().toLocalDate() != null && program.getProgramAirDateTime().toLocalDate().isBefore(program.getDateReleased().toLocalDate()))
+            throw new Exception("Please set a valid release date, the air date cant be before the release date.");
+
         List<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());
 
         if(result != null && result.size() > 0){

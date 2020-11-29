@@ -142,8 +142,6 @@ public class ProgramModificationLayoutController  implements Initializable {
             program.setProgramType(programType.getValue().name());
 
             program = DatabaseHelper.convertToSpecifiedType(program,program);
-
-            System.out.println(DatabaseHelper.db.toJson(program));
         });
 
         programPhase.setOnAction(e -> {
@@ -163,30 +161,26 @@ public class ProgramModificationLayoutController  implements Initializable {
     }
 
     private void setProgramValues(){
+
         title.textProperty().addListener((c,o,n) -> {
             program.setTitle(n);
-            System.out.println(DatabaseHelper.db.toJson(program));
         });
 
         airDate.dateTimeValueProperty().addListener((c,o,n) -> {
             program.setProgramAirDateTime(n);
-            System.out.println(DatabaseHelper.db.toJson(program));
         });
 
         previewImage.textProperty().addListener((c,o,n) -> {
             program.setImage(n);
-            System.out.println(DatabaseHelper.db.toJson(program));
         });
 
         programSource.textProperty().addListener((c,o,n) -> {
             program.setSource(n);
-            System.out.println(DatabaseHelper.db.toJson(program));
         });
 
         length.textProperty().addListener((c,o,n) -> {
             try{
                 program.setLength(Double.parseDouble(n));
-                System.out.println(DatabaseHelper.db.toJson(program));
                 errorText.setText("");
             }catch (Exception e){
                 errorText.setText("Please set a valid number for length.");
@@ -196,7 +190,6 @@ public class ProgramModificationLayoutController  implements Initializable {
         duration.textProperty().addListener((c,o,n) -> {
             try{
                 program.setDuration(Double.parseDouble(n));
-                System.out.println(DatabaseHelper.db.toJson(program));
                 errorText.setText("");
             }catch (Exception e){
                 errorText.setText("Please set a valid number for duration.");
@@ -205,12 +198,24 @@ public class ProgramModificationLayoutController  implements Initializable {
 
         closedCaption.selectedProperty().addListener((c,o,n) -> {
             program.setClosedCaption(n);
-            System.out.println(DatabaseHelper.db.toJson(program));
         });
 
         shortDesc.textProperty().addListener((c,o,n) -> {
             program.setShortDescription(n);
-            System.out.println(DatabaseHelper.db.toJson(program));
+        });
+
+        releaseDate.dateTimeValueProperty().addListener((c,o,n) -> {
+            program.setDateReleased(n);
+        });
+
+        movieRating.ratingProperty().addListener((c,o,n) -> {
+            program.setRating(n.doubleValue());
+            errorText.setText("");
+        });
+
+        weatherRating.ratingProperty().addListener((c,o,n) -> {
+            program.setSeverityRating(n.doubleValue());
+            errorText.setText("");
         });
 
         actorFname.textProperty().addListener((c,o,n) -> {
@@ -249,7 +254,6 @@ public class ProgramModificationLayoutController  implements Initializable {
                 tempAgeRange.setMax(Integer.parseInt(n));
                 program.setAgeRange(tempAgeRange);
                 errorText.setText("");
-                System.out.println(DatabaseHelper.db.toJson(program));
             }catch (Exception e){
                 errorText.setText("Please set a valid number for max age.");
             }

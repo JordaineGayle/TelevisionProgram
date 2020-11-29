@@ -206,12 +206,12 @@ public class Program implements IProgram
     }
 
     @Override
-    public int getSeverityRating() {
+    public double getSeverityRating() {
         return 0;
     }
 
     @Override
-    public void setSeverityRating(int severityRating) {
+    public void setSeverityRating(double severityRating) {
 
     }
 }

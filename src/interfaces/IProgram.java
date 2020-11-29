@@ -29,9 +29,9 @@ public interface IProgram {
 
     void setDateReleased(LocalDateTime dateReleased);
 
-    int getSeverityRating();
+    double getSeverityRating();
 
-    void setSeverityRating(int severityRating);
+    void setSeverityRating(double severityRating);
 
     void setid();
 

@@ -207,9 +207,6 @@
     "ProgramAirDateTime": "2020-11-29T17:00:00"
   },
   {
-    "Rating": 0.0,
-    "DateReleased": null,
-    "Actors": null,
     "id": "716b0540-c982-4b51-a1d7-3505c80a6cc8",
     "ProgramType": "News",
     "ChannelName": "1 - BBC-ONE",
@@ -222,7 +219,55 @@
     "ClosedCaption": false,
     "ProgramPhase": "Live",
     "ProgramStatus": "ViewingLater",
-    "ProgramColor": "PURPLE",
+    "ProgramColor": "WHITE",
     "ProgramAirDateTime": "2020-12-04T06:00:00"
+  },
+  {
+    "Rating": 6.101332600911459,
+    "DateReleased": null,
+    "Actors": [
+      {
+        "Id": "ec0e6ce8-5843-497b-a9dd-68e3fcbc4703",
+        "FirstName": "Jimmy",
+        "LastName": "Green",
+        "Age": 24,
+        "LastGrammyDate": "2020-11-16T16:37:30.4788404"
+      },
+      {
+        "Id": "a7213bbc-6b87-4b57-8250-2dfb6b63cd24",
+        "FirstName": "Micheal",
+        "LastName": "Rowe",
+        "Age": 20,
+        "LastGrammyDate": "2020-11-29T16:39:26.2342023"
+      },
+      {
+        "Id": "c98ff8cd-0bce-435e-8d34-219849fabd69",
+        "FirstName": "Amanda",
+        "LastName": "Brown",
+        "Age": 29,
+        "LastGrammyDate": "2020-11-29T16:39:34.2105455"
+      },
+      {
+        "Id": "5c98ed93-ea95-4a51-94d8-d226b4efeaa1",
+        "FirstName": "Alciea",
+        "LastName": "Pinnock",
+        "Age": 45,
+        "LastGrammyDate": "2020-11-29T16:39:45.9691715"
+      }
+    ],
+    "id": "b281a1ee-841a-4dfb-b0a0-aeafb21df047",
+    "ProgramType": "Movie",
+    "ChannelName": "54 - CHANNEL-5",
+    "Title": "Invention Webuzz",
+    "Image": null,
+    "Source": null,
+    "ShortDescription": "A computer programmer who built a\n social network that took over the wold",
+    "Length": 3.0,
+    "Duration": 5.0,
+    "ClosedCaption": true,
+    "ProgramPhase": "New",
+    "ProgramStatus": null,
+    "ProgramColor": "RED",
+    "ProgramAirDateTime": "2020-11-29T17:00:00"
   }
 ]

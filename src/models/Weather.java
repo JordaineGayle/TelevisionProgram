@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Weather extends Program
 {
-    private int SeverityRating;
+    private double SeverityRating;
 
     public Weather() {
         ProgramColor = models.ProgramColor.GREEN;
@@ -21,11 +21,11 @@ public class Weather extends Program
         SeverityRating = severityRating;
     }
 
-    public int getSeverityRating() {
+    public double getSeverityRating() {
         return SeverityRating;
     }
 
-    public void setSeverityRating(int severityRating) {
+    public void setSeverityRating(double severityRating) {
         SeverityRating = severityRating;
     }
 }
