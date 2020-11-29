@@ -105,6 +105,8 @@ public class ProgramModificationLayoutController  implements Initializable {
 
     private Actor tempActor = new Actor();
 
+    private Range tempAgeRange = program.getAgeRange() == null ? new Range() : program.getAgeRange();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -185,6 +187,7 @@ public class ProgramModificationLayoutController  implements Initializable {
             try{
                 program.setLength(Double.parseDouble(n));
                 System.out.println(DatabaseHelper.db.toJson(program));
+                errorText.setText("");
             }catch (Exception e){
                 errorText.setText("Please set a valid number for length.");
             }
@@ -194,6 +197,7 @@ public class ProgramModificationLayoutController  implements Initializable {
             try{
                 program.setDuration(Double.parseDouble(n));
                 System.out.println(DatabaseHelper.db.toJson(program));
+                errorText.setText("");
             }catch (Exception e){
                 errorText.setText("Please set a valid number for duration.");
             }
@@ -220,6 +224,7 @@ public class ProgramModificationLayoutController  implements Initializable {
         actorAge.textProperty().addListener((c,o,n) -> {
             try{
                 tempActor.setAge(Integer.parseInt(n));
+                errorText.setText("");
             }catch (Exception e){
                 errorText.setText("Please set a valid number for actor's age.");
             }
@@ -227,6 +232,27 @@ public class ProgramModificationLayoutController  implements Initializable {
 
         grammyDate.dateTimeValueProperty().addListener((c,o,n) -> {
             tempActor.setLastGrammyDate(n.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        });
+
+        rangeMin.textProperty().addListener((c,o,n) -> {
+            try{
+                tempAgeRange.setMin(Integer.parseInt(n));
+                program.setAgeRange(tempAgeRange);
+                errorText.setText("");
+            }catch (Exception e){
+                errorText.setText("Please set a valid number for min age.");
+            }
+        });
+
+        rangeMax.textProperty().addListener((c,o,n) -> {
+            try{
+                tempAgeRange.setMax(Integer.parseInt(n));
+                program.setAgeRange(tempAgeRange);
+                errorText.setText("");
+                System.out.println(DatabaseHelper.db.toJson(program));
+            }catch (Exception e){
+                errorText.setText("Please set a valid number for max age.");
+            }
         });
     }
 
@@ -236,6 +262,7 @@ public class ProgramModificationLayoutController  implements Initializable {
                 try{
                     if(program != null){
                         DatabaseHelper.addOrUpdateProgram(program);
+                        errorText.setText("Program Added Successfully!");
                     }else {
                         errorText.setText("Please set up the necessary values for this program.");
                     }
@@ -252,6 +279,7 @@ public class ProgramModificationLayoutController  implements Initializable {
                 try{
                     if(program != null){
                         DatabaseHelper.removeProgram(program);
+                        errorText.setText("Program Removed Successfully!");
                     }else {
                         errorText.setText("You cannot remove an empty program.");
                     }
@@ -276,7 +304,8 @@ public class ProgramModificationLayoutController  implements Initializable {
                         && a.getLastName().toLowerCase().equals(tempActor.getLastName().toLowerCase())).collect(Collectors.toList());
 
                 if(existInList.size() > 0){
-                    errorText.setText("Actor already exist in list");
+                    errorText.setText("Actor already exist.");
+                    return;
                 }
             }catch (Exception ex){}
 
@@ -286,7 +315,8 @@ public class ProgramModificationLayoutController  implements Initializable {
             program.setActors(actors);
             actorFname.setText("");
             actorLname.setText("");
-            actorAge.setText("");
+            actorAge.setText("0");
+            errorText.setText("");
             grammyDate.setDateTimeValue(LocalDateTime.now());
             System.out.println(DatabaseHelper.db.toJson(program));
         });

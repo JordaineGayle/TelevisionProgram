@@ -173,7 +173,7 @@ public class DatabaseHelper {
 
         /* Temporal Logic*/
 
-        if(program.getProgramAirDateTime() == null || program.getProgramAirDateTime().isBefore(LocalDateTime.now()))
+        if(program.getProgramAirDateTime() == null || program.getProgramAirDateTime().toLocalDate().isBefore(LocalDateTime.now().toLocalDate()))
             throw new Exception("Please use a valid air date for program.");
 
         if(!TimeHelper.correctProgramDateLength(program).toLocalDate().equals(program.getProgramAirDateTime().toLocalDate()))
