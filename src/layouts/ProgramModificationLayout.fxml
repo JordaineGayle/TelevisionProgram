@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
 <?import tornadofx.control.DateTimePicker?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" style="-fx-background-color: #212121;" text="Modify Program" textFill="WHITE" BorderPane.alignment="CENTER">
          <font>
@@ -24,87 +29,270 @@
       </Label>
    </top>
    <center>
-      <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-         <children>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Title" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <font>
-                  <Font name="Rockwell" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <ComboBox maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Program Type" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </ComboBox>
-            <ComboBox layoutX="50.0" layoutY="85.0" maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Channel" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </ComboBox>
-            <DateTimePicker prefHeight="40.0" prefWidth="300.0" promptText="Select Air Date" showWeekNumbers="true" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </DateTimePicker>
-            <TextField layoutX="50.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Preview Image" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <font>
-                  <Font name="Rockwell" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField layoutX="50.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Program Source" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <font>
-                  <Font name="Rockwell" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField layoutX="50.0" layoutY="250.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Length" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <font>
-                  <Font name="Rockwell" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <TextField layoutX="50.0" layoutY="315.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Duration" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
-               <font>
-                  <Font name="Rockwell" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextField>
-            <ComboBox layoutX="50.0" layoutY="125.0" maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Program Phase" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;" />
-            <CheckBox alignment="CENTER" indeterminate="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;" text="Closed Caption">
-               <font>
-                  <Font name="Rockwell" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </CheckBox>
-            <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" promptText="Short Description">
-               <font>
-                  <Font name="Rockwell" size="10.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </TextArea>
-         </children>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
+         <children>
+            <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308">
+               <children>
+                  <TextField fx:id="title" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Title" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ComboBox fx:id="programType" maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Program Type" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="channel" layoutX="50.0" layoutY="85.0" maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Channel" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <DateTimePicker fx:id="airDate" prefHeight="40.0" prefWidth="300.0" promptText="Select Air Date" showWeekNumbers="true" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </DateTimePicker>
+                  <TextField fx:id="previewImage" layoutX="50.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Preview Image" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="programSource" layoutX="50.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Program Source" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="length" layoutX="50.0" layoutY="250.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Length" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="duration" layoutX="50.0" layoutY="315.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Duration" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <ComboBox fx:id="programPhase" layoutX="50.0" layoutY="125.0" maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Program Phase" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;" />
+                  <CheckBox fx:id="closedCaption" alignment="CENTER" indeterminate="true" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;" text="Closed Caption">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" promptText="Short Description">
+                     <font>
+                        <Font name="Rockwell" size="10.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <Region prefHeight="670.0" prefWidth="33.0" />
+            <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308">
+               <children>
+                  <Label maxWidth="300.0" text="Add Actors">
+                     <font>
+                        <Font name="Rockwell Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="actorFname" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="First Name" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="actorLname" layoutX="50.0" layoutY="25.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Last Name" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="actorAge" layoutX="50.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Age" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <font>
+                        <Font name="Rockwell" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <DateTimePicker fx:id="grammyDate" format="yyyy-MM-dd" prefHeight="40.0" prefWidth="300.0" promptText="Last Grammy Date" showWeekNumbers="true" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </DateTimePicker>
+                  <Button fx:id="addActor" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #039BE5; -fx-background-radius: 30;" text="Add Actor" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Rockwell Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <DropShadow color="#00000044" />
+                     </effect>
+                  </Button>
+                  <Label layoutX="25.0" layoutY="308.0" maxWidth="300.0" text="Add Movie Rating">
+                     <font>
+                        <Font name="Rockwell Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Rating fx:id="movieRating" max="8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" partialRating="true" prefHeight="32.0" prefWidth="300.0" rating="0.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Rating>
+                  <Label layoutX="25.0" layoutY="236.0" maxWidth="300.0" text="Add Movie Release Date">
+                     <font>
+                        <Font name="Rockwell Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <DateTimePicker fx:id="releaseDate" format="yyyy-MM-dd" layoutX="25.0" layoutY="191.0" prefHeight="40.0" prefWidth="300.0" promptText="Release Date" showWeekNumbers="true" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </DateTimePicker>
+                  <Label layoutX="25.0" layoutY="20.0" maxWidth="300.0" text="Add Denomination">
+                     <font>
+                        <Font name="Rockwell Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="denomination" maxHeight="50.0" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Denomination" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Label layoutX="25.0" layoutY="236.0" maxWidth="300.0" text="Add Age Range">
+                     <font>
+                        <Font name="Rockwell Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefWidth="300.0">
+                     <children>
+                        <TextField fx:id="rangeMin" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Min" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="rangeMax" layoutX="15.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Max" style="-fx-background-radius: 10; -fx-border-color: #212121; -fx-border-radius: 10; -fx-background-color: none;">
+                           <font>
+                              <Font name="Rockwell" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <Label layoutX="25.0" layoutY="236.0" maxWidth="300.0" text="Add Weather Serverity">
+                     <font>
+                        <Font name="Rockwell Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Rating fx:id="weatherRating" layoutX="33.0" layoutY="252.0" maxHeight="-Infinity" maxWidth="-Infinity" partialRating="true" prefHeight="32.0" prefWidth="300.0" rating="0.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Rating>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
    </center>
+   <bottom>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="saveProgram" layoutX="10.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #039BE5;" text="Save" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#00000044" />
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="deleteProgram" layoutX="110.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: rgba(229,57,53 ,1);" text="Delete" textFill="WHITE">
+               <font>
+                  <Font name="Rockwell Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow color="#00000044" />
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
 </BorderPane>

@@ -1,9 +1,11 @@
 package models;
 
+import java.util.UUID;
+
 //actor class
 public class Actor
 {
-    private int Id;
+    private String Id;
 
     private String FirstName;
     private String LastName;
@@ -12,20 +14,24 @@ public class Actor
 
     public Actor(){};
 
-    public Actor(int id, String firstName, String lastName, int age, String lastGrammyDate) {
-        Id = id;
+    public Actor(String id, String firstName, String lastName, int age, String lastGrammyDate) {
+        Id = UUID.randomUUID().toString();
         FirstName = firstName;
         LastName = lastName;
         Age = age;
         LastGrammyDate = lastGrammyDate;
     }
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(String id) {
+        if(id.isEmpty()){
+            Id = UUID.randomUUID().toString();
+        }else{
+            Id = id;
+        }
     }
 
     public String getFirstName() {
