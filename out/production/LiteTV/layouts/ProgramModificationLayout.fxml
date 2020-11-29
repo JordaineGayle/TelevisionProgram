@@ -101,7 +101,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </CheckBox>
-                  <TextArea maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" promptText="Short Description">
+                  <TextArea fx:id="shortDesc" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" promptText="Short Description">
                      <font>
                         <Font name="Rockwell" size="10.0" />
                      </font>
@@ -299,8 +299,11 @@
             </HBox>
             <Text fx:id="errorText" fill="#ee0d0d" stroke="#030303" strokeWidth="0.3" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="758.3652114868164" VBox.vgrow="ALWAYS">
                <font>
-                  <Font name="Rockwell Bold" size="11.0" />
+                  <Font name="Rockwell Bold" size="12.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
             </Text>
          </children>
       </VBox>

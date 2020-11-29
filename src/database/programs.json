@@ -12,7 +12,7 @@
     "ClosedCaption": true,
     "ProgramPhase": "New",
     "ProgramStatus": null,
-    "ProgramColor": "RED",
+    "ProgramColor": "WHITE",
     "ProgramAirDateTime": "2020-11-22T21:15:32.4133613"
   },
   {
@@ -28,7 +28,7 @@
     "ClosedCaption": true,
     "ProgramPhase": "New",
     "ProgramStatus": null,
-    "ProgramColor": "GREEN",
+    "ProgramColor": "WHITE",
     "ProgramAirDateTime": "2020-11-22T20:15:32.4133613"
   },
   {
@@ -45,7 +45,7 @@
     "ClosedCaption": true,
     "ProgramPhase": "New",
     "ProgramStatus": null,
-    "ProgramColor": "YELLOW",
+    "ProgramColor": "PURPLE",
     "ProgramAirDateTime": "2020-11-22T20:15:32.4133613"
   },
   {
@@ -62,7 +62,7 @@
     "ClosedCaption": false,
     "ProgramPhase": "New",
     "ProgramStatus": null,
-    "ProgramColor": "PURPLE",
+    "ProgramColor": "BLUE",
     "ProgramAirDateTime": "2020-11-22T19:15:32.4133613"
   },
   {
@@ -70,7 +70,7 @@
     "DateReleased": null,
     "Actors": [
       {
-        "Id": 0,
+        "Id": "0.0",
         "FirstName": "Jordaine",
         "LastName": "Gayle",
         "Age": 0,
@@ -89,7 +89,7 @@
     "ClosedCaption": true,
     "ProgramPhase": "New",
     "ProgramStatus": "ViewingLater",
-    "ProgramColor": "BLUE",
+    "ProgramColor": "RED",
     "ProgramAirDateTime": "2020-11-24T03:55:55.4591428"
   },
   {
@@ -97,7 +97,7 @@
     "DateReleased": null,
     "Actors": [
       {
-        "Id": 0,
+        "Id": "0.0",
         "FirstName": "Jordaine",
         "LastName": "Gayle",
         "Age": 0,
@@ -116,7 +116,24 @@
     "ClosedCaption": true,
     "ProgramPhase": "New",
     "ProgramStatus": "ViewingLater",
-    "ProgramColor": "PURPLE",
+    "ProgramColor": "RED",
     "ProgramAirDateTime": "2020-11-28T16:55:55.4591428"
+  },
+  {
+    "Denomination": "Buddism",
+    "id": "16616f10-a0c1-44ae-a041-32f03344190d",
+    "ProgramType": "Gospel",
+    "ChannelName": "150 - VH1",
+    "Title": "Cool tally",
+    "Image": null,
+    "Source": null,
+    "ShortDescription": null,
+    "Length": 0.0,
+    "Duration": 0.0,
+    "ClosedCaption": false,
+    "ProgramPhase": null,
+    "ProgramStatus": null,
+    "ProgramColor": "BLUE",
+    "ProgramAirDateTime": "2020-12-30T22:10:00"
   }
 ]

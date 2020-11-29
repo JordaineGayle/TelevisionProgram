@@ -172,7 +172,6 @@ public class ChannelListingsLayoutController implements Initializable {
                 handleDurationHours(program);
             }
             else if(LocalDateTime.now().isAfter(correctDate) && program.getDuration() > 0){
-                System.out.println("Correct fu date "+fullCorrectDate.toString());
                 if(fullCorrectDate.isAfter(LocalDateTime.now()) || TimeHelper.isDateEqualToNow(fullCorrectDate)){
 
                     int totalHours = (int)(program.getProgramAirDateTime().getHour() + program.getLength());

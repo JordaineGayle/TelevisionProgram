@@ -140,14 +140,16 @@ public class DatabaseHelper {
 
     public static boolean addOrUpdateProgram(IProgram program) throws Exception{
 
+
         if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
+        if(program.getProgramType() == null) throw new Exception("A program type is mandatory please add one.");
 
         if(program.getChannelName() == null || program.getChannelName().isEmpty()) throw new Exception("A channel is mandatory please add one.");
 
         if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
 
         if(program.getProgramPhase() != null && program.getProgramPhase().equals(ProgramPhase.Repeat) && program.getDuration() <= 0){
-            throw new Exception("You cannot set the program to repeat with a 'Duration'. Please set 'Duration'.");
+            throw new Exception("You cannot set the program to repeat without a 'Duration'. Please set 'Duration'.");
         }
 
         if(program.getLength() < 0 || program.getDuration() < 0
@@ -282,23 +284,33 @@ public class DatabaseHelper {
     }
 
     public static IProgram convertToSpecifiedType(IProgram program, Object original){
+
+        IProgram newProgram = null;
+
         if(program.getProgramType().equals("Comedy")){
-            return toType(original,new TypeToken<Comedy>(){});
+            newProgram = toType(original,new TypeToken<Comedy>(){});
+            newProgram.setProgramColor(ProgramColor.YELLOW);
         }else if(program.getProgramType().equals("General")){
-            return toType(original,new TypeToken<General>(){});
+            newProgram = toType(original,new TypeToken<General>(){});
+            newProgram.setProgramColor(ProgramColor.WHITE);
         }else if(program.getProgramType().equals("Gospel")){
-            return toType(original,new TypeToken<Gospel>(){});
+            newProgram = toType(original,new TypeToken<Gospel>(){});
+            newProgram.setProgramColor(ProgramColor.BLUE);
         }else if(program.getProgramType().equals("Kids")){
-            return toType(original,new TypeToken<Kids>(){});
+            newProgram = toType(original,new TypeToken<Kids>(){});
+            newProgram.setProgramColor(ProgramColor.PURPLE);
         }else if(program.getProgramType().equals("Movie")){
-            return toType(original,new TypeToken<Movie>(){});
+            newProgram = toType(original,new TypeToken<Movie>(){});
+            newProgram.setProgramColor(ProgramColor.RED);
         }else if(program.getProgramType().equals("News")){
-            return toType(original,new TypeToken<News>(){});
+            newProgram = toType(original,new TypeToken<News>(){});
+            newProgram.setProgramColor(ProgramColor.WHITE);
         }else if(program.getProgramType().equals("Weather")){
-            return toType(original,new TypeToken<General>(){});
+            newProgram = toType(original,new TypeToken<Weather>(){});
+            newProgram.setProgramColor(ProgramColor.GREEN);
         }
 
-        return toType(original,new TypeToken<Program>(){});
+        return newProgram;
 
     }
 
@@ -330,8 +342,6 @@ public class DatabaseHelper {
         items.forEach((key,val)-> {
             channelMap.add((key+" - "+val).toUpperCase());
         });
-
-        System.out.println(items);
 
         loadPrograms();
 

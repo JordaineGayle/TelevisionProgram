@@ -12,7 +12,7 @@ public class Actor
     private int Age;
     private String LastGrammyDate;
 
-    public Actor(){};
+    public Actor(){Id = UUID.randomUUID().toString();};
 
     public Actor(String id, String firstName, String lastName, int age, String lastGrammyDate) {
         Id = UUID.randomUUID().toString();
