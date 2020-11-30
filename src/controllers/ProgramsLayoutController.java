@@ -109,8 +109,13 @@ public class ProgramsLayoutController implements Initializable {
             try{
                 String actornames = String.join(",", prog.getActors().stream().map(e -> e.getFirstName()+" "+e.getLastName()).collect(Collectors.toList()));
 
-                List<Node> actors = buildNodeMap("Actors:",actornames);
+                List<Node> actors = buildNodeMap("Starring:",null);
                 hbs.add(buildDefaultHBox(actors));
+
+
+                List<Node> actorsn = buildNodeMap(null,actornames);
+                hbs.add(buildDefaultHBox(actorsn));
+
             }catch (Exception e){}
 
             try
@@ -222,22 +227,26 @@ public class ProgramsLayoutController implements Initializable {
     private List<Node> buildNodeMap(String key, String value){
         List<Node> nodes = new ArrayList<>();
 
-        Label keyLabel = new Label(key);
-        keyLabel.setMinSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
-        keyLabel.setPrefSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
-        keyLabel.setFont(new Font("Rockwell",14));
-        keyLabel.setStyle("-fx-font-weight: bold;-fx-text-fill:#212121");
-        keyLabel.setMaxWidth(200);
-        keyLabel.setWrapText(true);
-        nodes.add(keyLabel);
+        if(key != null && !key.isEmpty())
+        {
+            Label keyLabel = new Label(key);
+            keyLabel.setMinSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
+            keyLabel.setPrefSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
+            keyLabel.setFont(new Font("Rockwell",14));
+            keyLabel.setStyle("-fx-font-weight: bold;-fx-text-fill:#212121");
+            keyLabel.setMaxWidth(200);
+            keyLabel.setWrapText(true);
+            nodes.add(keyLabel);
+        }
 
-        if(value != null && !value.isEmpty()){
+        if(value != null && !value.isEmpty())
+        {
             Label valueLabel = new Label(value);
             valueLabel.setMinSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
             valueLabel.setPrefSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
             valueLabel.setFont(new Font("Rockwell",12));
             valueLabel.setStyle("-fx-text-fill:#212121");
-            valueLabel.setMaxWidth(100);
+            valueLabel.setMaxWidth(300);
             valueLabel.setWrapText(true);
             nodes.add(valueLabel);
         }

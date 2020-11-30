@@ -32,23 +32,6 @@
     "ProgramAirDateTime": "2020-11-22T20:15:32.4133613"
   },
   {
-    "AgeRange": null,
-    "id": "866f925e-1cc4-47b2-be25-ccf5a549b14c",
-    "ProgramType": "Kids",
-    "ChannelName": "74 - DAVE",
-    "Title": "Top Notch",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "This is a hot movie, thriller",
-    "Length": 6.0,
-    "Duration": 0.0,
-    "ClosedCaption": true,
-    "ProgramPhase": "New",
-    "ProgramStatus": null,
-    "ProgramColor": "PURPLE",
-    "ProgramAirDateTime": "2020-11-22T20:15:32.4133613"
-  },
-  {
     "Denomination": null,
     "id": "4e42a847-6967-4930-868b-bcab242ce730",
     "ProgramType": "Gospel",
@@ -135,23 +118,6 @@
     "ProgramStatus": null,
     "ProgramColor": "BLUE",
     "ProgramAirDateTime": "2020-12-30T22:10:00"
-  },
-  {
-    "Denomination": "Christiantity",
-    "id": "39a4ef71-5d99-429e-a272-c92cee29064a",
-    "ProgramType": "Gospel",
-    "ChannelName": "202 - TBN",
-    "Title": "Welcome to worship",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "gy",
-    "Length": 2.0,
-    "Duration": 3.0,
-    "ClosedCaption": true,
-    "ProgramPhase": "Live",
-    "ProgramStatus": null,
-    "ProgramColor": "BLUE",
-    "ProgramAirDateTime": "2020-11-29T16:05:09.5905916"
   },
   {
     "Denomination": "Christiantity",

@@ -346,7 +346,7 @@ public class ProgramModificationLayoutController  implements Initializable {
                     }
                 }catch (Exception ex){
                     errorText.setText(ex.getMessage());
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
                 }
             }
         });
