@@ -1,29 +1,22 @@
 package controllers;
 
 import helpers.DatabaseHelper;
+import helpers.SceneBuilder;
 import helpers.ScenesHelper;
 import helpers.TimeHelper;
 import interfaces.IProgram;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -31,8 +24,8 @@ import models.ProgramType;
 import org.controlsfx.control.Rating;
 
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -51,19 +44,33 @@ public class ProgramsLayoutController implements Initializable {
     @FXML
     private Tooltip tooltip = new Tooltip();
 
+    @FXML
+    private ComboBox<ProgramType> filterbox = new ComboBox();
+
+    @FXML
+    private TextField searchbox = new TextField();
+
     public static IProgram currentlyModifiedProgram;
 
     private List<IProgram> programs = DatabaseHelper.getPrograms();
 
     private List<VBox> mappedItems = new ArrayList<>();
 
+    private Stage stage = SceneBuilder.getStages().get("ProgramModificationLayout.fxml");
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tooltip.setShowDelay(Duration.millis(0));
         tooltip.setAutoHide(true);
         tooltip.setAutoFix(true);
+        setUpFilter();
         setUpAddProgramButton();
-        buildTiles();
+        queryProgramSetup();
+        determineAndbuildFilteredPrograms();
+
+        stage.setOnCloseRequest(e -> {
+            determineAndbuildFilteredPrograms();
+        });
     }
 
     private void setUpAddProgramButton(){
@@ -72,9 +79,54 @@ public class ProgramsLayoutController implements Initializable {
         });
     }
 
-    private void buildTiles(){
+    private void setUpFilter(){
+        filterbox.getItems().addAll(ProgramType.values());
 
-        for (IProgram prog : DatabaseHelper.getPrograms()) {
+        filterbox.setValue(ProgramType.All);
+
+        filterbox.setOnAction(e -> {
+            determineAndbuildFilteredPrograms();
+        });
+    }
+
+    private void queryProgramSetup(){
+
+        searchbox.textProperty().addListener((c,o,n)->{
+
+            if(n == null || n.isEmpty()){
+                determineAndbuildFilteredPrograms();
+            }else{
+                List<String> searchItems = Arrays.asList(n.split(",").clone());
+
+                determineAndbuildFilteredPrograms();
+
+                programs = programs.stream().filter(e -> isMatch(searchItems,e.getTitle()) == true).collect(Collectors.toList());
+
+                searchProgramsBuilder();
+            }
+
+        });
+
+    }
+
+    private boolean isMatch(List<String> queryParams, String queryText)
+    {
+        queryText = queryText.toLowerCase();
+
+        for (int x = 0; x < queryParams.size(); x++){
+            if(queryText.contains(queryParams.get(x).toLowerCase()))return true;
+        }
+
+        return false;
+    }
+
+    private void buildTiles(List<IProgram> programs){
+
+        if(programs == null){
+            programs = DatabaseHelper.getPrograms();
+        }
+
+        for (IProgram prog : programs) {
 
             List<HBox> hbs = new ArrayList<>();
 
@@ -283,7 +335,25 @@ public class ProgramsLayoutController implements Initializable {
         return image;
     }
 
-    public  static DropShadow buildDShadow(){
+    private void determineAndbuildFilteredPrograms(){
+        programs = DatabaseHelper.getPrograms();
+
+        if(!filterbox.getValue().equals(ProgramType.All)){
+            programs = programs.stream().filter(e -> e.getProgramType().equals(filterbox.getValue().name())).collect(Collectors.toList());
+        }
+
+        programsTile.getChildren().clear();
+        mappedItems = new ArrayList<>();
+        buildTiles(programs);
+    }
+
+    private void searchProgramsBuilder(){
+        programsTile.getChildren().clear();
+        mappedItems = new ArrayList<>();
+        buildTiles(programs);
+    }
+
+    private  static DropShadow buildDShadow(){
 
         DropShadow ds = new DropShadow();
 

@@ -264,6 +264,17 @@
          <children>
             <HBox alignment="CENTER">
                <children>
+                  <Button fx:id="newProgram" layoutX="289.0" layoutY="20.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #212121;" text="New" textFill="WHITE">
+                     <font>
+                        <Font name="Rockwell Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <effect>
+                        <DropShadow color="#00000044" />
+                     </effect>
+                  </Button>
                   <Button fx:id="saveProgram" layoutX="10.0" layoutY="10.0" minHeight="40.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #039BE5;" text="Save" textFill="WHITE">
                      <font>
                         <Font name="Rockwell Bold" size="14.0" />

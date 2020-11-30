@@ -9,6 +9,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         ScenesHelper.InvokeMainLayout(primaryStage);
+        ScenesHelper.InvokeProgramModificationInstance(new Stage());
     }
 
 

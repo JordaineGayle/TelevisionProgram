@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.SceneBuilder;
 import helpers.TimeHelper;
 import interfaces.IProgram;
 import javafx.fxml.FXML;
@@ -7,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import models.*;
 
 import java.net.URL;
@@ -62,10 +64,6 @@ public class ProgramInfoLayoutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setUpLabels();
-
-        System.out.println("Program Type"+ program.getProgramType());
-
-        System.out.println("Class Type Version: "+Movie.class.getName());
     }
 
     public void setUpLabels(){

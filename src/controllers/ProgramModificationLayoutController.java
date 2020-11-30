@@ -99,6 +99,9 @@ public class ProgramModificationLayoutController  implements Initializable {
     @FXML
     private TextArea shortDesc = new TextArea();
 
+    @FXML
+    private Button newProgram = new Button();
+
     private IProgram program = ProgramsLayoutController.currentlyModifiedProgram == null  ? new Program() : ProgramsLayoutController.currentlyModifiedProgram;
 
     private List<Actor> actors = program.getActors() == null ? new ArrayList<>() : program.getActors();
@@ -111,6 +114,8 @@ public class ProgramModificationLayoutController  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         setupComboBoxes();
+
+        configureNewProgram();
 
         configureSaveProgram();
 
@@ -157,19 +162,20 @@ public class ProgramModificationLayoutController  implements Initializable {
 
         if(program != null){
             try{
-                channel.setValue(program.getChannelName());
+                if(!program.getChannelName().isEmpty())
+                    channel.setValue(program.getChannelName());
             }catch (Exception ex){}
 
             try{
-                programType.setValue(ProgramType.valueOf(program.getProgramType()));
+                if(program.getProgramType()!=null)programType.setValue(ProgramType.valueOf(program.getProgramType()));
             }catch (Exception ex){}
 
             try{
-                programPhase.setValue(program.getProgramPhase());
+                if(program.getProgramPhase()!=null)programPhase.setValue(program.getProgramPhase());
             }catch (Exception ex){}
 
             try{
-                denomination.setValue(program.getDenomination());
+                if(program.getDenomination()!=null)denomination.setValue(program.getDenomination());
             }catch (Exception ex){}
 
             try{
@@ -362,6 +368,19 @@ public class ProgramModificationLayoutController  implements Initializable {
                     }else {
                         errorText.setText("You cannot remove an empty program.");
                     }
+                }catch (Exception ex){
+                    errorText.setText(ex.getMessage());
+                }
+            }
+        });
+    }
+
+    private void configureNewProgram(){
+        newProgram.setOnMouseClicked(e -> {
+            if(e.getButton().equals(MouseButton.PRIMARY)){
+                try{
+                    program = new Program();
+                    setupModifiedProgramValues();
                 }catch (Exception ex){
                     errorText.setText(ex.getMessage());
                 }
