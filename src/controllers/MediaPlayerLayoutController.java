@@ -37,8 +37,6 @@ public class MediaPlayerLayoutController implements Initializable {
 
     private DoubleProperty progress;
 
-    private StringProperty mediaDuration;
-
     private Stage stage = SceneBuilder.getStages().get("MediaPlayerLayout.fxml");
 
     private boolean isPlaying = false;
@@ -100,6 +98,13 @@ public class MediaPlayerLayoutController implements Initializable {
         progressBar.progressProperty().bindBidirectional(progress);
 
         mediaTitle.setText("Now Playing: "+currentProgram.getTitle().toUpperCase()+" - Channel: "+currentProgram.getChannelName().toUpperCase());
+
+        /*if(
+                (currentProgram.getProgramPhase().equals(ProgramPhase.Repeat)
+                && currentProgram.getProgramAirDateTime().isBefore(LocalDateTime.now())
+                && TimeHelper.correctProgramDate(currentProgram).isAfter(LocalDateTime.now()))
+                || ()
+        )*/
 
         setUpMediaPlayerAndControls();
 
