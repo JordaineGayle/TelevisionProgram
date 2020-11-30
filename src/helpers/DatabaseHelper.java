@@ -142,7 +142,7 @@ public class DatabaseHelper {
 
 
         if(program.getTitle() == null || program.getTitle().isEmpty()) throw new Exception("A title is mandatory please add one.");
-        if(program.getProgramType() == null) throw new Exception("A program type is mandatory please add one.");
+        if(program.getProgramType() == null || program.getProgramType().isEmpty()) throw new Exception("A program type is mandatory please add one.");
 
         if(program.getChannelName() == null || program.getChannelName().isEmpty()) throw new Exception("A channel is mandatory please add one.");
 
@@ -164,7 +164,7 @@ public class DatabaseHelper {
         if(program.getProgramType().equals(ProgramType.Gospel.name()) && program.getDenomination() == null)
             throw new Exception("Please set a valid denomination. Gospel programs require it.");
 
-        if(program.getProgramType().equals(ProgramType.Movie.name()) && program.getDateReleased().toLocalDate() != null && program.getProgramAirDateTime().toLocalDate().isBefore(program.getDateReleased().toLocalDate()))
+        if(program.getProgramType().equals(ProgramType.Movie.name()) && program.getDateReleased() !=null && program.getDateReleased().toLocalDate() != null && program.getProgramAirDateTime().toLocalDate().isBefore(program.getDateReleased().toLocalDate()))
             throw new Exception("Please set a valid release date, the air date cant be before the release date.");
 
         List<IProgram> result = programs.stream().filter(e -> e.getId().equals(program.getId())).collect(Collectors.toList());

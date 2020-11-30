@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<BorderPane fx:id="testPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: rgba(238,238,238 ,1);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProgramsLayoutController">
+<BorderPane fx:id="testPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgba(238,238,238 ,1);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProgramsLayoutController">
    <top>
       <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #212121;" BorderPane.alignment="CENTER">
          <children>
@@ -63,16 +63,16 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: rgba(238,238,238 ,1);" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(238,238,238 ,1);" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <content>
-            <TilePane fx:id="programsTile" alignment="CENTER" cache="true" focusTraversable="true" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefTileHeight="400.0" prefTileWidth="250.0" style="-fx-background-color: rgba(250,250,250 ,1);" tileAlignment="TOP_CENTER" vgap="10.0">
+            <TilePane fx:id="programsTile" alignment="CENTER" cache="true" focusTraversable="true" hgap="50.0" prefHeight="200.0" prefTileWidth="293.0" prefWidth="200.0" style="-fx-background-color: rgba(250,250,250 ,1);" tileAlignment="TOP_CENTER" vgap="50.0">
                <children>
-                  <VBox style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <VBox maxWidth="-Infinity" prefWidth="250.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true">
+                        <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" VBox.vgrow="ALWAYS">
                            <image>
                               <Image url="@../assets/ForBiggerEscapes.jpg" />
                            </image>
@@ -115,6 +115,9 @@
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
                         </HBox>
                         <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
                            <children>
@@ -214,18 +217,474 @@
                      </padding>
                      <effect>
                         <DropShadow color="#00000071" height="10.0" radius="4.5" spread="0.09" width="10.0" />
-                     </effect></VBox>
+                     </effect>
+                     <TilePane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </TilePane.margin></VBox>
+                  <VBox layoutX="532.0" layoutY="20.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" VBox.vgrow="ALWAYS">
+                           <image>
+                              <Image url="@../assets/ForBiggerEscapes.jpg" />
+                           </image>
+                        </ImageView>
+                        <HBox maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Title:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Category:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Air Date:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Length:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="206.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Duration:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="258.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Closed Caption: ">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="284.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Rating:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="310.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Rating disable="true" partialRating="true" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <effect>
+                        <DropShadow color="#00000071" height="10.0" radius="4.5" spread="0.09" width="10.0" />
+                     </effect>
+                     <TilePane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </TilePane.margin>
+                  </VBox>
+                  <VBox layoutX="400.0" layoutY="20.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="250.0" pickOnBounds="true" VBox.vgrow="ALWAYS">
+                           <image>
+                              <Image url="@../assets/ForBiggerEscapes.jpg" />
+                           </image>
+                        </ImageView>
+                        <HBox maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Title:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Category:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Air Date:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Length:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="206.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Duration:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="258.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Closed Caption: ">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="284.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Rating:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="310.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Rating disable="true" partialRating="true" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <effect>
+                        <DropShadow color="#00000071" height="10.0" radius="4.5" spread="0.09" width="10.0" />
+                     </effect>
+                  </VBox>
+                  <VBox layoutX="270.0" layoutY="20.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="230.0" fitWidth="293.0" pickOnBounds="true" VBox.vgrow="ALWAYS">
+                           <image>
+                              <Image url="@../assets/ForBiggerEscapes.jpg" />
+                           </image>
+                        </ImageView>
+                        <HBox maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Title:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Category:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Air Date:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="180.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Length:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="206.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Duration:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="258.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Closed Caption: ">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Region prefWidth="10.0" />
+                              <Label layoutX="15.0" layoutY="15.0" text="Title">
+                                 <font>
+                                    <Font name="Rockwell" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="284.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Label text="Rating:">
+                                 <font>
+                                    <Font name="Rockwell Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="310.0" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Rating disable="true" max="8" partialRating="true" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <effect>
+                        <DropShadow color="#00000071" height="10.0" radius="4.5" spread="0.09" width="10.0" />
+                     </effect>
+                  </VBox>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
             </TilePane>
          </content>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <tooltip>
-            <Tooltip text="Click for more info" />
+            <Tooltip fx:id="tooltip" text="Click for more info" />
          </tooltip>
       </ScrollPane>
    </center>

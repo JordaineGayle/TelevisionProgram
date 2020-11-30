@@ -133,7 +133,7 @@ public class ProgramModificationLayoutController  implements Initializable {
 
         denomination.getItems().addAll(Denomination.values());
 
-        channel.onActionProperty().set(e -> {
+        channel.setOnAction(e -> {
             program.setChannelName(channel.getValue());
         });
 
@@ -156,11 +156,85 @@ public class ProgramModificationLayoutController  implements Initializable {
     private void setupModifiedProgramValues(){
 
         if(program != null){
+            try{
+                channel.setValue(program.getChannelName());
+            }catch (Exception ex){}
+
+            try{
+                programType.setValue(ProgramType.valueOf(program.getProgramType()));
+            }catch (Exception ex){}
+
+            try{
+                programPhase.setValue(program.getProgramPhase());
+            }catch (Exception ex){}
+
+            try{
+                denomination.setValue(program.getDenomination());
+            }catch (Exception ex){}
+
+            try{
+                title.setText(program.getTitle());
+            }catch (Exception ex){}
+
+            try{
+                airDate.setDateTimeValue(program.getProgramAirDateTime());
+            }catch (Exception ex){}
+
+
+            try{
+                previewImage.setText(program.getImage());
+            }catch (Exception ex){}
+
+
+            try{
+                programSource.setText(program.getSource());
+            }catch (Exception ex){}
+
+            try{
+                length.setText(String.valueOf(program.getLength()));
+            }catch (Exception ex){}
+
+            try{
+                duration.setText(String.valueOf(program.getDuration()));
+            }catch (Exception ex){}
+
+            try{
+                closedCaption.setAllowIndeterminate(false);
+                closedCaption.setSelected(program.isClosedCaption());
+                closedCaption.setVisible(true);
+
+            }catch (Exception ex){}
+
+            try{
+                shortDesc.setText(program.getShortDescription());
+            }catch (Exception ex){}
+
+            try{
+                movieRating.setRating(program.getRating());
+            }catch (Exception ex){}
+
+            try{
+                releaseDate.setDateTimeValue(program.getDateReleased());
+            }catch (Exception ex){}
+
+            try{
+                rangeMin.setText(String.valueOf(tempAgeRange.getMin()));
+            }catch (Exception ex){}
+
+            try{
+                rangeMax.setText(String.valueOf(tempAgeRange.getMax()));
+            }catch (Exception ex){}
+
+            try{
+                weatherRating.setRating(program.getSeverityRating());
+            }catch (Exception ex){}
 
         }
     }
 
     private void setProgramValues(){
+
+        setupModifiedProgramValues();
 
         title.textProperty().addListener((c,o,n) -> {
             program.setTitle(n);
@@ -272,6 +346,7 @@ public class ProgramModificationLayoutController  implements Initializable {
                     }
                 }catch (Exception ex){
                     errorText.setText(ex.getMessage());
+                    ex.printStackTrace();
                 }
             }
         });

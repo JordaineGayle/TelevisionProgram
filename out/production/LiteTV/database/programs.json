@@ -66,7 +66,7 @@
     "ProgramAirDateTime": "2020-11-22T19:15:32.4133613"
   },
   {
-    "Rating": 0.0,
+    "Rating": 7.23199951171875,
     "DateReleased": null,
     "Actors": [
       {
@@ -223,8 +223,8 @@
     "ProgramAirDateTime": "2020-12-04T06:00:00"
   },
   {
-    "Rating": 6.101332600911459,
-    "DateReleased": null,
+    "Rating": 7.146665852864583,
+    "DateReleased": "2020-11-01T22:41:04.8063639",
     "Actors": [
       {
         "Id": "ec0e6ce8-5843-497b-a9dd-68e3fcbc4703",
