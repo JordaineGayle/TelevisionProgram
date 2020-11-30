@@ -21,21 +21,18 @@
                   <Image url="@../assets/name.png" />
                </image>
             </ImageView>
-            <Button fx:id="dashboardBtn" alignment="TOP_LEFT" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewDashboard" styleClass="sidebarBtnActive" text="DASHBOARD" textAlignment="CENTER" textFill="#909090">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <Button fx:id="programBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewPrograms" styleClass="sidebarBtn" text="PROGRAMS" textAlignment="CENTER" textFill="#909090">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
                <font>
                   <Font name="Rockwell" size="13.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
                <graphic>
-                  <Label fx:id="markedItems" alignment="CENTER" prefWidth="17.0" style="-fx-background-color: #039BE5;" text="0" textFill="WHITE">
+                  <Label fx:id="markedItems" contentDisplay="TEXT_ONLY" graphicTextGap="10.0" prefHeight="12.0" prefWidth="17.0" text="0" textFill="#039be5">
                      <font>
                         <Font name="Rockwell Bold Italic" size="12.0" />
                      </font>
@@ -45,18 +42,7 @@
                   </Label>
                </graphic>
             </Button>
-            <Button fx:id="programBtn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewPrograms" styleClass="sidebarBtn" text="PROGRAMS" textAlignment="CENTER" textFill="#909090">
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-               <font>
-                  <Font name="Rockwell" size="13.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="channelListBtn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="70.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewListings" styleClass="sidebarBtn" text="CHANNEL LISTING" textAlignment="CENTER" textFill="#909090">
+            <Button fx:id="channelListBtn" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="70.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewListings" styleClass="sidebarBtnActive" text="CHANNEL LISTING" textAlignment="CENTER" textFill="#909090">
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>

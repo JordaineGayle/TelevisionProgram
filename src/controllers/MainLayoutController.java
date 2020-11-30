@@ -1,15 +1,19 @@
 package controllers;
 
+import helpers.AuthenticationHelper;
 import helpers.DatabaseHelper;
 import helpers.SceneBuilder;
+import helpers.ScenesHelper;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -23,8 +27,7 @@ import java.util.ResourceBundle;
 
 public class MainLayoutController implements Initializable {
 
-    @FXML
-    private Button dashboardBtn = new Button();
+    private static Button programBtnInstance  = new Button(), channelBtnInstance = new Button();
 
     @FXML
     private Button programBtn = new Button();
@@ -48,37 +51,37 @@ public class MainLayoutController implements Initializable {
     @FXML
     private BorderPane mainPane = new BorderPane();
 
+    private static BorderPane globalMainPaneInstance = new BorderPane();
+
     private boolean fullScreen = true;
 
     private Stage mainStage = SceneBuilder.getStages().get("MainLayout.fxml");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mainPane.setCenter(paneBuilder("DashboardLayout.fxml"));
+        mainPane.setCenter(paneBuilder("ChannelListingsLayout.fxml"));
 
         markedItems.textProperty().bind(markedItemsCount.asString());
 
         if(DatabaseHelper.getMarkedPrograms().size() > 0){
             markedItemsCount.setValue(DatabaseHelper.getMarkedPrograms().size());
         }
+
+        globalMainPaneInstance = mainPane;
+        programBtnInstance = programBtn;
+        channelBtnInstance = channelListBtn;
     }
 
-    @FXML
-    void viewDashboard(ActionEvent event) {
-        handleBtnToggle(dashboardBtn, new Button[]{channelListBtn,programBtn});
-        mainPane.setCenter(paneBuilder("DashboardLayout.fxml"));
-    }
 
     @FXML
     void viewListings(ActionEvent event) {
-        handleBtnToggle(channelListBtn, new Button[]{dashboardBtn,programBtn});
+        handleBtnToggle(channelListBtn, new Button[]{programBtn});
         mainPane.setCenter(paneBuilder("ChannelListingsLayout.fxml"));
     }
 
     @FXML
     void viewPrograms(ActionEvent event) {
-        handleBtnToggle(programBtn, new Button[]{dashboardBtn,channelListBtn});
-        mainPane.setCenter(paneBuilder("ProgramsLayout.fxml"));
+        navigateToPrograms();
     }
 
     @FXML
@@ -107,7 +110,18 @@ public class MainLayoutController implements Initializable {
 
     }
 
-    private Pane paneBuilder(String layout){
+    public static void setProgramBtnActive(){
+
+        programBtnInstance.getStyleClass().removeAll("sidebarBtn","sidebarBtnActive");
+
+        programBtnInstance.getStyleClass().add("sidebarBtnActive");
+
+        channelBtnInstance.getStyleClass().removeAll("sidebarBtn","sidebarBtnActive");
+        channelBtnInstance.getStyleClass().add("sidebarBtn");
+
+    }
+
+    public static Pane paneBuilder(String layout){
 
         try{
             Pane pane = new FXMLLoader().load(MainLayoutController.class.getResource("/layouts/"+layout));
@@ -124,6 +138,19 @@ public class MainLayoutController implements Initializable {
         markedItemsCount.setValue(val);
     }
 
+    public static BorderPane getMainPane(){
+        return globalMainPaneInstance;
+    }
+
+    public static void navigateToPrograms(){
+
+        if(AuthenticationHelper.isAuthenticated()){
+            setProgramBtnActive();
+            globalMainPaneInstance.setCenter(paneBuilder("ProgramsLayout.fxml"));
+        }else{
+            ScenesHelper.InvokeAuthentication(new Stage());
+        }
+    }
 
 }
 

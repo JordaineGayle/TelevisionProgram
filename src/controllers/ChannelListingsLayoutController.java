@@ -1,5 +1,4 @@
 package controllers;
-import com.google.gson.reflect.TypeToken;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;
 import helpers.TimeHelper;
@@ -10,10 +9,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -379,7 +375,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     private void setupCellNode(IProgram program, Label node){
 
-        ContextMenu contextMenu = setepCellContextMenu(program);
+        ContextMenu contextMenu = setupCellContextMenu(program);
 
         node.getStyleClass().add(program.getProgramColor().name().toLowerCase());
 
@@ -402,7 +398,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
     }
 
-    private ContextMenu setepCellContextMenu(IProgram program){
+    private ContextMenu setupCellContextMenu(IProgram program){
 
         ContextMenu contextMenu = new ContextMenu();
 
@@ -415,6 +411,15 @@ public class ChannelListingsLayoutController implements Initializable {
         MenuItem viewMore = new MenuItem("See Full Description");
 
         contextMenu.getItems().addAll(watchNow,viewLater,recordProgram,viewMore);
+
+        Button progList = new Button("Navigate To Programs.");
+        progList.setStyle("-fx-background-color:none;-fx-text-fill:rgba(129,212,250 ,1);");
+        progList.setFont(new Font("Rockwell",14));
+        progList.setOnMouseClicked(e -> {
+            if(e.getButton() == MouseButton.PRIMARY){
+                MainLayoutController.navigateToPrograms();
+            }
+        });
 
         contextMenu.getItems().forEach( i -> {
             i.setStyle("-fx-text-fill:#fff;-fx-font-size: 12px;-fx-padding:5 80 5 5;-fx-width:250px");
@@ -433,29 +438,28 @@ public class ChannelListingsLayoutController implements Initializable {
 
         viewLater.setOnAction(e -> {
             program.setProgramStatus(ProgramStatus.ViewingLater);
+            boolean success = DatabaseHelper.addMarkedProgram(program);
 
-            IProgram newp = DatabaseHelper.db.fromJson(DatabaseHelper.db.toJson(program),new TypeToken<Movie>(){});
-            newp.setid();
-            newp.setProgramAirDateTime(newp.getProgramAirDateTime().plusDays(4).plusHours(13));
+            if(success){
+                ScenesHelper.createPopup("MainLayout.fxml","Program added to marked list successfully. You can check programs to see more.", progList);
+            }
+            else
+            {
+                ScenesHelper.createPopup("MainLayout.fxml","Failed to add program to view later.", null);
+            }
 
-
-
-            newp.setDuration(5);
-            newp.setLength(6);
-            newp.setProgramColor(ProgramColor.PURPLE);
-
-            System.out.println("New program air date: "+newp.getProgramAirDateTime().toString());
-            System.out.println("New program date end: "+TimeHelper.correctProgramDate(newp).toString());
-
-            try{
-
-                DatabaseHelper.addOrUpdateProgram(newp);
-                //System.out.println(DatabaseHelper.db.toJson(newp));
-            }catch (Exception ex){ex.printStackTrace();}
         });
 
         recordProgram.setOnAction(e -> {
             program.setProgramStatus(ProgramStatus.Recorded);
+            boolean success = DatabaseHelper.addMarkedProgram(program);
+            if(success){
+                ScenesHelper.createPopup("MainLayout.fxml","Program will be recorded and saved in marked programs list. You can check programs to see more.", progList);
+            }
+            else
+            {
+                ScenesHelper.createPopup("MainLayout.fxml","Failed to reocrd program.", null);
+            }
         });
 
         contextMenu.setOpacity(0.9);

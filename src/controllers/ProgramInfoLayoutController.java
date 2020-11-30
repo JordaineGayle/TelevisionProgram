@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.*;
 
@@ -21,6 +22,9 @@ public class ProgramInfoLayoutController implements Initializable {
 
     @FXML
     ImageView image = new ImageView();
+
+    @FXML
+    AnchorPane apane = new AnchorPane();
 
     @FXML
     private Label title = new Label();
@@ -101,7 +105,7 @@ public class ProgramInfoLayoutController implements Initializable {
             ageRange.setText(program.getAgeRange().getMin() +" - "+program.getAgeRange().getMax());
         }catch (Exception e){}
 
-        rating.setText(String.valueOf(program.getRating()));
+        rating.setText(String.valueOf(program.getRating())+"/8");
 
         try{
             releasedDate.setText(TimeHelper.convertToHumanReadableFormat(program.getDateReleased()));
@@ -117,7 +121,7 @@ public class ProgramInfoLayoutController implements Initializable {
             actors.setText("unknown");
         }
 
-        severityRating.setText(String.valueOf(program.getSeverityRating()));
+        severityRating.setText(String.valueOf(program.getSeverityRating())+"/5");
 
     }
 
