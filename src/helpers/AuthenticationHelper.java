@@ -1,3 +1,7 @@
+/**
+ * Class that stores the state of the authentication
+ * */
+
 package helpers;
 
 public class AuthenticationHelper {

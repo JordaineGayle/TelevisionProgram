@@ -1,3 +1,10 @@
+/**
+ * This class is a parent and also a child class, it act as the instance of the IProgram since the IProgram can't be instantiated
+ * We could however remove IProgram and implement all the methods here and override them in the classes they are used but we wanted
+ * to show that we understood parent of parent, sub parent etc.
+ *
+ * */
+
 package models;
 
 

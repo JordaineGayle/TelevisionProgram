@@ -1,4 +1,3 @@
-import controllers.MainLayoutController;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;
 import javafx.application.Application;
@@ -15,9 +14,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         DatabaseHelper.db.InitializeDB();
-
         launch(args);
-
-
     }
 }

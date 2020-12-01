@@ -1,3 +1,6 @@
+/**
+ * Handles the playing of the media
+ * */
 package controllers;
 
 import helpers.SceneBuilder;

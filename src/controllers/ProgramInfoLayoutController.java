@@ -1,3 +1,7 @@
+/**
+ * Give detailed information about the a program.
+ * **/
+
 package controllers;
 
 import helpers.SceneBuilder;

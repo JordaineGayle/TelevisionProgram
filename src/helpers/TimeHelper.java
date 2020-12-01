@@ -1,3 +1,7 @@
+/**
+ * This is a simple temporal helper, that translate time to 12 hour format and compare them also
+ * **/
+
 package helpers;
 
 import interfaces.IProgram;

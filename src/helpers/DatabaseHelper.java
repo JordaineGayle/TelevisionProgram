@@ -1,3 +1,7 @@
+/**
+ * Class that workers with the data, the backbone of the operation goes on here. Everything data manipulation goes on here.
+ * **/
+
 package helpers;
 
 import com.google.gson.*;
@@ -348,15 +352,34 @@ public class DatabaseHelper {
 
     private void loadDBContentsInMemory(){
 
-        TreeMap<Integer,String> items = readJson("channels.json",new TypeToken<>(){});
+        /** Increased the program load time*/
 
-        items.forEach((key,val)-> {
-            channelMap.add((key+" - "+val).toUpperCase());
-        });
+        new Thread(){
+            @Override
+            public void run() {
+                TreeMap<Integer,String> items = readJson("channels.json",new TypeToken<>(){});
 
-        loadPrograms();
+                items.forEach((key,val)-> {
+                    channelMap.add((key+" - "+val).toUpperCase());
+                });
+            }
+        }.start();
 
-        loadMarkedPrograms();
+        new Thread(){
+            @Override
+            public void run() {
+                loadPrograms();
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                loadMarkedPrograms();
+            }
+        }.start();
+
+
 
     }
 

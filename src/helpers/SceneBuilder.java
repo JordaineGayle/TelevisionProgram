@@ -1,3 +1,7 @@
+/**
+ * Create dynamic scenes, this class handles the state of all stages, all thier instances are stored and retrieved here.
+ * **/
+
 package helpers;
 
 import javafx.fxml.FXMLLoader;
@@ -18,8 +22,6 @@ import java.util.Optional;
 public class SceneBuilder {
 
     private static HashMap<String,Stage> stages = new HashMap<>();
-
-    private static HashMap<String,Parent> scenes = new HashMap<>();
 
     private Stage stage;
 
@@ -46,12 +48,9 @@ public class SceneBuilder {
 
         try{
 
-            Parent parent = FXMLLoader.load(SceneBuilder.class.getResource("/layouts/"+LayoutName));
+            Scene scene = new Scene(FXMLLoader.load(SceneBuilder.class.getResource("/layouts/"+LayoutName)));
 
-            scenes.put(getLayoutName(),parent);
-
-            Scene scene = new Scene(parent);
-
+            //aids in creating translucent scenes.
             scene.setFill(Color.TRANSPARENT);
 
             stage.setScene(scene);
@@ -92,10 +91,6 @@ public class SceneBuilder {
 
     public static HashMap<String, Stage> getStages() {
         return stages;
-    }
-
-    public static HashMap<String, Parent> getScenes() {
-        return scenes;
     }
 
     public double getLength() {

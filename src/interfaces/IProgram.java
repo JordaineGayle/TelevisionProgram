@@ -1,3 +1,7 @@
+/**
+ * This interface holds all the getters and setters for all the models used. it's the base parent class
+ * */
+
 package interfaces;
 
 import models.Actor;

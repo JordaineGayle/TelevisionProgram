@@ -1,3 +1,7 @@
+/**
+ * This class handles the layout of the channels
+ * */
+
 package controllers;
 import helpers.DatabaseHelper;
 import helpers.ScenesHelper;

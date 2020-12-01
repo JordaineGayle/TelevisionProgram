@@ -1,3 +1,6 @@
+/**
+ * Handles to navigation throughout the program and is the first screen that gets loaded
+ * **/
 package controllers;
 
 import helpers.AuthenticationHelper;

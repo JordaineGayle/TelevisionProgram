@@ -19,15 +19,15 @@
       </ImageView>
       <VBox layoutX="10.0" layoutY="284.0" maxHeight="1.7976931348623157E308" prefHeight="452.0" prefWidth="358.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="284.0">
          <children>
-            <HBox>
+            <HBox VBox.vgrow="ALWAYS">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Title:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Title:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="title" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="title" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -39,13 +39,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Length:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Length:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="length" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="length" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -57,13 +57,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="46.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Air Date:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Air Date:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="airdate" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="airdate" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -75,13 +75,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="82.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Repeat Days Length" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Repeat Days Length" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="duration" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="duration" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -93,13 +93,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Closed Caption: " textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Closed Caption: " textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="closeedCaption" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="closeedCaption" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -111,13 +111,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Program Type: " textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Program Type: " textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="programType" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="programType" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -129,13 +129,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Denomination: " textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Denomination: " textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="denomination" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="denomination" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -147,13 +147,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Age Range: " textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Age Range: " textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="ageRange" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="ageRange" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -165,13 +165,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="46.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Rating:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Rating:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="rating" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="rating" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -183,13 +183,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Severity Rating:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Severity Rating:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="severityRating" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="severityRating" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -201,13 +201,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Released Date:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Released Date:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="releasedDate" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="releasedDate" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -219,13 +219,13 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0">
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Actors:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Actors:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxWidth="10.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="actors" layoutX="10.0" layoutY="10.0" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="actors" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="12.0" />
                      </font>
@@ -237,13 +237,13 @@
             </HBox>
             <VBox>
                <children>
-                  <Label maxWidth="-Infinity" prefWidth="300.0" text="Short Description:" textFill="#838383" wrapText="true">
+                  <Label minWidth="-Infinity" text="Short Description:" textFill="#838383" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="Rockwell" size="14.0" />
                      </font>
                   </Label>
                   <Region maxHeight="30.0" prefHeight="10.0" prefWidth="260.0" VBox.vgrow="ALWAYS" />
-                  <Label fx:id="description" maxWidth="300.0" prefWidth="300.0" textFill="#c5c5c5" wrapText="true">
+                  <Label fx:id="description" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="320.0" textFill="#c5c5c5" wrapText="true">
                      <font>
                         <Font name="Rockwell Italic" size="12.0" />
                      </font>

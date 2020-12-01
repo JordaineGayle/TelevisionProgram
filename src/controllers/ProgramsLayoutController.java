@@ -1,3 +1,7 @@
+/**
+ * Has the list of marked and unmarked programs, you can literally see everything here, has a search capability and filters.
+ * */
+
 package controllers;
 
 import helpers.DatabaseHelper;
@@ -24,7 +28,9 @@ import models.ProgramListing;
 import models.ProgramType;
 import org.controlsfx.control.Rating;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -138,12 +144,12 @@ public class ProgramsLayoutController implements Initializable {
             programs = DatabaseHelper.getPrograms();
         }
 
-        for (IProgram prog : programs) {
+        programs.forEach(prog ->{
 
             List<HBox> hbs = new ArrayList<>();
 
             List<Node> image = new ArrayList<>();
-            image.add(buildImageNode(prog.getImage() == null || prog.getImage().isEmpty() ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAUmka06uFKW8BxmZXi8uH_N1euTnUnTWmhQ&usqp=CAU" : prog.getImage()));
+            image.add(buildImageNode(prog.getImage()));
             hbs.add(buildDefaultHBox(image));
 
             List<Node> title = buildNodeMap("Title:",prog.getTitle());
@@ -260,7 +266,7 @@ public class ProgramsLayoutController implements Initializable {
             vb.setEffect(buildDShadow());
 
             mappedItems.add(vb);
-        }
+        });
 
         programsTile.getChildren().addAll(mappedItems);
     }
@@ -359,7 +365,13 @@ public class ProgramsLayoutController implements Initializable {
 
     private Node buildImageNode(String source){
         ImageView image = new ImageView();
-        image.setImage(new Image(source,true));
+
+        if(source == null || source.isEmpty()){
+            image.setImage(new Image(Paths.get("").toAbsolutePath().toUri().toString()+"/src/assets/defaultmedia.png",true));
+        }else{
+            image.setImage(new Image(source,true));
+        }
+
         image.setFitWidth(293);
         image.setFitHeight(230);
         image.setSmooth(true);

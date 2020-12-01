@@ -1,6 +1,9 @@
+/**
+ * Handles to modification of the programs
+ * */
+
 package controllers;
 
-import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import helpers.DatabaseHelper;
 import interfaces.IProgram;
@@ -12,8 +15,6 @@ import javafx.scene.text.Text;
 import models.*;
 import org.controlsfx.control.Rating;
 import tornadofx.control.DateTimePicker;
-
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

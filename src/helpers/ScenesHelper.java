@@ -1,5 +1,10 @@
+/**
+ * Creates the stages and sets additional attributes
+ * */
+
 package helpers;
 
+import controllers.AuthenticationLayoutController;
 import controllers.MainLayoutController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -110,6 +115,12 @@ public class ScenesHelper {
                 if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.C) {
                     finalStage.close();
                 }
+
+                if(event.getCode() == KeyCode.ENTER){
+                    AuthenticationLayoutController.authUser();
+                }
+
+                System.out.println(event.getCode());
             });
 
             stage.initStyle(StageStyle.TRANSPARENT);
