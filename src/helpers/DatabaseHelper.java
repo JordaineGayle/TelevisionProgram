@@ -258,6 +258,10 @@ public class DatabaseHelper {
 
             Program prog = db.fromJson(covertedItem,new TypeToken<>(){});
 
+            if(prog.getProgramPhase() != null && prog.getProgramPhase().equals(ProgramPhase.New) && prog.getDuration() > 0 && prog.getProgramAirDateTime().isBefore(LocalDateTime.now())){
+                prog.setProgramPhase(ProgramPhase.Repeat);
+            }
+
             if(prog.getProgramStatus() != null && prog.getProgramStatus().equals(ProgramStatus.ViewingLater))
             {
                 try{
@@ -311,6 +315,10 @@ public class DatabaseHelper {
         }else if(program.getProgramType().equals("Weather")){
             newProgram = toType(original,new TypeToken<Weather>(){});
             newProgram.setProgramColor(ProgramColor.GREEN);
+        }
+
+        if(newProgram.getProgramPhase() != null && newProgram.getProgramPhase().equals(ProgramPhase.New) && newProgram.getDuration() > 0 && newProgram.getProgramAirDateTime().isBefore(LocalDateTime.now())){
+            newProgram.setProgramPhase(ProgramPhase.Repeat);
         }
 
         return newProgram;

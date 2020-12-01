@@ -21,7 +21,7 @@
     "Length": 12.0,
     "Duration": 15.0,
     "ClosedCaption": true,
-    "ProgramPhase": "New",
+    "ProgramPhase": "Repeat",
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "RED",
     "ProgramAirDateTime": "2020-11-24T03:55:55.4591428"
@@ -106,7 +106,7 @@
     "Length": 3.0,
     "Duration": 5.0,
     "ClosedCaption": true,
-    "ProgramPhase": "New",
+    "ProgramPhase": "Repeat",
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "RED",
     "ProgramAirDateTime": "2020-11-29T17:00:00"
@@ -133,9 +133,42 @@
     "Length": 6.0,
     "Duration": 5.0,
     "ClosedCaption": true,
-    "ProgramPhase": "New",
+    "ProgramPhase": "Repeat",
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "RED",
     "ProgramAirDateTime": "2020-11-28T16:55:55.4591428"
+  },
+  {
+    "Denomination": null,
+    "id": "6f5ab9df-197e-4710-9782-7bc56cd58d80",
+    "ProgramType": "Gospel",
+    "ChannelName": "202 - TBN",
+    "Title": "Great Day In Heaven",
+    "Image": null,
+    "Source": null,
+    "ShortDescription": "Good gospel concert.",
+    "Length": 4.0,
+    "Duration": 8.0,
+    "ClosedCaption": true,
+    "ProgramPhase": "Live",
+    "ProgramStatus": "ViewingLater",
+    "ProgramColor": "BLUE",
+    "ProgramAirDateTime": "2020-11-30T07:26:00"
+  },
+  {
+    "id": "3b666572-a85c-4888-b641-4e6ca7494bd5",
+    "ProgramType": "General",
+    "ChannelName": "155 - UNIVERSAL-CHANNEL",
+    "Title": "Lottery Scamming Interview",
+    "Image": null,
+    "Source": null,
+    "ShortDescription": "Interview with lottery scammers in mobay.",
+    "Length": 3.0,
+    "Duration": 3.0,
+    "ClosedCaption": false,
+    "ProgramPhase": "Live",
+    "ProgramStatus": "ViewingLater",
+    "ProgramColor": "WHITE",
+    "ProgramAirDateTime": "2020-11-30T06:39:00"
   }
 ]

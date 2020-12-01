@@ -7,12 +7,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.*;
@@ -206,6 +210,7 @@ public class ChannelListingsLayoutController implements Initializable {
                     newColKey = formatTo12Hour(t,"00");
 
                     Label node = buildChildrenLabel(program.getTitle());
+                    node.setGraphic(buildChildrenIndicators(program));
 
                     if(t == currentHour){
                         setupCellNode(program,node,true);
@@ -222,6 +227,7 @@ public class ChannelListingsLayoutController implements Initializable {
             if(program.getProgramAirDateTime().getHour() >= currentHour){
 
                 Label node = buildChildrenLabel(program.getTitle());
+                node.setGraphic(buildChildrenIndicators(program));
 
                 if(program.getProgramAirDateTime().getHour() == currentHour){
                     setupCellNode(program,node,true);
@@ -275,6 +281,7 @@ public class ChannelListingsLayoutController implements Initializable {
                     newColKey = formatTo12Hour(t,"00");
 
                     Label node = buildChildrenLabel(program.getTitle());
+                    node.setGraphic(buildChildrenIndicators(program));
 
                     if(t == currentHour){
                         setupCellNode(program,node,true);
@@ -292,6 +299,7 @@ public class ChannelListingsLayoutController implements Initializable {
             if(program.getProgramAirDateTime().getHour() >= currentHour){
 
                 Label node = buildChildrenLabel(program.getTitle());
+                node.setGraphic(buildChildrenIndicators(program));
 
                 if(program.getProgramAirDateTime().getHour() == currentHour){
                     setupCellNode(program,node,true);
@@ -352,6 +360,7 @@ public class ChannelListingsLayoutController implements Initializable {
                 newColKey = formatTo12Hour(t,"00");
 
                 Label node = buildChildrenLabel(program.getTitle());
+                node.setGraphic(buildChildrenIndicators(program));
 
                 if(t == currentHour){
                     setupCellNode(program,node,true);
@@ -382,13 +391,53 @@ public class ChannelListingsLayoutController implements Initializable {
 
         Label label = new Label(name);
 
-        label.setPadding(new Insets(10,10,10,10));
+        label.setPadding(new Insets(0,0,0,10));
 
         label.setTextAlignment(TextAlignment.CENTER);
 
+        label.setAlignment(Pos.CENTER_LEFT);
+
         label.setPrefWidth(250);
 
+        label.setMinSize(Label.USE_COMPUTED_SIZE,Label.USE_COMPUTED_SIZE);
+
+        label.setMaxSize(Label.USE_PREF_SIZE,50);
+
         label.setFont(new Font("Rockwell",12));
+
+        return label;
+    }
+
+    private Label buildChildrenIndicators(IProgram program){
+
+        Label label = new Label();
+        label.setPrefSize(10,10);
+        label.setMinSize(10,10);
+        label.setMaxSize(10,10);
+        label.setPadding(new Insets(1));
+        label.setAlignment(Pos.CENTER_LEFT);
+        label.setFont(Font.font("Rockwell", FontWeight.BOLD, 9));
+        label.setAlignment(Pos.CENTER);
+        label.setTextAlignment(TextAlignment.CENTER);
+        label.setTextFill(Color.BLACK);
+
+        if(program.getProgramPhase() != null && program.getProgramPhase().equals(ProgramPhase.New)){
+            label.setStyle("-fx-background-color: rgba(0,229,255 ,1);-fx-background-radius: 100;");
+        }else if(program.getProgramPhase() != null && program.getProgramPhase().equals(ProgramPhase.Live)){
+            label.setStyle("-fx-background-color: rgba(118,255,3 ,1);-fx-background-radius: 100;");
+        }else if(program.getProgramPhase() != null && program.getProgramPhase().equals(ProgramPhase.Repeat)){
+            label.setStyle("-fx-background-color: rgba(0,77,64 ,1);-fx-background-radius: 100;");
+            label.setTextFill(Color.WHITE);
+        }else{
+            label.setStyle("-fx-background-color: rgba(255,255,255,1);-fx-background-radius: 100;");
+        }
+
+        if(program.isClosedCaption()){
+            label.setText("C");
+            label.setPrefSize(15,15);
+            label.setMinSize(15,15);
+            label.setMaxSize(15,15);
+        }
 
         return label;
     }
@@ -511,17 +560,12 @@ public class ChannelListingsLayoutController implements Initializable {
 
         RowConstraints rowconst = new RowConstraints();
 
-        if (height > 0){
-            rowconst.setMinHeight(height);
-        }
-
         rowconst.setVgrow(Priority.ALWAYS);
         rowconst.setFillHeight(true);
+        rowconst.setValignment(VPos.CENTER);
+        rowconst.setMinHeight(40);
+        rowconst.setMaxHeight(100);
 
-
-        if (pos!=null){
-            rowconst.setValignment(pos);
-        }
 
         return rowconst;
     }

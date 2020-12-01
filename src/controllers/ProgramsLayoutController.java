@@ -245,7 +245,6 @@ public class ProgramsLayoutController implements Initializable {
                         currentlyModifiedProgram = prog;
                         ScenesHelper.InvokeProgramModification(new Stage());
                     }
-
                 });
             }else{
                 vb.setOnMouseClicked(e -> {
