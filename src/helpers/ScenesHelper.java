@@ -119,8 +119,6 @@ public class ScenesHelper {
                 if(event.getCode() == KeyCode.ENTER){
                     AuthenticationLayoutController.authUser();
                 }
-
-                System.out.println(event.getCode());
             });
 
             stage.initStyle(StageStyle.TRANSPARENT);
