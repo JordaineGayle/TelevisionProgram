@@ -99,13 +99,6 @@ public class MediaPlayerLayoutController implements Initializable {
 
         mediaTitle.setText("Now Playing: "+currentProgram.getTitle().toUpperCase()+" - Channel: "+currentProgram.getChannelName().toUpperCase());
 
-        /*if(
-                (currentProgram.getProgramPhase().equals(ProgramPhase.Repeat)
-                && currentProgram.getProgramAirDateTime().isBefore(LocalDateTime.now())
-                && TimeHelper.correctProgramDate(currentProgram).isAfter(LocalDateTime.now()))
-                || ()
-        )*/
-
         setUpMediaPlayerAndControls();
 
         setupMediaView();

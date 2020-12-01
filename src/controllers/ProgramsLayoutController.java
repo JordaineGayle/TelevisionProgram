@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import models.ProgramListing;
 import models.ProgramType;
 import org.controlsfx.control.Rating;
 
@@ -46,6 +47,9 @@ public class ProgramsLayoutController implements Initializable {
 
     @FXML
     private ComboBox<ProgramType> filterbox = new ComboBox();
+
+    @FXML
+    private ComboBox<ProgramListing> listingBox = new ComboBox();
 
     @FXML
     private TextField searchbox = new TextField();
@@ -82,9 +86,17 @@ public class ProgramsLayoutController implements Initializable {
     private void setUpFilter(){
         filterbox.getItems().addAll(ProgramType.values());
 
+        listingBox.getItems().addAll(ProgramListing.values());
+
         filterbox.setValue(ProgramType.All);
 
+        listingBox.setValue(ProgramListing.Unmarked);
+
         filterbox.setOnAction(e -> {
+            determineAndbuildFilteredPrograms();
+        });
+
+        listingBox.setOnAction(e -> {
             determineAndbuildFilteredPrograms();
         });
     }
@@ -158,6 +170,14 @@ public class ProgramsLayoutController implements Initializable {
                 hbs.add(buildDefaultHBox(phase));
             }catch (Exception e){}
 
+            if(listingBox.getValue().equals(ProgramListing.Marked)){
+                try{
+
+                    List<Node> phase = buildNodeMap("Status:",prog.getProgramStatus().name());
+                    hbs.add(buildDefaultHBox(phase));
+                }catch (Exception e){}
+            }
+
             try{
                 String actornames = String.join(",", prog.getActors().stream().map(e -> e.getFirstName()+" "+e.getLastName()).collect(Collectors.toList()));
 
@@ -217,17 +237,29 @@ public class ProgramsLayoutController implements Initializable {
             }catch (Exception e){}
 
             VBox vb = buildDefaultVBox(hbs);
+
+
+            if(listingBox.getValue().equals(ProgramListing.Unmarked)){
+                vb.setOnMouseClicked(e -> {
+                    if(e.getButton() == MouseButton.PRIMARY){
+                        currentlyModifiedProgram = prog;
+                        ScenesHelper.InvokeProgramModification(new Stage());
+                    }
+
+                });
+            }else{
+                vb.setOnMouseClicked(e -> {
+                    if(e.getButton() == MouseButton.PRIMARY){
+                        ChannelListingsLayoutController.setViewNowProgram(prog);
+                    }
+
+                });
+            }
+
             vb.setId(prog.getId());
 
             vb.setEffect(buildDShadow());
 
-            vb.setOnMouseClicked(e -> {
-                if(e.getButton() == MouseButton.PRIMARY){
-                    currentlyModifiedProgram = prog;
-                    ScenesHelper.InvokeProgramModification(new Stage());
-                }
-
-            });
             mappedItems.add(vb);
         }
 
@@ -336,7 +368,12 @@ public class ProgramsLayoutController implements Initializable {
     }
 
     private void determineAndbuildFilteredPrograms(){
-        programs = DatabaseHelper.getPrograms();
+
+        if(listingBox.getValue().equals(ProgramListing.Unmarked)){
+            programs = DatabaseHelper.getPrograms();
+        }else {
+            programs = DatabaseHelper.getMarkedPrograms();
+        }
 
         if(!filterbox.getValue().equals(ProgramType.All)){
             programs = programs.stream().filter(e -> e.getProgramType().equals(filterbox.getValue().name())).collect(Collectors.toList());

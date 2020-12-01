@@ -23,12 +23,20 @@
                   <Font name="Rockwell Bold Italic" size="14.0" />
                </font>
             </TextField>
+            <ComboBox fx:id="listingBox" layoutX="820.0" layoutY="20.0" maxHeight="1.7976931348623157E308" prefWidth="130.0" promptText="Select Listing" style="-fx-background-color: white; -fx-text-fill: white;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ComboBox>
             <ComboBox fx:id="filterbox" maxHeight="1.7976931348623157E308" prefWidth="130.0" promptText="Filter Programs" style="-fx-background-color: white; -fx-text-fill: white;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ComboBox>
-            <Button fx:id="addProgram" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: white;" text="Add Program" textFill="#212121">
+            <Button fx:id="addProgram" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: white;" text="Add Program" textFill="#212121" wrapText="true">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="apane" prefHeight="785.0" prefWidth="378.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProgramInfoLayoutController">
+<AnchorPane fx:id="apane" prefHeight="785.0" prefWidth="378.0" style="-fx-background-color: rgba(10,10,10,.9);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProgramInfoLayoutController">
    <children>
       <ImageView fx:id="image" fitHeight="264.0" fitWidth="358.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="472.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <image>

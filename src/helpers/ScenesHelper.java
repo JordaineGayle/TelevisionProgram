@@ -1,16 +1,20 @@
 package helpers;
 
+import controllers.MainLayoutController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Optional;
 
@@ -22,6 +26,14 @@ public class ScenesHelper {
 
         if(hasStage != null){
             stage = hasStage;
+        }else{
+            Stage finalStage = stage;
+            stage.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+
+                if (event.getCode() == KeyCode.ALT || event.getCode() == KeyCode.CONTROL) {
+                    MainLayoutController.navigateToPrograms();
+                }
+            });
         }
 
         new SceneBuilder(stage,"MainLayout.fxml",null,null,null);
@@ -49,7 +61,15 @@ public class ScenesHelper {
         if(hasStage != null){
             stage = hasStage;
         }else{
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.initModality(Modality.APPLICATION_MODAL);
+            Stage finalStage = stage;
+            stage.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+
+                if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.C) {
+                    finalStage.close();
+                }
+            });
         }
 
         new SceneBuilder(stage,"ProgramInfoLayout.fxml",Optional.of("Program Description"),Optional.of(378.00),Optional.of(785.00));
@@ -84,9 +104,20 @@ public class ScenesHelper {
             stage = hasStage;
         }else{
             stage.initModality(Modality.APPLICATION_MODAL);
+            Stage finalStage = stage;
+            stage.addEventFilter(KeyEvent.KEY_PRESSED, event->{
+
+                if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.C) {
+                    finalStage.close();
+                }
+            });
+
+            stage.initStyle(StageStyle.TRANSPARENT);
         }
 
         new SceneBuilder(stage,"AuthenticationLayout.fxml",Optional.of("User Authentication"),Optional.of(600.00),Optional.of(400.00));
+
+
         stage.setResizable(false);
         stage.setMaximized(false);
         stage.setFullScreen(false);

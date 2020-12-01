@@ -27,6 +27,43 @@
     "ProgramAirDateTime": "2020-11-24T03:55:55.4591428"
   },
   {
+    "AgeRange": {
+      "Min": 5,
+      "Max": 12
+    },
+    "id": "2ee71ff0-1b69-44b2-94d0-be9401d79dc7",
+    "ProgramType": "Kids",
+    "ChannelName": "102 - CARTOON-NETWORK",
+    "Title": "Scrapy Doo",
+    "Image": null,
+    "Source": null,
+    "ShortDescription": "Fun kids cartoon to watch, the newest on the block..",
+    "Length": 2.0,
+    "Duration": 6.0,
+    "ClosedCaption": true,
+    "ProgramPhase": "Live",
+    "ProgramStatus": "Recorded",
+    "ProgramColor": "PURPLE",
+    "ProgramAirDateTime": "2020-11-29T18:00:00"
+  },
+  {
+    "Denomination": null,
+    "id": "fc799f8d-c176-4765-9c33-3dcc5b6c294f",
+    "ProgramType": "Gospel",
+    "ChannelName": "202 - TBN",
+    "Title": "Holy Holy Jesus",
+    "Image": null,
+    "Source": null,
+    "ShortDescription": "This is a bible discussion for younbg people.",
+    "Length": 2.0,
+    "Duration": 7.0,
+    "ClosedCaption": true,
+    "ProgramPhase": null,
+    "ProgramStatus": "ViewingLater",
+    "ProgramColor": "BLUE",
+    "ProgramAirDateTime": "2020-11-29T21:00:00"
+  },
+  {
     "Rating": 7.146665852864583,
     "DateReleased": "2020-11-01T22:41:04.8063639",
     "Actors": [
@@ -75,44 +112,7 @@
     "ProgramAirDateTime": "2020-11-29T17:00:00"
   },
   {
-    "Denomination": "Christiantity",
-    "id": "fc799f8d-c176-4765-9c33-3dcc5b6c294f",
-    "ProgramType": "Gospel",
-    "ChannelName": "202 - TBN",
-    "Title": "Holy Holy Jesus",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "This is a bible discussion for younbg people.",
-    "Length": 2.0,
-    "Duration": 7.0,
-    "ClosedCaption": true,
-    "ProgramPhase": null,
-    "ProgramStatus": "ViewingLater",
-    "ProgramColor": "BLUE",
-    "ProgramAirDateTime": "2020-11-29T21:00:00"
-  },
-  {
-    "AgeRange": {
-      "Min": 5,
-      "Max": 12
-    },
-    "id": "2ee71ff0-1b69-44b2-94d0-be9401d79dc7",
-    "ProgramType": "Kids",
-    "ChannelName": "102 - CARTOON-NETWORK",
-    "Title": "Scrapy Doo",
-    "Image": null,
-    "Source": null,
-    "ShortDescription": "Fun kids cartoon to watch, the newest on the block..",
-    "Length": 2.0,
-    "Duration": 6.0,
-    "ClosedCaption": true,
-    "ProgramPhase": "Live",
-    "ProgramStatus": "ViewingLater",
-    "ProgramColor": "PURPLE",
-    "ProgramAirDateTime": "2020-11-29T18:00:00"
-  },
-  {
-    "Rating": 0.0,
+    "Rating": 6.93333251953125,
     "DateReleased": null,
     "Actors": [
       {

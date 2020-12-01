@@ -207,7 +207,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
                     Label node = buildChildrenLabel(program.getTitle());
 
-                    setupCellNode(program,node);
+                    if(t == currentHour){
+                        setupCellNode(program,node,true);
+                    }else{
+                        setupCellNode(program,node,false);
+                    }
 
                     grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
 
@@ -219,7 +223,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
                 Label node = buildChildrenLabel(program.getTitle());
 
-                setupCellNode(program,node);
+                if(program.getProgramAirDateTime().getHour() == currentHour){
+                    setupCellNode(program,node,true);
+                }else{
+                    setupCellNode(program,node,false);
+                }
 
                 grid.add(node,channelsColumnMapping.get(colKey),channelsRowMapping.get(rowKey));
             }
@@ -268,7 +276,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
                     Label node = buildChildrenLabel(program.getTitle());
 
-                    setupCellNode(program,node);
+                    if(t == currentHour){
+                        setupCellNode(program,node,true);
+                    }else{
+                        setupCellNode(program,node,false);
+                    }
 
                     grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
 
@@ -281,7 +293,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
                 Label node = buildChildrenLabel(program.getTitle());
 
-                setupCellNode(program,node);
+                if(program.getProgramAirDateTime().getHour() == currentHour){
+                    setupCellNode(program,node,true);
+                }else{
+                    setupCellNode(program,node,false);
+                }
 
                 grid.add(node,channelsColumnMapping.get(colKey),channelsRowMapping.get(rowKey));
             }
@@ -337,7 +353,11 @@ public class ChannelListingsLayoutController implements Initializable {
 
                 Label node = buildChildrenLabel(program.getTitle());
 
-                setupCellNode(program,node);
+                if(t == currentHour){
+                    setupCellNode(program,node,true);
+                }else{
+                    setupCellNode(program,node,false);
+                }
 
                 grid.add(node,channelsColumnMapping.get(newColKey),channelsRowMapping.get(rowKey));
 
@@ -373,9 +393,9 @@ public class ChannelListingsLayoutController implements Initializable {
         return label;
     }
 
-    private void setupCellNode(IProgram program, Label node){
+    private void setupCellNode(IProgram program, Label node, boolean playProgram){
 
-        ContextMenu contextMenu = setupCellContextMenu(program);
+        ContextMenu contextMenu = setupCellContextMenu(program,playProgram);
 
         node.getStyleClass().add(program.getProgramColor().name().toLowerCase());
 
@@ -398,11 +418,17 @@ public class ChannelListingsLayoutController implements Initializable {
 
     }
 
-    private ContextMenu setupCellContextMenu(IProgram program){
+    private ContextMenu setupCellContextMenu(IProgram program, boolean playProgram){
 
         ContextMenu contextMenu = new ContextMenu();
 
-        MenuItem watchNow = new MenuItem("Watch Now");
+        if(playProgram){
+            MenuItem watchNow = new MenuItem("Watch Now");
+            contextMenu.getItems().addAll(watchNow);
+            watchNow.setOnAction(e -> {
+                setViewNowProgram(program);
+            });
+        }
 
         MenuItem viewLater = new MenuItem("View Later");
 
@@ -410,7 +436,7 @@ public class ChannelListingsLayoutController implements Initializable {
 
         MenuItem viewMore = new MenuItem("See Full Description");
 
-        contextMenu.getItems().addAll(watchNow,viewLater,recordProgram,viewMore);
+        contextMenu.getItems().addAll(viewLater,recordProgram,viewMore);
 
         Button progList = new Button("Navigate To Programs.");
         progList.setStyle("-fx-background-color:none;-fx-text-fill:rgba(129,212,250 ,1);");
@@ -423,11 +449,6 @@ public class ChannelListingsLayoutController implements Initializable {
 
         contextMenu.getItems().forEach( i -> {
             i.setStyle("-fx-text-fill:#fff;-fx-font-size: 12px;-fx-padding:5 80 5 5;-fx-width:250px");
-        });
-
-        watchNow.setOnAction(e -> {
-            viewNowProgram = program;
-            ScenesHelper.InvokeMediaPlayer(new Stage());
         });
 
         viewMore.setOnAction(e -> {
@@ -505,4 +526,54 @@ public class ChannelListingsLayoutController implements Initializable {
         return rowconst;
     }
 
+    public static void setViewNowProgram(IProgram program){
+        viewNowProgram = program;
+
+        if(isProgramReady(program)){
+            ScenesHelper.InvokeMediaPlayer(new Stage());
+        }else{
+            ScenesHelper.createPopup("MainLayout.fxml","The program you are trying to view isn't available.",null);
+        }
+    }
+
+    private static boolean isProgramReady(IProgram program){
+        viewNowProgram = program;
+
+        LocalDateTime currentDate = viewNowProgram.getProgramAirDateTime();
+
+        if((TimeHelper.correctProgramDate(viewNowProgram).isAfter(LocalDateTime.now()) ||
+                TimeHelper.correctProgramDate(viewNowProgram).toLocalDate().equals(LocalDateTime.now().toLocalDate())) && viewNowProgram.getDuration() > 0){
+            for(int x =0; x < viewNowProgram.getDuration(); x++){
+                currentDate = viewNowProgram.getProgramAirDateTime().plusDays(x);
+
+                if(currentDate.toLocalDate().equals(LocalDateTime.now().toLocalDate())){
+                    break;
+                }
+            }
+        }
+
+        LocalDateTime tempCurrentdate = currentDate;
+
+        if((TimeHelper.correctProgramDate(viewNowProgram).isAfter(LocalDateTime.now()) ||
+                TimeHelper.correctProgramDate(viewNowProgram).toLocalDate().equals(LocalDateTime.now().toLocalDate())) && viewNowProgram.getLength() > 0){
+            for(int y =0; y < viewNowProgram.getLength(); y++){
+                currentDate = tempCurrentdate.plusHours(y);
+                if(currentDate.toLocalDate().equals(LocalDateTime.now().toLocalDate()) && currentDate.getHour() == LocalDateTime.now().getHour()){
+                    break;
+                }
+            }
+        }
+
+        if( (currentDate.getHour() == LocalDateTime.now().getHour()
+                && TimeHelper.correctProgramDate(viewNowProgram).isAfter(LocalDateTime.now())
+                && (viewNowProgram.getProgramStatus() == null || viewNowProgram.getProgramStatus().equals(ProgramStatus.ViewingLater)
+                || viewNowProgram.getProgramStatus().equals(ProgramStatus.WatchNow)) )
+
+                || (viewNowProgram.getProgramStatus() != null && viewNowProgram.getProgramStatus().equals(ProgramStatus.Recorded)
+                && viewNowProgram.getProgramAirDateTime().isBefore(LocalDateTime.now()))
+        ){
+            return true;
+        }
+        return false;
+    }
 }

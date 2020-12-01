@@ -1,8 +1,8 @@
 package models;
 
 public enum Denomination {
-    Christiantity,
-    Buddism,
+    Christianity,
+    Buddhism,
     Hinduism,
     Judaism,
     Others
