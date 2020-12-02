@@ -59,9 +59,11 @@ public class DatabaseHelper {
 
         if(objects == null){
             programs = new ArrayList<>();
+        }else{
+            programs = convertToIPrograms(objects);
         }
 
-        programs = convertToIPrograms(objects);
+
     }
 
     public void loadMarkedPrograms(){
@@ -69,9 +71,9 @@ public class DatabaseHelper {
 
         if(objects == null){
             markedPrograms = new ArrayList<>();
+        }else{
+            markedPrograms = convertToIPrograms(objects);
         }
-
-        markedPrograms = convertToIPrograms(objects);
 
         saveFileContents(toJson(markedPrograms),"marked_programs.json");
     }

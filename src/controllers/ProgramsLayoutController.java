@@ -182,6 +182,19 @@ public class ProgramsLayoutController implements Initializable {
                     List<Node> phase = buildNodeMap("Status:",prog.getProgramStatus().name());
                     hbs.add(buildDefaultHBox(phase));
                 }catch (Exception e){}
+
+                Button removeBtn = new Button("Delete Marked Program");
+
+                removeBtn.setOnMouseClicked(e -> {
+                    if(e.getButton() == MouseButton.PRIMARY){
+                        DatabaseHelper.removeMarkedProgram(prog);
+                        determineAndbuildFilteredPrograms();
+                    }
+                });
+
+                List<Node> btn = new ArrayList<>(){};
+                btn.add(removeBtn);
+                hbs.add(buildDefaultHBox(btn));
             }
 
             try{

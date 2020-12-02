@@ -464,8 +464,7 @@ public class ChannelListingsLayoutController implements Initializable {
             }
 
             if(event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2){
-                viewNowProgram = program;
-                ScenesHelper.InvokeMediaPlayer(new Stage());
+                setViewNowProgram(program);
             }
         });
 

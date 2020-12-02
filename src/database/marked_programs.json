@@ -143,32 +143,5 @@
     "ProgramStatus": "ViewingLater",
     "ProgramColor": "WHITE",
     "ProgramAirDateTime": "2020-11-30T06:39:00"
-  },
-  {
-    "Rating": 6.93333251953125,
-    "DateReleased": null,
-    "Actors": [
-      {
-        "Id": "0.0",
-        "FirstName": "Jordaine",
-        "LastName": "Gayle",
-        "Age": 0,
-        "LastGrammyDate": null
-      }
-    ],
-    "id": "5647b523-77ad-4b5b-82e8-2cd1c7c383ff",
-    "ProgramType": "Movie",
-    "ChannelName": "64 - MTV",
-    "Title": "Hot Topic",
-    "Image": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
-    "Source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "ShortDescription": "This is a hot movie, thriller",
-    "Length": 6.0,
-    "Duration": 5.0,
-    "ClosedCaption": true,
-    "ProgramPhase": "Repeat",
-    "ProgramStatus": "Recorded",
-    "ProgramColor": "RED",
-    "ProgramAirDateTime": "2020-11-28T16:55:55.4591428"
   }
 ]

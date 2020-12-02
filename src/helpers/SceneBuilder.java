@@ -5,7 +5,6 @@
 package helpers;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -16,22 +15,21 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Optional;
 
 public class SceneBuilder {
 
-    private static HashMap<String,Stage> stages = new HashMap<>();
+    private static final HashMap<String,Stage> stages = new HashMap<>();
 
-    private Stage stage;
+    private final Stage stage;
 
-    private Double Width;
+    private final Double Width;
 
-    private Double Height;
+    private final Double Height;
 
-    private String LayoutName;
+    private final String LayoutName;
 
-    private String Title;
+    private final String Title;
 
     public SceneBuilder(Stage stage, String layoutName, @Nullable Optional<String> title, @Nullable Optional<Double> width, @Nullable Optional<Double> height) {
         this.stage = stage;
