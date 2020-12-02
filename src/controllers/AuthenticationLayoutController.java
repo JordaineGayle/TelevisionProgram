@@ -130,12 +130,13 @@ public class AuthenticationLayoutController implements Initializable {
             if(authenticated){
                 message = "Login was successful, please wait...\nyou can proceed to the programs listing.";
                 ScenesHelper.createPopup("AuthenticationLayout.fxml",message,null);
-                PauseTransition delay = new PauseTransition(Duration.seconds(5));
+                PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
                 delay.setOnFinished(t -> stage.close());
                 delay.play();
                 return;
             }
         }catch (Exception ex){}
+
         ScenesHelper.createPopup("AuthenticationLayout.fxml",message,null);
 
     }
